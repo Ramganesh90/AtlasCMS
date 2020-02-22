@@ -1,0 +1,132 @@
+﻿@model Atlas.DAL.SAL03_ResAppointments
+
+
+<div class="container">
+    <div class="row">
+        <div class="pull-left"><h2>@ViewBag.Title</h2></div>
+        <div class="pull-right col-md-3">
+            <h3>
+                <button type="submit" class="btn btn-primary btn-block" name="newPersonalAppt" onclick="location.href='@Url.Action("personal", "appointments")'">
+                    <span class="glyphicon glyphicon-plus white"></span> Add Personal Appointment
+                </button>
+            </h3>
+        </div>
+        <div class="pull-right col-md-3">
+            <h3>
+                <button type="submit" class="btn btn-primary btn-block" name="newAppt" onclick="location.href='@Url.Action("Create", "appointments")'">
+                    <span class="glyphicon glyphicon-plus white"></span> Add Appointment
+                </button>
+            </h3>
+        </div>
+    </div>
+    <div class="row pull-right">
+        <div class="form-group">
+            <p style="margin-right:15px">
+                Filter <input type="text" placeholder="Last Name" name="lastName" value="" class="input-text" style="width:150px"/>
+                       <input type="text" placeholder="Town" name="town" value="" class="input-text" style="width:150px" />
+                 and/or
+                <input type="text" placeholder="Zip" name="ZipCode" value="" class="input-text" maxlength="5" style="width:100px" />
+                <button type="submit" class="btn-default" name="btnSearch">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+            </p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    @if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+    {  <div class="row">
+        <div class="col-md-8 col-sm-6 alert alert-error">
+            <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+        </div>
+    </div>
+    }
+
+    <div class="row">
+        <div class="container col-md-offset-1">
+            <div id="appointmentsList" style="margin-top: 2em;">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+
+
+        $(function () {
+            var baseUrl = function () {
+                var href = window.location.href.split('/');
+                return href[0] + '//' + href[2] + '/' + href[3] + '/';
+            }
+
+            $("button[name='btnSearch']").click(function () {
+                $.ajax({
+                    url: baseUrl() + '/Appointments/search',
+                    data: "{ 'lastName': '" + $("input[name='lastName']").val() + "','city': '" + $("input[name='town']").val() + "','zipCode':'" + $("input[name='ZipCode']").val() + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $("#appointmentsList").html('');
+                        if (data.length > 0) {
+                            $.each(data, function (key, val) {
+                                $('<p><a class="contact-name-link" href='+baseUrl() +'Appointments/details/' + val.SalApptId + '>' + val.SalApptLastName + ', ' + val.SalApptFirstName + '</a> - ' +
+                                    '<span>'+val.SalApptCity+', </span>'+
+                                    '<span>'+val.SalApptState+' </span>'+
+                                    '<span>'+val.SalApptZip+' </span>'+
+                                    '</p>')
+                                    .appendTo('#appointmentsList');
+                            });
+                        }
+                        else
+                        {
+                            $('<p class="contact-name-link">No Search results founds</p>')
+                                   .appendTo('#appointmentsList');
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+
+            $("input[name='ZipCode']").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: baseUrl() + '/Company/getStateAndCity/',
+                        data: "{ 'zip_prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.length > 0) {
+                                response($.map(data, function (item) {
+                                    return item;
+                                }))
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                minLength: 3
+            });
+        });
+
+
+    </script>
+}

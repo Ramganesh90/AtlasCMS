@@ -1,0 +1,1323 @@
+﻿@{
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+@model Atlas.Models.ProjectViewModel
+<h2 style="margin-top:12px !important">Project Setup</h2>
+<div id="errorMsg" style="display:none">
+    @*<div class="col-md-8 col-sm-6 alert alert-error">
+            <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+            <div class="validation-summary-errors alert alert-danger">
+                <ul>
+                    <li> @Atlas.Models.BusinessConstants.contactAdmin</li>
+                </ul>
+            </div>
+        </div>*@
+</div>
+
+<div>
+    <div class="col-md-7" style="padding:0px;margin-bottom: 20px;">
+        <span><b><i class="normal-heading-text" style="font-size:10pt !important;text-decoration:none">Date Entered: @DateTime.Now.ToShortDateString()</i></b></span>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingOne">
+                    <h5 class="panel-title">
+                        <a style="text-decoration:none" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            1. Job Site Information
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("jobSiteInfo", "project", FormMethod.Post, new { id = "jobSiteInfoForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.HiddenFor(model => model.JobSites.JobSiteId, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div style="margin-left:26%;">
+                                    @Html.CheckBoxFor(model => model.JobSites.IsCommercial, new { htmlAttributes = new { @class = "commercialCust" } })
+                                    @Html.LabelFor(model => model.JobSites.IsCommercial, htmlAttributes: new { @class = "project-labels" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.JobName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.BillingFirstName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.BillingFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.BillingFirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>
+                                            <a class="normal-heading-text apptmodal" style="display:inline;font-size:medium;margin:0px 15px 0px -15px" href="#" data-toggle="modal" data-target="#ApptModal">Appointment</a>
+                                            @*<a id="getCustomer" class="normal-heading-bold-text" data-toggle="modal" href="#" data-target="#CustomerModal">Search Customers</a>*@
+                                            <a class="normal-heading-text" style="display:inline;font-size:medium" data-toggle="modal" href="#" data-target="#CustomerModal">Customer</a>
+                                        <p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.BillingLastName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.BillingLastName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.BillingLastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.BillingCompanyName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.JobSites.BillingCompanyName, new SelectList(ViewBag.CompanyList, "Value", "Text"),
+                           "-Select-", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.JobSites.BillingCompanyName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobSiteAddress, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.JobSiteAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSiteAddress, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobSiteCity, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.JobSiteCity, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSiteCity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobSiteState, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.JobSites.JobSiteState, ViewBag.StatesList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSiteState, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobSiteZip, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.JobSiteZip, new { htmlAttributes = new { @class = "form-control", type = "number", maxlength = "5" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSiteZip, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobSiteEMail, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.JobSiteEMail, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSiteEMail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobSitePhone, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.JobSitePhone, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSitePhone, "", new { @class = "text-danger" })
+                                    </div>
+                                    @Html.LabelFor(model => model.JobSites.JobSitePhoneExt, htmlAttributes: new { @class = "control-label col-md-3 project-labels", @style = "margin-left:-20%" })
+                                    <div class="col-md-2">
+                                        @Html.EditorFor(model => model.JobSites.JobSitePhoneExt, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSitePhoneExt, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobSiteMobilePhone, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.JobSiteMobilePhone, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSiteMobilePhone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobSites.JobSiteFax, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobSites.JobSiteFax, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobSites.JobSiteFax, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.HiddenFor(model => model.JobSites.SalApptId, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.HiddenFor(model => model.JobSites.SalContId, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingTwo">
+                    <h5 class="panel-title">
+                        <a style="text-decoration:none" class="collapsed" role="button" data-toggle="" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            2. Billing Information
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("saveBillingInfo", "project", FormMethod.Post, new { id = "BillingInfoForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.HiddenFor(model => model.BillingInfoDetails.PRJBillingID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-5" style="margin-left:25%;display:inline-block; position: relative;top: -1px;">
+                                        <label class="checkbox-inline" style="font-size:11pt !important">
+                                            <input class="copyAddress" type="checkbox" name="companyAddr" value="0" style="margin-top: 2px;">Same as Company Name
+                                        </label><br />
+                                        <label class="checkbox-inline" style="font-size:11pt !important">
+                                            <input class="copyAddress" type="checkbox" name="jobsiteAddr" value="1" style="margin-top: 2px;">Same as Job Site Address
+                                        </label><br />
+                                        <label class="checkbox-inline" style="font-size:11pt !important">
+                                            <input class="copyAddress" type="checkbox" name="newAddr" value="2" checked="checked" style="margin-top: 2px;">Add New Address
+                                        </label><br />
+                                    </div>
+                                </div>
+                                <div class="form-group" id="commonAddressSection">
+                                    <div style="margin: 0 0 0 27%;" class="mediumfont11pts">
+                                        <div style="display:none">
+                                            <span id="BillingFN"></span>&nbsp;<span id="BillingLN"></span><br />
+                                            <span id="BillingAddresses"></span><br />
+                                            <span id="BillingCompName"></span>
+                                            <span id="BillingCity"></span>&nbsp;,<span id="BillingState"></span>&nbsp;<span id="BillingZip"></span><br />
+                                            <span>Phone: </span><span id="BillingPh"></span><span>&nbsp;Ext.</span><span id="BillingExt"></span><br />
+                                            <span>Mobile:</span><span id="BillingMob"></span><br />
+                                            <span>Email: </span><span id="BillingEMail"></span><br />
+                                            <span>Fax:</span><span id="BillingFx"></span><br />
+                                        </div>
+                                        <div id="copiedAddressDtl" style="margin-top:15px"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="newAddressSection">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingFirstName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingFirstName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <a class="normal-heading-text apptmodal" style="display:inline;font-size:medium;margin:0px 15px 0px -15px" href="#" data-toggle="modal" data-target="#ApptModal">Appointment</a>
+                                                @*<a class="normal-heading-text" style="display:inline;font-size:medium;margin:0px 15px 0px -15px" data-toggle="modal" href="#">Appointment</a>*@
+                                                <a class="normal-heading-text" style="display:inline;font-size:medium" data-toggle="modal" href="#" data-target="#CustomerModal">Customer</a>
+                                            <p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingLastName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingLastName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingLastName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingCompanyName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingCompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingCompanyName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingAddress, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingAddress, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingCity, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingCity, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingCity, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingState, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(model => model.BillingInfoDetails.BillingState, ViewBag.StatesList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingState, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingZip, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingZip, new { htmlAttributes = new { @class = "form-control", type = "number", maxlength = "5" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingZip, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingEMail, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingEMail, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingEMail, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingPhone, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingPhone, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingPhone, "", new { @class = "text-danger" })
+                                        </div>
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingPhoneExt, htmlAttributes: new { @class = "control-label col-md-3 project-labels", @style = "margin-left:-20%" })
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingPhoneExt, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingPhoneExt, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingMobilePhone, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingMobilePhone, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingMobilePhone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.BillingInfoDetails.BillingFax, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BillingInfoDetails.BillingFax, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BillingInfoDetails.BillingFax, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingThree">
+                    <h5 class="panel-title">
+                        <a style="text-decoration:none" class="collapsed" role="button" data-toggle="" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            3. Job Site Details
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("jobSiteDetails", "project", FormMethod.Post, new { id = "jobSiteDetailsForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.HiddenFor(model => model.JobDetails.PRJID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobDetails.DivID, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.JobDetails.DivID, new SelectList(ViewBag.DivisionList, "Value", "Text"),
+                           "-Select-", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.JobDetails.DivID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobDetails.MhRateID, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.JobDetails.MhRateID, ViewBag.RateTypesList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.JobDetails.MhRateID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobDetails.DriveTime1Way, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobDetails.DriveTime1Way, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobDetails.DriveTime1Way, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobDetails.JobStatusId, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.JobDetails.JobStatusId, ViewBag.JobStatusList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.JobDetails.JobStatusId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JobDetails.PRJDateEntered, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.JobDetails.PRJDateEntered, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.JobDetails.PRJDateEntered, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4 style="margin:0px">Job Notes</h4>
+        <textarea cols="40" rows="10"></textarea>
+        <br /><br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="button" class="btn btn-primary" id="saveJobDetails">
+                    Save & Select Bid <span class="glyphicon glyphicon-arrow-right white"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade in" id="CustomerModal" tabindex="-1" role="dialog" aria-labelledby="CustomerModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                @Html.Partial("_CustomerSearch")
+            </div>
+        </div>
+        <input id="JobSite_SalContID" value="" type="hidden" />
+    </div>
+    <div class="modal fade in" id="ApptModal" tabindex="-1" role="dialog" aria-labelledby="ApptModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @Html.Partial("_ApptSearch")
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="~/Scripts/jquery.inputmask.bundle.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" type="text/css" rel="stylesheet" />
+<script src="~/Scripts/UtilScript.js"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvkJkaV---FzzN7mIiYoEpRhqQcxeDSoc" type="text/javascript"></script>
+
+<script>
+    var jq = $.noConflict();
+    var apiKey = "AIzaSyBvkJkaV---FzzN7mIiYoEpRhqQcxeDSoc";
+    jq(function () {
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+        var checkCommId = function () {
+            var commId = "@Convert.ToString(Session["CommID"])";
+            if (!commId) {
+                handleError('Project cannot be processed for saving, only view is applicable as user is part of Sales group!');
+                return false;
+            }
+            return true;
+        }
+
+        var handleError = function (msg) {
+            if (jq("#errorMsg").html().trim().length == 0) {
+                var errorText = "<div class=\"col-md-8 col-sm-6 alert alert-error\">" +
+         "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" style=\"font-size:14px\">close X</button>" +
+         "<div class=\"validation-summary-errors alert alert-danger\">" +
+           "<ul><li>" + msg + " </li></ul></div></div>"
+                jq("#errorMsg").html(errorText);
+                jq("#errorMsg").show();
+            }
+            else {
+                jq("#errorMsg").show();
+                jq("#errorMsg li").remove();
+                jq("#errorMsg ul").append("<li>" + msg + "</li>");
+            }
+        }
+        jq(document).ready(function ($) {
+            var locationAddr = window.location.pathname.toLocaleLowerCase();
+            var ProjectActivemenu = "Project Setup";
+            $(".project-menu").each(function (index, el) {
+                if (ProjectActivemenu && el.children[0].text.toLowerCase().indexOf(ProjectActivemenu.toLowerCase()) >= 0) {
+                    $(this).removeClass("project-menu")
+                    $(this).children().addClass("proj-active");
+                }
+                else //if(activemenu == el.children[0].text.toLowerCase())
+                {
+                    $(this).children().removeClass("proj-inactive");
+                }
+            });
+
+            var selectedCopyAddr = 2;
+            jq(".panel-default .panel-heading").each(function (index, elem) {
+                if (index != 0) {
+                    jq(elem).addClass("panel-heading-inactive");
+                }
+                else {
+                    jq(elem).removeClass("panel-heading-inactive").addClass("panel-heading-active");
+                }
+            });
+
+            if (jq("#JobDetails_JobStatusId").val()=="") {
+                jq("#JobDetails_JobStatusId").val("Q");
+            }
+
+            jq("#commonAddressSection").hide();
+            jq("#JobSites_BillingFirstName,#JobSites_BillingLastName").attr("readonly", true);
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+            jq("#JobSites_JobSitePhone,#JobSites_JobSiteMobilePhone, #JobSites_JobSiteFax").inputmask({ "mask": "(999) 999-9999" });
+            jq("#BillingInfoDetails_BillingPhone,#BillingInfoDetails_BillingMobilePhone,#BillingInfoDetails_BillingFax").inputmask({ "mask": "(999) 999-9999" });
+
+            var checkout = jq('#JobDetails_PRJDateEntered').datepicker({
+                startDate: new Date(),
+                todayHighlight: true,
+                orientation: 'top right',
+                beforeShowDay: function (date) {
+                    return date.valueOf() >= now.valueOf();
+                },
+                autoclose: true
+
+            }).on('changeDate', function (ev) {
+                jq(this).blur();
+                jq(this).datepicker('hide');
+            });
+
+            if (jq('#JobDetails_PRJDateEntered').val()) {
+                jq('#JobDetails_PRJDateEntered').datepicker("update", jq('#JobDetails_PRJDateEntered').val());
+            }
+
+            //if (jq("#JobSites_SalContId").val() != null || jq("#JobSites_SalContId").val() != "" || jq("#JobSites_SalContId").val() != 0 || jq("#JobSites_SalContId").val() != undefined) {
+            //    $(".commercialCust").prop('checked', true)
+            //}
+            if (jq("#JobDetails_PRJID").val() == 0) {
+                jq("#saveJobDetails").attr("disabled", "disabled");
+            }
+            var setInactiveHeader = function (inactiveId) {
+                jq(".panel-default .panel-heading").each(function (index, elem) {
+                    if (index != inactiveId) {
+                        jq(elem).removeClass("panel-heading-active").addClass("panel-heading-inactive");
+                    }
+                    else {
+                        jq(elem).removeClass("panel-heading-inactive").addClass("panel-heading-active");
+                    }
+                });
+            }
+            $(".project-nav").find("li:gt(0)").hide();
+            var SaveJobSiteInformation = function () {
+                var jobSiteInfo = {
+                    "JobName": jq("#JobSites_JobName").val(),
+                    "BillingFirstName": jq("#JobSites_BillingFirstName").val(),
+                    "BillingLastName": jq("#JobSites_BillingLastName").val(),
+                    "BillingCompanyName": jq("#JobSites_BillingCompanyName").val(),
+
+                    "JobSiteAddress": jq("#JobSites_JobSiteAddress").val(),
+                    "JobSiteCity": jq("#JobSites_JobSiteCity").val(),
+                    "JobSiteState": jq("#JobSites_JobSiteState").val(),
+                    "JobSiteZip": jq("#JobSites_JobSiteZip").val(),
+                    "JobSitePhone": jq("#JobSites_JobSitePhone").val(),
+                    "JobSitePhoneExt": jq("#JobSites_JobSitePhoneExt").val(),
+                    "JobSiteFax": jq("#JobSites_JobSiteFax").val(),
+                    "JobSiteMobilePhone": jq("#JobSites_JobSiteMobilePhone").val(),
+                    "JobSiteEMail": jq("#JobSites_JobSiteEMail").val(),
+                    "SalApptId": jq("#JobSites_SalApptId").val(),
+                    "SalContId": jq("#JobSites_SalContId").val(),
+                };
+                jq.ajax({
+                    url: baseUrl() + 'Project/saveJobSitesInfo',
+                    data: JSON.stringify(jobSiteInfo),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data == -2) {
+                            checkCommId();
+                        }
+                        else if (data >= 0) {
+                            jq("#errorMsg").hide();
+                            jq('a[href = "#collapseTwo"]').attr('data-toggle', 'collapse');
+                            jq("#JobSites_JobSiteId").val(data);
+                            $("#collapseOne").collapse('hide');
+                            $("#collapseTwo").collapse('show');
+                            setInactiveHeader(1);
+                        }
+                        else {
+                            handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                        }
+                    },
+                    error: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    },
+                    failure: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+
+            var SaveBillingInformation = function () {
+                var BillingFN, BillingLN, BillingCompName, BillingAddr, BillingCity, BillingState,
+                    BillingZip, BillingPh, BillingExt, BillingFax, BillingMob,
+                    BillingEMail = null;
+
+                if (selectedCopyAddr == 2) {
+                    if (jq("#BillingInfoDetails_BillingFirstName").val()) {
+                        BillingFN = jq("#BillingInfoDetails_BillingFirstName").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingLastName").val()) {
+                        BillingLN = jq("#BillingInfoDetails_BillingLastName").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingCompanyName").val()) {
+                        BillingCompName = jq("#BillingInfoDetails_BillingCompanyName").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingAddress").val()) {
+                        BillingAddr = jq("#BillingInfoDetails_BillingAddress").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingCity").val()) {
+                        BillingCity = jq("#BillingInfoDetails_BillingCity").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingState").val()) {
+                        BillingState = jq("#BillingInfoDetails_BillingState").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingZip").val()) {
+                        BillingZip = jq("#BillingInfoDetails_BillingZip").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingPhone").val()) {
+                        BillingPh = jq("#BillingInfoDetails_BillingPhone").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingPhoneExt").val()) {
+                        BillingExt = jq("#BillingInfoDetails_BillingPhoneExt").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingFax").val()) {
+                        BillingFax = jq("#BillingInfoDetails_BillingFax").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingMobilePhone").val()) {
+                        BillingMob = jq("#BillingInfoDetails_BillingMobilePhone").val()
+                    }
+                    if (jq("#BillingInfoDetails_BillingEMail").val()) {
+                        BillingEMail = jq("#BillingInfoDetails_BillingEMail").val()
+                    }
+                }
+
+                else {
+                    BillingFN = jq("#BillingFN").text();
+                    BillingLN = jq("#BillingLN").text();
+                    BillingCity = jq("#BillingCity").text();
+                    BillingAddr = jq("#BillingAddresses").text();
+                    BillingCompName = jq("#BillingCompName").text();
+                    BillingState = jq("#BillingState").text();
+                    BillingZip = jq("#BillingZip").text();
+                    BillingPh = jq("#BillingPh").text();
+                    BillingExt = jq("#BillingExt").text();
+                    BillingFax = jq("#BillingFx").text();
+                    BillingMob = jq("#BillingMob").text();
+                    BillingEMail = jq("#BillingEMail").text();
+                }
+
+                var billingInfo = {
+                    "BillingFirstName": BillingFN,
+                    "BillingLastName": BillingLN,
+                    "BillingCompanyName": BillingCompName,
+                    "BillingAddress": BillingAddr,
+                    "BillingCity": BillingCity,
+                    "BillingState": BillingState,
+                    "BillingZip": BillingZip,
+                    "BillingPhone": BillingPh,
+                    "BillingPhoneExt": BillingExt,
+                    "BillingFax": BillingFax,
+                    "BillingMobilePhone": BillingMob,
+                    "BillingEMail": BillingEMail
+                };
+                jq.ajax({
+                    url: baseUrl() + 'Project/saveBillingInfo',
+                    data: JSON.stringify(billingInfo),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data >= 0) {
+                            jq("#errorMsg").hide();
+                            jq('a[href = "#collapseThree"]').attr('data-toggle', 'collapse');
+                            jq("#BillingInfoDetails_PRJBillingID").val(data);
+                            $("#collapseTwo").collapse('hide');
+                            $("#collapseThree").collapse('show');
+                            $("#saveJobDetails").attr('disabled', false);
+                            setInactiveHeader(2);
+                            GetRoute();
+                        } else {
+                            handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                        }
+                    },
+                    error: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    },
+                    failure: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+
+            var saveJobDetails = function () {
+                var jobDetails = {
+                    "DivID": jq("#JobDetails_DivID").val(),
+                    "MhRateID": jq("#JobDetails_MhRateID").val(),
+                    "DriveTime1Way": jq("#JobDetails_DriveTime1Way").val(),
+                    "JobSiteId": jq("#JobSites_JobSiteId").val(),
+                    "JobStatusId": jq("#JobDetails_JobStatusId").val(),
+                    "PRJBillingID": jq("#BillingInfoDetails_PRJBillingID").val(),
+                    "PRJDateEntered": jq("#JobDetails_PRJDateEntered").val(),
+                    "ProjectName": jq("#JobSites_JobName").val(),
+                    "IsCommercial": jq("#JobSites_IsCommercial").prop('checked'),
+                    "PRJNotes": jq('textarea').val(),
+                    "PRJID": jq("#JobDetails_PRJID").val()
+                };
+                jq.ajax({
+                    url: baseUrl() + 'Project/saveJobSiteDetails',
+                    data: JSON.stringify(jobDetails),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data >= 0) {
+                            jq("#errorMsg").hide();
+                            jq('a[href = "#collapseThree"]').attr('data-toggle', 'collapse');
+                            window.location.href = baseUrl() + "project/viewbid/proj/" + data
+                        } else {
+                            handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                        }
+                    },
+                    error: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    },
+                    failure: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+
+            jq("#jobSiteInfoForm").submit(function (event) {
+                var isEmpty = false;
+                jq("#jobSiteInfoForm input[data-val-required], #jobSiteInfoForm select[data-val-required]").each(function () {
+                    if (!$(this).val() && $(this)[0].id != "JobSites_JobSiteId" && !jq("#JobSites_IsCommercial").prop('checked')) {
+                        isEmpty = true;
+                    }
+                });
+                if (isEmpty) {
+                    jq(".panel-default .panel-heading").each(function (index, elem) {
+                        jq(elem).removeClass("panel-heading-active");
+                        jq(elem).addClass("panel-heading-inactive");
+                    });
+                    jq("#headingOne").removeClass("panel-heading-inactive").addClass("panel-heading-active");
+                    jq("#headingTwo").removeClass("panel-heading-active").addClass("panel-heading-inactive");
+                    $("#collapseOne").collapse('show');
+                    $("#collapseTwo").collapse('hide'); event.stopPropagation(); return;
+                }
+                else if (jq("#jobSiteInfoForm").valid()) {
+                    SaveJobSiteInformation();
+                    return false;
+                }
+            });
+
+            jq("#BillingInfoForm").submit(function (event) {
+                var isEmpty = false;
+                if (jq("input[name='newAddr']").prop('checked')) {
+                    jq("#BillingInfoForm input[data-val-required], #BillingInfoForm select[data-val-required]").each(function () {
+                        if (!$(this).val() && $(this)[0].id != "BillingInfoDetails_PRJBillingID" && !jq("#JobSites_IsCommercial").prop('checked')) {
+                            isEmpty = true;
+                        }
+                    });
+                }
+                if (isEmpty) {
+                    jq(".panel-default .panel-heading").each(function (index, elem) {
+                        jq(elem).removeClass("panel-heading-active");
+                        jq(elem).addClass("panel-heading-inactive");
+                    });
+                    jq("#headingTwo").removeClass("panel-heading-inactive").addClass("panel-heading-active");
+                    event.preventDefault();
+                }
+                    //else if(jq("#BillingInfoForm").valid()){
+                else if (jq("#BillingInfoForm").valid()) {
+                    SaveBillingInformation();
+                    return false;
+                }
+            });
+
+            jq("#jobSiteDetailsForm").submit(function (event) {
+                var isEmpty = false;
+                jq("#jobSiteDetailsForm input[data-val-required], #jobSiteDetailsForm select[data-val-required]").each(function () {
+                    if (!$(this).val() && $(this)[0].id != "JobDetails_PRJID") {
+                        isEmpty = true;
+                    }
+                });
+                if (isEmpty) {
+                    jq(".panel-default .panel-heading").each(function (index, elem) {
+                        jq(elem).removeClass("panel-heading-active");
+                        jq(elem).addClass("panel-heading-inactive");
+                    });
+                    jq("#headingThree").removeClass("panel-heading-inactive").addClass("panel-heading-active");
+                    $("#collapseThree").collapse('show');
+                    event.stopPropagation(); return;
+                }
+                else if (jq("#jobSiteDetailsForm").valid()) {
+                    saveJobDetails();
+                    return false;
+                }
+            });
+
+            jq('a[href = "#collapseOne"]').on("click", function (e) {
+                setInactiveHeader(0);
+            });
+
+            jq('a[href = "#collapseTwo"]').on("click", function (e) {
+                checkCommId();
+                jq("#jobSiteInfoForm").trigger('submit');
+            });
+
+            jq('a[href = "#collapseThree"]').on("click", function () {
+                if (jq("#JobSites_JobSiteId").val()) {
+                    jq("#BillingInfoForm").trigger('submit');
+                }
+            });
+
+            jq("#saveJobDetails").click(function () {
+                checkCommId();
+                if (!jq("#saveJobDetails").is(':disabled')) {
+                    jq("#jobSiteDetailsForm").trigger('submit');
+                }
+            });
+
+            jq("#JobSites_IsCommercial").on("change", function () {
+                jq("#JobSites_BillingFirstName,#JobSites_BillingLastName").attr("readonly", !jq("#JobSites_IsCommercial").prop('checked'));
+                var billingform = jq("#BillingInfoForm").get(0);
+                if (jq("#JobSites_IsCommercial").prop('checked')) {
+                    jq("#JobSites_BillingFirstName").rules("remove", "required");
+                    jq("#JobSites_BillingLastName").rules("remove", "required");
+                    jq("#BillingInfoForm input[data-val-required], #BillingInfoForm select[data-val-required]").each(function () {
+                        jq(this).rules("remove", "required");
+                        jq(this).valid();
+
+                    });
+
+                }
+                else {
+                    jq("#JobSites_BillingFirstName").rules("add", "required");
+                    jq("#JobSites_BillingLastName").rules("add", "required");
+                    jq("#BillingInfoForm input[data-val-required], #BillingInfoForm select[data-val-required]").each(function () {
+                        jq(this).rules("add", "required");
+                    });
+                }
+                jq("#JobSites_BillingFirstName").valid();
+                jq("#JobSites_BillingLastName").valid();
+            });
+            jq('.copyAddress').on('change', function () {
+                selectedCopyAddr = parseInt(jq(this).val());
+                jq('.copyAddress').not(this).prop('checked', false);
+                switch (parseInt(jq(this).val())) {
+                    case 0:
+                        if (jq("#JobSites_BillingCompanyName").val()) {
+                            handleCompanyAddressCopy();
+                            jq("#newAddressSection").hide();
+                            jq("#commonAddressSection").show();
+                        }
+                        else {
+                            alert("Please choose company from Job Site Information");
+                            jq(this).attr("checked", false);
+                        }
+                        break;
+                    case 1:
+                        setAddressSections();
+                        jq("#newAddressSection").hide();
+                        jq("#commonAddressSection").show();
+                        break;
+                    case 2:
+                        jq("#newAddressSection").show();
+                        jq("#commonAddressSection").hide();
+                        break;
+                }
+
+            });
+
+            var handleCompanyAddressCopy = function () {
+                jq.ajax({
+                    url: baseUrl() + 'Project/getCompanyAddressDetails',
+                    data: "{ 'companyId': '" + jq("#JobSites_BillingCompanyName").val() + "'}",
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data) {
+                            setAddressSections(data);
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+
+            var setAddressSections = function (data) {
+                jq("#copiedAddressDtl").empty();
+                if (data) {
+                    jq("#BillingFN").text(jq("#JobSites_BillingFirstName").val());
+                    jq("#BillingLN").text(jq("#JobSites_BillingLastName").val());
+                    jq("#BillingAddresses").text(data.SalCompAddress);
+                    if (jq("#JobSites_BillingCompanyName option:selected").val() && jq("#JobSites_BillingCompanyName option:selected").text()) {
+                        jq("#BillingCompName").text(jq("#JobSites_BillingCompanyName option:selected").text());
+                    }
+                    jq("#BillingCity").text(data.SalCompCity);
+                    jq("#BillingState").text(data.SalCompState);
+                    jq("#BillingZip").text(data.SalCompZip);
+                    jq("#BillingPh").text(data.SalCompPhone);
+                    jq("#BillingExt").text(data.SalCompPhoneExt);
+                    jq("#BillingMob").text(data.SalCompMobile);
+                    jq("#BillingEMail").text(data.SalCompEMail);
+                    jq("#BillingFx").text(data.SalCompFax);
+                }
+                else {
+                    jq("#BillingFN").text(jq("#JobSites_BillingFirstName").val());
+                    jq("#BillingLN").text(jq("#JobSites_BillingLastName").val());
+                    jq("#BillingAddresses").text(jq("#JobSites_JobSiteAddress").val());
+                    if (jq("#JobSites_BillingCompanyName option:selected").val() && jq("#JobSites_BillingCompanyName option:selected").text()) {
+                        jq("#BillingCompName").text(jq("#JobSites_BillingCompanyName option:selected").text());
+                    }
+                    jq("#BillingCity").text(jq("#JobSites_JobSiteCity").val());
+                    jq("#BillingState").text(jq("#JobSites_JobSiteState").val());
+                    jq("#BillingZip").text(jq("#JobSites_JobSiteZip").val());
+                    jq("#BillingPh").text(jq("#JobSites_JobSitePhone").val());
+                    jq("#BillingExt").text(jq("#JobSites_JobSitePhoneExt").val());
+                    jq("#BillingMob").text(jq("#JobSites_JobSiteMobilePhone").val());
+                    jq("#BillingEMail").text(jq("#JobSites_JobSiteEMail").val());
+                    jq("#BillingFx").text(jq("#JobSites_JobSiteFax").val());
+                }
+                var manipulatedData = null;
+                manipulatedData = "<span>" + jq("#BillingFN").text() + "&nbsp;" + jq("#BillingLN").text() + " </span><br />";
+                if (jq("#BillingCompName").text()) {
+                    manipulatedData += "<span>" + jq("#BillingCompName").text() + " </span><br />";
+                }
+                if (jq("#BillingAddresses").text()) {
+                    manipulatedData += "<span>" + jq("#BillingAddresses").text() + " </span><br />";
+                }
+
+                manipulatedData += "<span>" + jq("#BillingCity").text() + ",&nbsp;" + jq("#BillingState").text() + "&nbsp;" + jq("#BillingZip").text() + "</span><br />";
+                if (jq("#BillingPh").text()) {
+                    manipulatedData += "<span class='phone'>Phone: " + jq("#BillingPh").text() + "&nbsp; " + " </span>";
+                }
+                if (jq("#BillingExt").text()) {
+                    manipulatedData += "<span>Ext: " + jq("#BillingExt").text() + "</span><br />";
+                }
+                else {
+                    manipulatedData += "<br />";
+                }
+                if (jq("#BillingMob").text()) {
+                    manipulatedData += "<span class='phone'>Mobile: " + jq("#BillingMob").text() + "</span><br />";
+                }
+                if (jq("#BillingFx").text()) {
+                    manipulatedData += "<span>Fax: " + jq("#BillingFx").text() + "</span><br />";
+                }
+                if (jq("#BillingEMail").text()) {
+                    manipulatedData += "<span>Email: " + jq("#BillingEMail").text() + "</span><br />";
+                }
+
+                jq("#copiedAddressDtl").append(manipulatedData);
+            }
+
+            $("button[name='btnSearch']").click(function () {
+                CustomerSearch();
+            });
+
+            var CustomerSearch = function () {
+                url = baseUrl() + 'Customers/search';
+                $.ajax({
+                    url: url,
+                    data: "{ 'lastName': '" + $("input[name='lastName']").val() + "','zipCode':'" + $("input[name='ZipCode']").val() + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $("#contactsList").html('');
+                        if (data.length > 0) {
+                            $.each(data, function (key, val) {
+                                $('<p id="customer-details' + val.SalContId + '"><a class="contact-name-link" href="#" data-val=' + val.SalContId + '>' + val.SalContLastName + ', ' + val.SalContFirstName + '</a> - ' +
+                                    '<span>' + val.SalContAddress + ', </span>' +
+                                    '<span>' + val.SalContCity + ', </span>' +
+                                    '<span>' + val.SalContState + ' </span>' +
+                                    '<span>' + val.SalContZip + ' </span>' +
+                                    '</p>')
+                                    .appendTo('#contactsList');
+
+                                $("p#customer-details" + val.SalContId).click(function () {
+                                    var custdetails = $(this).children();
+                                    $('#CustomerModal').modal('hide');
+                                    $('.modal-backdrop').remove();
+                                    $("#JobSites_SalContId").val(val.SalContId);
+                                    var tagname, sectionName = null;
+                                    if (jq("#headingOne").hasClass("panel-heading-active")) {
+                                        tagname = "#JobSites_";
+                                        sectionName = "JobSite";
+                                    }
+                                    else {
+                                        tagname = "#BillingInfoDetails_";
+                                        sectionName = "Billing";
+                                    }
+
+                                    CustomerSearchById(custdetails[0].getAttribute('data-val'), tagname, sectionName, baseUrl() + 'Customers/search');
+                                });
+                            });
+                        }
+                        else {
+                            $('<p class="contact-name-link">No Search results founds</p>')
+                                   .appendTo('#contactsList');
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+            var CustomerSearchById = function (id, tag, sectionName, url) {
+                //url = baseUrl() + '/Customers/search';
+                //var tag= null;
+                //    if (true) {
+                //        tag ="";
+                //}
+                $.ajax({
+                    url: url,
+                    data: "{\"ContId\": \"" + id + "\"}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data && data.SalContId > 0) {
+                            $(tag + "BillingFirstName").val(data.SalContFirstName);
+                            $(tag + "BillingFirstName").next().hide();
+                            $(tag + "BillingLastName").val(data.SalContLastName);
+                            $(tag + "BillingLastName").next().hide();
+                            if (tag == "#JobSites_") {
+                                $("#JobSites_SalContId").val(data.SalContId);
+                            }
+                            $(tag + sectionName + "Address").val(data.SalContAddress);
+                            $(tag + sectionName + "Address").next().hide();
+                            $(tag + sectionName + "City").val(data.SalContCity);
+                            $(tag + sectionName + "City").next().hide();
+                            $(tag + sectionName + "State").val(data.SalContState);
+                            $(tag + sectionName + "State").next().hide();
+                            $(tag + sectionName + "Zip").val(data.SalContZip);
+                            $(tag + sectionName + "Zip").next().hide();
+                            $(tag + "BillingCompanyName").val(data.SalCompId);
+                            $(tag + "BillingCompanyName").next().hide();
+                            if (data.SalContPhone) {
+                                $(tag + sectionName + "Phone").val(data.SalContPhone);
+                                $(tag + sectionName + "Phone").trigger("blur");
+                            }
+                            $(tag + sectionName + "PhoneExt").val(data.SalContPhoneExt);
+                            $(tag + sectionName + "PhoneExt").next().hide();
+                            if (data.SalContMobile) {
+                                $(tag + sectionName + "MobilePhone").val(data.SalContMobile);
+                                $(tag + sectionName + "MobilePhone").trigger("blur");
+                            }
+                            $(tag + sectionName + "Fax").val(data.SalContFax);
+                            $(tag + sectionName + "Fax").next().hide();
+                            if (data.SalContEmail && data.SalContEmail != "" && data.SalContEmail != null && data.SalContEmail != "N/A") {
+                                $(tag + sectionName + "EMail").val(data.SalContEmail);
+                                $(tag + sectionName + "EMail").next().hide();
+                            }
+                            else {
+                                $(tag + sectionName + "EMail").val("");
+                            }
+                        }
+                        else {
+                            alert("Customer Details not found!");
+                            window.location.href = baseUrl() + "/projects";
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+
+            var apptSearchById = function (id, tag, sectionName, url) {
+                $.ajax({
+                    url: url,
+                    data: "{\"id\": \"" + id + "\"}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data.ScheduledAppointments && data.ScheduledAppointments.SalContId > 0) {
+                            data = data.ScheduledAppointments;
+                        }
+                        if (data && data.SalContId > 0) {
+                            $(tag + "BillingFirstName").val(data.SalApptFirstName);
+                            $(tag + "BillingFirstName").next().hide();
+                            $(tag + "BillingLastName").val(data.SalApptLastName);
+                            $(tag + "BillingLastName").next().hide();
+                            if (tag == "#JobSites_") {
+                                $("#JobSites_SalApptId").val(data.SalApptId);
+                            }
+                            $(tag + sectionName + "Address").val(data.SalApptAddress);
+                            $(tag + sectionName + "Address").next().hide();
+                            $(tag + sectionName + "City").val(data.SalApptCity);
+                            $(tag + sectionName + "City").next().hide();
+                            $(tag + sectionName + "State").val(data.SalApptState);
+                            $(tag + sectionName + "State").next().hide();
+                            $(tag + sectionName + "Zip").val(data.SalApptZip);
+                            $(tag + sectionName + "Zip").next().hide();
+                            $(tag + "BillingCompanyName").val(data.SalCompId);
+                            $(tag + "BillingCompanyName").next().hide();
+                            if (data.SalApptPhone) {
+                                $(tag + sectionName + "Phone").val(data.SalApptPhone);
+                                $(tag + sectionName + "Phone").trigger("blur");
+                            }
+                            $(tag + sectionName + "PhoneExt").val(data.SalApptPhoneExt);
+                            $(tag + sectionName + "PhoneExt").next().hide();
+                            if (data.SalApptMobile) {
+                                $(tag + sectionName + "MobilePhone").val(data.SalApptMobile);
+                                $(tag + sectionName + "MobilePhone").trigger("blur");
+                            }
+                            $(tag + sectionName + "Fax").val(data.SalApptFax);
+                            $(tag + sectionName + "Fax").next().hide();
+                            if (data.SalApptEmail && data.SalApptEmail != "" && data.SalApptEmail != null && data.SalApptEmail != "N/A") {
+                                $(tag + sectionName + "EMail").val(data.SalApptEmail);
+                                $(tag + sectionName + "EMail").next().hide();
+                            }
+                            else {
+                                $(tag + sectionName + "EMail").val("");
+                            }
+                        }
+                        else {
+                            alert("Customer Details not found!");
+                            window.location.href = baseUrl() + "projects";
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+
+            jq("button[name='btnApptSearch']").click(function () {
+                jq.ajax({
+                    url: baseUrl() + 'Appointments/search',
+                    data: "{ 'lastName': '" + jq("input[name='custLastName']").val() + "','city': '" + jq("input[name='town']").val() + "','zipCode':'" + jq("input[name='CustZipCode']").val() + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        jq("#appointmentsList").html('');
+                        if (data.length > 0) {
+                            jq.each(data, function (key, val) {
+                                jq('<p id="appt-details' + val.SalApptId + '"><a class="contact-name-link" href="#"  data-val=' + val.SalApptId + '>' + val.SalApptLastName + ', ' + val.SalApptFirstName + '</a> - ' +
+                                    '<span>' + val.SalApptCity + ', </span>' +
+                                    '<span>' + val.SalApptState + ' </span>' +
+                                    '<span>' + val.SalApptZip + ' </span>' +
+                                    '</p>')
+                                    .appendTo('#appointmentsList');
+
+                                $("p#appt-details" + val.SalApptId).click(function () {
+                                    var custdetails = $(this).children();
+                                    $('#ApptModal').modal('hide');
+                                    $('.modal-backdrop').remove();
+                                    var tagname, sectionName = null;
+                                    if (jq("#headingOne").hasClass("panel-heading-active")) {
+                                        tagname = "#JobSites_";
+                                        sectionName = "JobSite";
+                                    }
+                                    else {
+                                        tagname = "#BillingInfoDetails_";
+                                        sectionName = "Billing";
+                                    }
+                                    apptSearchById(custdetails[0].getAttribute('data-val'), tagname, sectionName, baseUrl() + 'Appointments/ShowApptById');
+                                });
+                            });
+                        }
+                        else {
+                            jq('<p class="contact-name-link">No Search results founds</p>')
+                                   .appendTo('#appointmentsList');
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+
+            jq("#JobSites_JobSiteZip,#BillingInfoDetails_BillingZip").autocomplete({
+                source: function (request, response) {
+                    var elem = null;
+                    jq.ajax({
+                        url: baseUrl() + 'Company/getStateAndCity',
+                        data: "{ \"zip_prefix\": \"" + request.term + "\"}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.length > 0) {
+                                response($.map(data, function (item) {
+                                    return item;
+                                }))
+                            }
+                            else {
+                                //$("#SalContCity").val('');
+                                //$("#SalContState").val('');
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    var elemCity, elemState = null;
+                    if (jq("#headingOne").hasClass("panel-heading-active")) {
+                        elemCity = "#JobSites_JobSiteCity";
+                        elemState = "#JobSites_JobSiteState";
+                    }
+                    else {
+                        elemCity = "#BillingInfoDetails_BillingCity";
+                        elemState = "#BillingInfoDetails_BillingState";
+                    }
+                    $(elemCity).val(i.item.city);
+                    $(elemState).val(i.item.state);
+                },
+                minLength: 3
+            });
+
+            $("#JobSites_JobSiteZip,#BillingInfoDetails_BillingZip").change(function () {
+                var elemCity, elemState = null;
+                if (jq("#headingOne").hasClass("panel-heading-active")) {
+                    elemCity = "#JobSites_JobSiteCity";
+                    elemState = "#JobSites_JobSiteState";
+                }
+                else {
+                    elemCity = "#BillingInfoDetails_BillingCity";
+                    elemState = "#BillingInfoDetails_BillingState";
+                }
+
+                var inputEl = $(this).val();
+                if ((inputEl.length <= 4)) {
+                    $(elemCity).val('');
+                    $(elemState).val('');
+                }
+
+                else if ((inputEl) && (inputEl.length == 5)) {
+                    $.ajax({
+                        url: baseUrl() + 'Company/getStateAndCity/',
+                        data: "{ 'zip_prefix': '" + inputEl + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.length > 0) {
+                                $(elemState).val(data[0].state);
+                                $(elemCity).val(data[0].city);
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                }
+            });
+            checkCommId();
+
+            function GetRoute() {
+                var source, destination;
+                source = jq("#JobSites_JobSiteAddress").val() + " " +
+                                jq("#JobSites_JobSiteCity").val() + " " +
+                                jq("#JobSites_JobSiteState").val() + " " +
+                                jq("#JobSites_JobSiteZip").val();
+                destination = "@Atlas.Models.BusinessConstants.AtlasAddress";
+
+                //*********DISTANCE AND DURATION**********************//
+                var service = new google.maps.DistanceMatrixService();
+                service.getDistanceMatrix({
+                    origins: [source],
+                    destinations: [destination],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    unitSystem: google.maps.UnitSystem.METRIC,
+                    avoidHighways: false,
+                    avoidTolls: false
+                }, function (response, status) {
+                    var hours, mins = 0;
+                    try {
+                        if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                            var distance = response.rows[0].elements[0].distance.text;
+                            var duration = response.rows[0].elements[0].duration.text;
+                            //alert("Distance: " + distance + " Duration: " + duration);
+                            var timeSplit = duration.match(/\d+/g);
+
+                            if (timeSplit.length > 1) {
+                                hours = parseInt(timeSplit[0]) * 60;
+                                mins = parseInt(timeSplit[1]);
+                            }
+                            else {
+                                mins = parseInt(timeSplit[0]);
+                            }
+                            if (mins <= 30) {
+                                mins = 30;
+                            }
+                            else {
+                                mins = 60;
+                            }
+                            if (hours > 0) {
+                                hours = parseInt(hours) + parseInt(mins)
+                            }
+                            else {
+                                hours = mins / 60;
+                            }
+                            jq("#JobDetails_DriveTime").val(hours);
+                        } else {
+                            jq("#JobDetails_DriveTime").val(hours);
+                        }
+                    }
+                    catch (ex) {
+                        jq("#JobDetails_DriveTime").val(hours);
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,57 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2 class="modal-title">Search Customer Appointment</h2>
+</div>            <!-- /modal-header -->
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="pull-right col-md-6">
+                <h3>
+                    <button type="submit" class="btn btn-primary btn-block" name="newPersonalAppt" onclick="location.href='@Url.Action("personal", "appointments")'">
+                        <span class="glyphicon glyphicon-plus white"></span> Add Personal Appointment
+                    </button>
+                </h3>
+            </div>
+            <div class="pull-right col-md-6">
+                <h3>
+                    <button type="submit" class="btn btn-primary btn-block" name="newAppt" onclick="location.href='@Url.Action("Create", "appointments")'">
+                        <span class="glyphicon glyphicon-plus white"></span> Add Appointment
+                    </button>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <p style="margin-right:15px">
+                    Filter <input type="text" placeholder="Last Name" name="custLastName" value="" class="input-text" style="width:130px" />
+                    <input type="text" placeholder="Town" name="town" value="" class="input-text" style="width:130px" />
+                    and/or
+                    <input type="text" placeholder="Zip" name="CustZipCode" value="" class="input-text" maxlength="5" style="width:80px" />
+                    <button type="submit" class="btn-default" name="btnApptSearch">
+                        <span class="glyphicon glyphicon-search"></span> Search
+                    </button>
+                </p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="container col-md-offset-1">
+                <div id="appointmentsList" style="margin-top: 2em;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>            <!-- /modal-body -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+</div>  
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+ }  
+
+<script>
+
+</script>

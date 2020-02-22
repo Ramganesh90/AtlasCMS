@@ -1,0 +1,44 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2 class="modal-title">Search Customers</h2>
+</div>            <!-- /modal-header -->
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="pull-right">
+                <h3>
+                    <button type="submit" class="btn btn-primary" name="newCustomer" onclick="location.href='@Url.Action("Create", "customers")'">
+                        <span class="glyphicon glyphicon-plus white"></span> Add a New Customer
+                    </button>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <p>
+                    Filter By <input type="text" placeholder="Last Name" name="lastName" value="" class="input-text" /> and
+                    <input type="text" placeholder="Zip Code" name="ZipCode" value="" class="input-text" maxlength="5" style="width:25%"  />
+                    <button type="submit" class="btn-default" name="btnSearch">
+                        <span class="glyphicon glyphicon-search"></span> Search
+                    </button>
+                </p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="container col-md-offset-1">
+                <div id="contactsList" style="margin-top: 2em;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>            <!-- /modal-body -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+</div>  
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+ }  

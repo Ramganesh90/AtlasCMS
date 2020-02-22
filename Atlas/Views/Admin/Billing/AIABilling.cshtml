@@ -1,0 +1,264 @@
+﻿@model Atlas.Models.DBO.AIABilling
+
+@{
+    ViewBag.Title = "AIA Billing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title </h2>
+<hr />
+<div id="aiaBillingForm">
+    @using (Html.BeginForm("saveAiabilling", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+        {  <div class="row">
+            <div class="col-md-8 col-sm-6 alert alert-error">
+                <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            </div>
+        </div>
+        }
+            <div class="row form-group">
+                <div class="col-md-3">
+                    @Html.HiddenFor(model => model.PRJID, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.BIDID, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.BIDID, new SelectList(ViewBag.BidItems, "Value", "Text"),
+                           "-Select-", new { @class = "form-control project-editors" })
+                        @Html.ValidationMessageFor(model => model.BIDID, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.ApplicationNum, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.ApplicationNum, new { htmlAttributes = new { @class = "form-control project-editors",@min=1 } })
+                        @Html.ValidationMessageFor(model => model.ApplicationNum, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.CommissionExpires, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.CommissionExpires, new { htmlAttributes = new { @class = "form-control project-editors", @format = "date" } })
+                        @Html.ValidationMessageFor(model => model.CommissionExpires, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.BillingDate, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.BillingDate, new { htmlAttributes = new { @class = "form-control project-editors",@format = "date" } })
+                        @Html.ValidationMessageFor(model => model.BillingDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.EntryDate, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.EntryDate, new { htmlAttributes = new { @class = "form-control project-editors", @format = "date" } })
+                        @Html.ValidationMessageFor(model => model.EntryDate, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    @Html.LabelFor(model => model.NotaryDate, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.NotaryDate, new { htmlAttributes = new { @class = "form-control project-editors", @format = "date" } })
+                        @Html.ValidationMessageFor(model => model.NotaryDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.OriginalContractSum, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.OriginalContractSum, new { htmlAttributes = new { @class = "form-control project-editors currency" } })
+                        @Html.ValidationMessageFor(model => model.OriginalContractSum, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.NetChangeByCO, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.NetChangeByCO, new { htmlAttributes = new { @class = "form-control project-editors currency" } })
+                        @Html.ValidationMessageFor(model => model.NetChangeByCO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.ItemNo, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.ItemNo, new { htmlAttributes = new { @class = "form-control project-editors" } })
+                        @Html.ValidationMessageFor(model => model.ItemNo, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.QtyOfBI, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.QtyOfBI, new { htmlAttributes = new { @class = "form-control project-editors" } })
+                        @Html.ValidationMessageFor(model => model.QtyOfBI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.UnitOfMeasure, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.UnitOfMeasure, new SelectList(ViewBag.UOMTypes, "Value", "Text"),
+                           "-Select-", new { @class = "form-control project-editors" })
+                        @Html.ValidationMessageFor(model => model.UnitOfMeasure, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control project-editors currency" } })
+                        @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.BilledQty, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.BilledQty, new { htmlAttributes = new { @class = "form-control project-editors" } })
+                        @Html.ValidationMessageFor(model => model.BilledQty, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Accept, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.Accept, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "true" },
+                                           new SelectListItem() { Text = "No", Value = "false"}
+                                        }, new { @class = "form-control project-editors", style = "font-size:12pt;" })
+                        @Html.ValidationMessageFor(model => model.Accept, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-2">
+                    <input type="submit" value="Save Billing" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+    <script>
+    $(function () {
+        var nowTemp = new Date();
+        var date = $( "input[format='date']" ).datepicker({
+            startDate: new Date(),
+            format: 'mm/dd/yy',
+            todayHighlight: true,
+            todayBtn: 'linked',
+            orientation: 'top right',
+            autoclose: true
+
+        }).on('changeDate', function (ev) {
+            $(this).blur();
+            $(this).datepicker('hide');
+            $(this).closest('input').focus();
+        });
+    });
+    $(document).ready(function () {
+
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+
+        let params = (new URL(document.location)).searchParams;
+        let id = params.get("id");
+        if (!isNaN(parseInt(id))) {
+            $("#PRJID").val(id);
+        }
+
+        function currencyFormat(n, currency) {
+            return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+        }
+
+        $(".currency").change(function () {
+            var value = $(this).val();
+            if (!isNaN(value) && value != "" && value != undefined) {
+                var formattedText = currencyFormat(parseInt(value));
+                $(this).val(formattedText);
+            }
+            else {
+                $(this).val(0);
+            }
+        });
+
+        $('#aiaBillingForm').find('form').on('submit', function () {
+            $("#OriginalContractSum").val($("#OriginalContractSum").val().replace(/,/g, ''));
+            $("#UnitPrice").val($("#UnitPrice").val().replace(/,/g, ''));
+            $("#NetChangeByCO").val($("#NetChangeByCO").val().replace(/,/g, ''));
+        });
+
+        var formatDate = function (dt) {
+            var date = new Date(parseInt(dt.replace('/Date(', '')))
+            return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear()
+        }
+
+        var resetData = function () {
+            $("#aiaBillingForm").find('form').find("input[type=text]").val('');
+            $("#aiaBillingForm").find('form').find("input[type=number]").val('');
+            $("#aiaBillingForm").find('form').find("input[type=datetime]").val('');
+            $("#aiaBillingForm").find('form').find("select").not("#BIDID").val(0);
+        }
+
+        $("#BIDID").change(function () {
+            if ($("#BIDID").prop('selectedIndex') > 0)
+            {
+                var jsonData = {
+                    "PRJID": $("#PRJID").val(),
+                    "BIDID": $("#BIDID").val()
+                }
+                $.ajax({
+                    url: baseUrl() + 'Admin/getAiaBilling',
+                    data: JSON.stringify(jsonData),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data != null) {
+                            alert("Prefilling the Billing Details!");
+                            $("#CommissionExpires").val(formatDate(data.CommissionExpires));
+                            $("#ApplicationNum").val(data.ApplicationNum);
+                            $("#BillingDate").val(formatDate(data.BillingDate));
+                            $("#EntryDate").val(formatDate(data.EntryDate));
+                            $("#NotaryDate").val(formatDate(data.NotaryDate));
+                            $("#OriginalContractSum").val(data.OriginalContractSum);
+                            $("#NetChangeByCO").val(data.NetChangeByCO);
+                            $("#ItemNo").val(data.ItemNo);
+                            $("#QtyOfBI").val(data.QtyOfBI);
+                            $("#UnitOfMeasure").val(data.UnitOfMeasure);
+                            $("#UnitPrice").val(data.UnitPrice);
+                            $("#BilledQty").val(data.BilledQty);
+                            $("#Accept").val(data.Accept);
+                        }
+                        else {
+                            resetData();
+                        }
+                    },
+                    error: function (response) {
+                         resetData();
+                    },
+                    failure: function (response) {
+                        alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+            else {
+                resetData();
+            }
+        });
+    });
+    </script>
+}

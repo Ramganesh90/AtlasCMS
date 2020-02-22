@@ -1,0 +1,171 @@
+﻿<div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 class="modal-title">PunchList Maintenance</h2>
+    </div>            <!-- /modal-header -->
+    <div class="modal-body">
+        <div class="container">
+            <table id="punchlist" class="table">
+                <tr>
+                    <th>PunchList Item Id</th>
+                    <th>Job Number</th>
+                    <th>Job Name</th>
+                    <th>Problem</th>
+                    <th>Date Received</th>
+                    <th>Status</th>
+                </tr>
+            </table>
+        </div>
+    </div>            <!-- /modal-body -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<style>
+    .modal-dialog {
+        width: 75%;
+    }
+
+    .modal-header {
+        padding: 10px 10px;
+        color: #FFF;
+        border-bottom: 2px solid #0E2D4C;
+    }
+
+    table td, th {
+        font-size: medium !important;
+        color: #0E2D4C;
+        border: 1px solid #b3aeae;
+    }
+
+    #punchlist td:nth-child(1), #punchlist td:nth-child(2) {
+         width: 7%;
+         text-align: left;
+    }
+
+    #punchlist td:nth-child(3), #punchlist td:nth-child(4) {
+        width: 45%;
+         text-align: left;
+    }
+
+    #punchlist td:nth-child(5) {
+        width: 7%;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+
+        $('#punchListMaintenance').on('show.bs.modal', function (e) {
+            $('#punchlist').hide();
+            PunchListLoad();
+        });
+        $('#punchlist').on('change',".punchStatus", function (e) {
+            var status = $(this).find("option:selected").val();
+            var id = $(this).closest('tr').find("td:nth(0)").text();
+            UpdateStatus(id,status);
+        });
+
+        var PunchListLoad = function () {
+            $.ajax({
+                url: baseUrl() + 'Admin/viewPunchList',
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data) {
+                        $('#punchlist').show();
+                        $("tr:has(td)").remove();
+                        var c = [];
+                        if (data.length > 0) {
+                            var hasPunchStatus = undefined;
+                            $.each(data, function (i, item) {
+                                c.push("<tr><td>" + item.PunchListId + "</td>");
+                                c.push("<td>" + item.JobNumber + "</td>");
+                                c.push("<td>" + item.JobName + "</td>");
+                                c.push("<td>" + item.Problem + "</td>");
+                                c.push("<td>" + item.DateReceived + "</td>");
+                                if(item.PunchStatuses!=null && item.PunchStatuses.length >0){
+                                    hasPunchStatus = true;
+                                    var s = $("<select class=\"punchStatus\" />");
+                                    $.each(item.PunchStatuses, function (i, val) {
+                                        if (val.CmsStatusId != item.Status) {
+                                            $(s).append($("<option></option>").attr("value", val.CmsStatusId).text(val.StatusName));
+                                        }
+                                        else {
+                                            $(s).append($("<option></option>").attr("value", val.CmsStatusId).text(val.StatusName)
+                                                .attr("selected","selected"));
+                                        }
+                                    });
+
+                                    c.push("<td>" + s[0].outerHTML + "</td></tr>");
+                                }
+                                else{
+                                    c.push("</tr>");
+                                }
+
+                            });
+                            if(!hasPunchStatus){
+                                $("#punchlist th:last-child").remove();
+                            }
+                        }
+                        else {
+                            c.push("<tr><td colspan='6'> No PunchList Data</td>");
+                        }
+                        $('#punchlist').append(c.join(""));
+                    }
+                },
+                error: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                },
+                failure: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                }
+            });
+        }
+
+        var UpdateStatus = function (id,status) {
+            var updateData = {
+                "punchId": id,
+                    "status":status
+            };
+            $.ajax({
+                url: baseUrl() + 'Admin/UpdatePunchListStatus',
+                data: JSON.stringify(updateData),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data >0) {
+                        alert('Updated PunchList Status');
+                    }
+                    else {
+                        alert('Failed to update PunchList Status');
+                    }
+                },
+                error: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                },
+                failure: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                }
+            });
+        }
+    });
+</script>

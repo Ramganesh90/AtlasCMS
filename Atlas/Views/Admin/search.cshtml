@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Atlas.Models.SearchPunchListModel>
+@{
+    ViewBag.Title = "Generate PunchList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="container" style="padding-bottom:15px">
+    <div class="row pull-right">
+        <div class="form-group">
+            <p style="margin-right:15px">
+                Filter <input type="text" placeholder="Job Name" name="projectName" value="" class="input-text" /> and/or
+                <input type="text" placeholder="Town" name="Town" value="" class="input-text" />
+                <button class="btn-default" name="btnSearch">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+            </p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="punchListSearch">
+        <p class="normal-heading-text">Search Results</p>
+        <table id="projects" class="table">
+            <tr style="font-size:medium">
+                <th style="font-size:medium !important;">Job Number</th>
+                <th style="font-size:medium !important;">Job Name</th>
+                <th style="font-size:medium !important;">First Name</th>
+                <th style="font-size:medium !important;">Last Name</th>
+                <th style="font-size:medium !important;">Address Name</th>
+                <th style="font-size:medium !important;">State</th>
+                <th style="font-size:medium !important;">City</th>
+                <th style="font-size:medium !important;">Zip</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/UtilScript.js"></script>
+<style>
+    table td, th {
+        font-size: small !important;
+        color: #0E2D4C;
+        text-align: center;
+    }
+
+    .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+        line-height: 1.1;
+        text-align: left;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('#punchListSearch').hide();
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+
+        $("button[name='btnSearch'").click(function () {
+            var jsonData = {
+                "projectName": $("input[name='projectName']").val(),
+                "City": $("input[name='Town']").val()
+            }
+            $.ajax({
+                url: baseUrl() + 'Admin/searchList',
+                data: JSON.stringify(jsonData),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data) {
+                        $('#punchListSearch').show();
+                        $("tr:has(td)").remove();
+                        $("tr.bidrow").remove();
+                        var c = [];
+                        if (data.length > 0) {
+                            $.each(data, function (i, item) {
+                                var c = [];
+                                c.push("<tr><td class='punchid'><a class='normal-heading-text' style='font-size:14px !important' data-Salesmen='" + item.Salesmen + "' data-Phone='" + item.JobPhone + "'  data-JobContact='" + item.JobContact + "' data-PRJID='" + item.PRJID + "' href=#>" + item.JobNumber + "</a></td>");
+                                c.push("<td>" + item.JobName + "</td>");
+                                c.push("<td>" + item.FirstName + "</td>");
+                                c.push("<td>" + item.LastName + "</td>");
+                                c.push("<td>" + item.JobAddress + "</td>");
+                                c.push("<td>" + item.JobState + "</td>");
+                                c.push("<td>" + item.JobCity + "</td>");
+                                c.push("<td>" + item.JobZip + "</td></tr>");
+                                $('#projects').append(c.join(""));
+                                var bidRow = [];
+                                if (item.BidItem != null && item.BidItem.length > 0) {
+                                    bidRow.push("<tr colspan='6'><table><tr class='bidrow'><th>Bid ID</th><th>Bid Name</th><th>Fence Type</tr>");
+                                    $.each(item.BidItem, function (i, bidData) {
+                                        bidRow.push("<tr class='bidrow'><td>" + bidData.BidItemId + "</td>");
+                                        bidRow.push("<td>" + bidData.BidItemName + "</td>");
+                                        bidRow.push("<td>" + bidData.FenceType + "</td></tr>");
+                                    });
+                                    bidRow.push("</table></tr>");
+                                    var BidRows = bidRow.join("");
+                                    $('#projects').append(BidRows);
+                                }
+                                else {
+                                    $('#projects').append("<tr class='bidrow'><td colspan='6'> No Bid Items</td>");
+                                }
+                            });
+                        }
+                        else {
+                            $('#projects').append("<tr><td colspan='6'> No Search Result Found</td>");
+                        }
+
+                    }
+                },
+                error: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                },
+                failure: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                }
+            });
+        });
+
+        $('#projects').on("click", ".punchid", function (e) {
+            e.preventDefault();
+            var postData = {
+                "PRJID": $(this).children().attr('data-PRJID'),
+                "JobNumber": $(this).children().attr('data-JobNumber')
+            }
+            window.location.href = baseUrl() + "admin/complaintForm?id=" + $(this).children().attr('data-PRJID');
+                                        
+        });
+    });
+</script>

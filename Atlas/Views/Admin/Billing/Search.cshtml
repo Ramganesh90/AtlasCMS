@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Atlas.Models.SearchPunchListModel>
+@{
+    ViewBag.Title = "Job Billing Maintenance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="container" style="padding-bottom:15px">
+    <div class="row pull-right">
+        <div class="form-group">
+            <p style="margin-right:15px">
+                Filter <input type="text" placeholder="Job Name" name="projectName" value="" class="input-text" /> and/or
+                <input type="text" placeholder="Job City" name="Town" value="" class="input-text" />
+                <button class="btn-default" name="btnSearch">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+            </p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="jobMaintenanceSearch">
+        <p class="normal-heading-text">Search Results</p>
+        <table id="projects" class="table">
+            <tr style="font-size:medium">
+                <th style="font-size:medium !important;">Job Number</th>
+                <th style="font-size:medium !important;">Job Name</th>
+                <th style="font-size:medium !important;">Project Maintenance</th>
+                <th style="font-size:medium !important;">AIA Billing</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/UtilScript.js"></script>
+<style>
+    table td, th {
+        font-size: small !important;
+        color: #0E2D4C;
+        text-align: center;
+    }
+
+    .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+        line-height: 1.1;
+        text-align: left;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('#jobMaintenanceSearch').hide();
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+
+        $("button[name='btnSearch'").click(function () {
+            var jsonData = {
+                "projectName": $("input[name='projectName']").val(),
+                "City": $("input[name='Town']").val()
+            }
+            $.ajax({
+                url: baseUrl() + 'Admin/searchList',
+                data: JSON.stringify(jsonData),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data) {
+                        $('#jobMaintenanceSearch').show();
+                        $("tr:has(td)").remove();
+                        var c = [];
+                        if (data.length > 0) {
+                            $.each(data, function (i, item) {
+                                var c = [];
+                                c.push("<tr><td>" + item.JobNumber + "</td>");
+                                c.push("<td>" + item.JobName + "</td>");
+                                c.push("<td class='maintenance maintenance-link' data-val=" + item.PRJID + "><a style='font-size: 14px !important;' class='normal-heading-text'>View</a></td>");
+                                c.push("<td class='billing maintenance-link' data-val=" + item.PRJID + "><a style='font-size: 14px !important;' class='normal-heading-text'>View</a></td></tr>");
+                                $('#projects').append(c.join(""));
+                            });
+                        }
+                        else {
+                            $('#projects').append("<tr><td colspan='6'> No Search Result Found</td>");
+                        }
+
+                    }
+                },
+                error: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                },
+                failure: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                }
+            });
+
+            $('.table').on("click", ".maintenance-link", (function (e) {
+                e.preventDefault();
+                if ($(this).hasClass("maintenance")) {
+                    window.location.href = baseUrl() + "Admin/maintenance?id=" + $(this).attr('data-val')
+                }
+                else {
+                    window.location.href = baseUrl() + "Admin/aiabilling?id=" + $(this).attr('data-val')
+                }
+            })
+            );
+        });
+    });
+
+    </script>

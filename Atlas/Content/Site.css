@@ -1,0 +1,585 @@
+﻿@font-face {
+    font-family: 'MyriadProRegularBold';
+    src: url('font/myriadpro-bold.eot'); /* IE9 Compat Modes */
+    src: url('font/myriadpro-bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('font/myriadpro-bold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('font/myriadpro-bold.woff') format('woff'), /* Pretty Modern Browsers */
+    url('font/myriadpro-bold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('font/myriadpro-bold.svg#myriadpro-bold') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'MyriadProRegular';
+    src: url('font/myriadpro-regular.eot'); /* IE9 Compat Modes */
+    src: url('font/myriadpro-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('font/myriadpro-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('font/myriadpro-regular.woff') format('woff'), /* Pretty Modern Browsers */
+    url('font/myriadpro-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('font/myriadpro-regular.svg#myriadpro-regular') format('svg'); /* Legacy iOS */
+}
+
+input[type=text]::-ms-clear {
+    display: none;
+}
+
+* {
+    font-family: MyriadProRegular;
+    font-size: 14pt;
+    color: #777777;
+}
+
+body {
+    left: 0;
+    padding: 0px;
+}
+
+
+h1, h2, h3, h4 {
+    font-family: MyriadProRegularBold;
+    color: #0E2D4C;
+}
+
+h1 {
+    font-size: 28pt;
+}
+
+h2 {
+    font-size: 24pt;
+}
+
+h3 {
+    font-size: 22pt;
+}
+
+h4 {
+    font-size: 15pt;
+}
+
+.normal-heading-text {
+    color: #0E2D4C;
+    font-family: MyriadProRegular;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+.normal-heading-bold-text {
+    color: #0E2D4C;
+    font-family: MyriadProRegularBold;
+    text-decoration: underline;
+}
+
+/* Custom .navbar */
+/* Top Menu Bar Office Menu*/
+
+.navbar {
+    min-height: 35px !important;
+    margin: 0px !important;
+    top: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.navbar-nav > li > a,
+.navbar-brand {
+    padding-top: 10px !important;
+    padding-bottom: 0 !important;
+    height: 35px;
+}
+
+.navbar-default {
+    background-color: #0E2D4C;
+    border-color: #9891bd;
+}
+
+    .navbar-default .navbar-brand {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #ffffff;
+        }
+
+    .navbar-default .navbar-text {
+        color: #ffffff;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #ffffff;
+        font-size: 12pt;
+    }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #ffffff;
+        }
+
+
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        color: #ffffff;
+        background-color: #ffffff;
+    }
+
+    .navbar-default .navbar-nav > .open > a,
+    .navbar-default .navbar-nav > .open > a:hover,
+    .navbar-default .navbar-nav > .open > a:focus {
+        color: #ffffff;
+        background-color: #ffffff;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: #9891bd;
+    }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #9891bd;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #ffffff;
+        }
+
+    .navbar-default .navbar-collapse,
+    .navbar-default .navbar-form {
+        border-color: #ffffff;
+    }
+
+    .navbar-default .navbar-link {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-link:hover {
+            color: #ffffff;
+        }
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #ecdbff;
+        }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #ecdbff;
+        background-color: #9891bd;
+    }
+
+    #logo {
+        /*width: 100%;
+        height: 100%;*/
+        min-width: 250px;
+        min-height: 80px;
+    }
+}
+/* Office Menu - Ends*/
+
+/* Custom .navbar */
+/* Second Menu - Begins*/
+
+.navbar-inverse {
+    background-color: #b2b299;
+    border-color: #FFF;
+}
+
+    .navbar-inverse .navbar-brand {
+        color: #ffffff;
+    }
+
+        .navbar-inverse .navbar-brand:hover,
+        .navbar-inverse .navbar-brand:focus {
+            color: #ffffff;
+        }
+
+    .navbar-inverse .navbar-text {
+        color: #ffffff;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #ffffff;
+        font-size: 16pt;
+        margin: 0px 10px 0px 10px;
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover,
+        .navbar-inverse .navbar-nav > li > a:focus {
+            color: #0e2d4c;
+        }
+
+    .navbar-inverse .navbar-nav > li.active {
+        color: #0e2d4c;
+    }
+
+    .navbar-inverse .navbar-nav > .active > a,
+    .navbar-inverse .navbar-nav > .active > a:hover,
+    .navbar-inverse .navbar-nav > .active > a:focus {
+        color: #0e2d4c;
+        /*background-color: #76746a;*/
+    }
+
+    .navbar-inverse .navbar-nav > .open > a,
+    .navbar-inverse .navbar-nav > .open > a:hover,
+    .navbar-inverse .navbar-nav > .open > a:focus {
+        color: #0e2d4c;
+        background-color: #76746a;
+    }
+
+    .navbar-inverse .navbar-toggle {
+        border-color: #76746a;
+    }
+
+        .navbar-inverse .navbar-toggle:hover,
+        .navbar-inverse .navbar-toggle:focus {
+            background-color: #76746a;
+        }
+
+        .navbar-inverse .navbar-toggle .icon-bar {
+            background-color: #ffffff;
+        }
+
+    .navbar-inverse .navbar-collapse,
+    .navbar-inverse .navbar-form {
+        border-color: #ffffff;
+    }
+
+    .navbar-inverse .navbar-link {
+        color: #ffffff;
+    }
+
+        .navbar-inverse .navbar-link:hover {
+            color: #0e2d4c;
+        }
+
+@media (max-width: 767px) {
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+        color: #ffffff;
+    }
+
+        .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+        .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #0e2d4c;
+        }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #0e2d4c;
+        background-color: #76746a;
+    }
+
+    #logo {
+        width: 40%;
+    }
+}
+
+/* Second Menu - Ends*/
+
+hr {
+    margin-top: 0PX !important;
+    margin-bottom: 0px !important;
+    border-top: 1px solid #eeeeee;
+}
+
+/*Button*/
+.btn {
+    background-color: #0e2d4c !important;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+    color: #FFF;
+    background-color: #143F6A;
+    border-color: #143F6A;
+    font-family: MyriadProRegular;
+    font-size: 14pt;
+    margin: 5px;
+}
+
+.btn-default,
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active {
+    color: #777777;
+    background-color: #EBEBEB;
+    border: none;
+    border-radius: 2px;
+    font-family: MyriadProRegularBold;
+    font-size: 14pt;
+}
+
+.btn-shadow {
+    color: #0E2D4C;
+    font-family: MyriadProRegularBold;
+    font-size: 14pt;
+    width: 42%;
+    margin-top: 15px;
+    height: 42px !important;
+    padding: 6px;
+    margin-right: 18px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    -webkit-box-shadow: 0px 4px 1px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 1px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 1px 0px rgba(0,0,0,0.75);
+}
+
+.btn-light-brown {
+    background-color: #E4DBBC;
+    color: #0E2D4C;
+    font-family: MyriadProRegular;
+    font-size: 14pt;
+    width: 30%;
+    height: 38px !important;
+    margin-left: 30px;
+}
+
+.bottom-shadow {
+    border-radius: 1px;
+    border: 1px solid #8f8e8e;
+    -webkit-box-shadow: 1px 4px 1px 0px rgba(143,142,142,0.75);
+    -moz-box-shadow: 1px 4px 1px 0px rgba(143,142,142,0.75);
+    box-shadow: 1px 4px 1px 0px rgba(143,142,142,0.75);
+}
+
+.btn-brown {
+    background-color: #671313;
+    box-shadow: 1px 2px #8f8e8e;
+    border-bottom: 1px solid #8f8e8e;
+    color: #FFFFFF;
+    font-family: MyriadProRegular;
+    font-size: 14pt;
+    height: 52px !important;
+    border-radius: 2px;
+    width: 74%;
+    margin-bottom: 10px;
+}
+
+.white, .white a {
+    color: #fff;
+}
+
+.hyperlinks {
+    font-family: MyriadProRegular;
+    color: #777777;
+    text-decoration: underline;
+}
+
+.field-validation-error > span, .required {
+    color: red !important;
+    font-size: 10pt !important;
+}
+
+.contact-name-link {
+    font-size: 15pt;
+    color: #777777;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+input, select {
+    padding-left: 5px;
+    border-radius: 2px;
+    font-size: 12pt;
+}
+
+.input-text {
+    font-size: 20px;
+    color: #555555;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.project-section {
+    height: 100px;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 5px;
+    width: 96%;
+}
+
+
+.appointment-section-border {
+    border-bottom-color: #E9EAEC;
+    border-bottom: 3px solid;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.small-text {
+    font-size: 15px;
+    line-height: 1.2;
+}
+
+.notesAppt {
+    padding-left: 15px;
+    width: 100%;
+    font-size: 16px;
+    min-height: 120px;
+}
+
+.appt-span-block {
+    border-bottom: 2px solid #E8E9EB;
+    width: 43%;
+    display: inline-block;
+}
+
+.appt-detail-note {
+    width: 38%;
+    font-size: 16px;
+    min-height: 120px;
+    margin-bottom: 10px;
+}
+
+.appt-label-bold {
+    font-family: MyriadProRegularBold;
+    font-size: 12pt;
+}
+
+.appt-label-reg {
+    font-family: MyriadProRegular;
+    font-size: 12pt;
+    padding: 0px;
+}
+
+.appt-details {
+    margin: 2px !important;
+}
+
+    .appt-details > label {
+        text-align: right;
+        padding-right: 8px;
+    }
+
+    .appt-details > span {
+        padding-left: 1px;
+        font-size: 16px;
+    }
+
+#Salesperson > option {
+    font-size: 11pt;
+}
+
+.fc-title, .fc-content > .fc-time, .fc-content > .fc-time > span {
+    color: white !important;
+}
+
+.fc-day-number {
+    font-family: MyriadProRegular;
+    color: #777777;
+    text-decoration: underline;
+}
+
+.fc-event .fc-bg {
+    background: none !important;
+}
+
+span.fc-time:after {
+    content: "m";
+}
+
+.fc-popover .fc-header {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.fc-time, .fc-title {
+    font-size: 16px !important;
+}
+
+.validation-warning {
+    font-size: 14px !important;
+    color: orange !important;
+}
+
+.title {
+    font-family: MyriadProRegularBold;
+    color: #0E2D4C;
+}
+.panel-group .panel + .panel{
+    margin:-1px 0px 0px 0px;
+}
+.panel-heading-active,.panel-heading-active > h5  {
+    background-color: #143F6A !important;
+    color: #FFF !important;
+    font-family: MyriadProRegularBold;
+}
+
+.panel-heading{
+    height:32px;
+    padding:5px;
+}
+
+.panel-heading-inactive {
+    font-family: MyriadProRegularBold;
+    background-color: #DFD6B9 !important;
+    color: #0E2D4C !important;
+    border-bottom:5px solid #07233e !important;
+    font-weight:900;
+}
+.panel-heading-inactive > h5 > a {
+    color: #153E72 !important;
+}
+
+
+.project-labels{
+    font-family: MyriadProRegularBold;
+    color: #0E2D4C !important;
+    padding:0px !important;
+    font-size: medium;
+}
+
+ .project-class h1,h2,h3,h4,p{
+     padding:0px !important;
+     margin:0px !important;
+ }
+
+  .project-class .panel-body{
+     margin:0px;
+     padding:0px;
+ }
+
+  .project-class .form-group{
+      margin-bottom:2px;
+  }
+   .project-class .form-control{
+      padding:0px;
+      height:auto;
+  }
+  .panel-title > a {
+    color: inherit;
+    font-size: medium;
+}
+  .project-editors{
+      padding:0px !important;width:100%;height:28px !important;
+  }
+
+  .mediumfont11pts > label,span{
+      font-size:11pt;
+      font-weight:normal;
+  }
+
+.alert {
+    padding: 15px;
+    margin: 0px !important;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.blue-font-medium{
+    font-size: medium !important;
+    color: #0E2D4C;
+}
+

@@ -1,0 +1,125 @@
+﻿@model Atlas.Models.DBO.Complaints
+@{
+    ViewBag.Title = "Complaint Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<div class="container">
+    @using (Html.BeginForm("saveComplaint", "Admin", FormMethod.Post, new { id = "complaintform" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+            {  <div class="row">
+                <div class="col-md-8 col-sm-6 alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                </div>
+            </div>
+            }
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.HiddenFor(model => model.PRJID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.JOBID, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobNumber, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.JobNumber, new { htmlAttributes = new { @class = "form-control project-editors",@readonly="readonly"  } })
+                    @Html.ValidationMessageFor(model => model.JobNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control project-editors", @readonly = "readonly"  } })
+                    @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobAddress, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.JobAddress, new { htmlAttributes = new { @class = "form-control project-editors"  } })
+                    @Html.ValidationMessageFor(model => model.JobAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobCity, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.JobCity, new { htmlAttributes = new { @class = "form-control project-editors"  } })
+                    @Html.ValidationMessageFor(model => model.JobCity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobPhone, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.JobPhone, new { htmlAttributes = new { @class = "form-control project-editors"  } })
+                    @Html.ValidationMessageFor(model => model.JobPhone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobContact, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.JobContact, new { htmlAttributes = new { @class = "form-control project-editors"  } })
+                    @Html.ValidationMessageFor(model => model.JobContact, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Salesman, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.Salesman, new { htmlAttributes = new { @class = "form-control project-editors", @readonly = "readonly"  } })
+                    @Html.ValidationMessageFor(model => model.Salesman, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobNotes, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                <div class="col-md-3">
+                    @Html.TextAreaFor(model => model.JobNotes, htmlAttributes: new { @class = "form-control", @style = "width:100%" })
+                    @Html.ValidationMessageFor(model => model.JobNotes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+                    <div class="col-md-offset-3">
+                        <button name="btnSubmit" class="btn btn-primary" type="submit">Send</button>
+                    </div>
+    }
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<style>
+    .modal-dialog {
+        width: 700px;
+    }
+
+    .modal-header {
+        padding: 10px 10px;
+        color: #FFF;
+        border-bottom: 2px solid #0E2D4C;
+    }
+
+    textarea {
+        padding: 0PX !important;
+        height: 90PX;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        let params = (new URL(document.location)).searchParams;
+        let id = params.get("id");
+        $("#PRJID").val(id);
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+    });
+</script>

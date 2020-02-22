@@ -1,0 +1,171 @@
+﻿@model IEnumerable<Atlas.Models.DBO.BidItems>
+@{
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+<div class="container">
+    <div class="container" style="padding:1%">
+        <h2 style="margin-top:12px !important">Bid Items - Project #@ViewBag.Title</h2>
+        <input type="hidden" value="@ViewBag.Title" id="projId" />
+        <table class="table table-bordered table-dark">
+            <tr>
+                <th class="shortWidth">
+                    @Html.DisplayNameFor(model => model.SelectToQuote)
+                </th>
+                <th class="shortWidth">
+                    @Html.DisplayNameFor(model => model.BidItemId)
+                </th>
+                <th class="longWidth">
+                    @Html.DisplayNameFor(model => model.BidItemName)
+                </th>
+                <th class="longWidth">
+                    @Html.DisplayNameFor(model => model.FenceType)
+                </th>
+                <th class="shortWidth">
+                    @Html.DisplayNameFor(model => model.PreTxSoldFor)
+                </th>
+                <th class="shortWidth">
+                    @Html.DisplayNameFor(model => model.DateActivated)
+                </th>
+            </tr>
+            @if (Model.Count() > 0)
+            {
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.CheckBoxFor(modelItem => item.SelectToQuote)
+                        </td>
+                        <td>
+                            @{
+                                var bid = item.BidItemId;
+                                if (!string.IsNullOrWhiteSpace(bid))
+                                {
+                                    bid = item.BidItemId;
+                                }
+                            }
+                            @Html.ActionLink(bid,
+                "selectheight", "Project",
+                new { bid = item.BidItemId, fence = item.FenceTypeId },
+                new { @class = "normal-heading-text" })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BidItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FenceType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PreTxSoldFor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateActivated)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+                                }
+        </table>
+    </div>
+
+    <div class="pull-right">
+        <div class="form-group">
+            <div>
+                <button type="button" id="btnSaveQuote" class="btn btn-primary" style="width: 95%;">
+                    Save Quote <span class="glyphicon glyphicon-arrow-right white"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        var locationAddr = window.location.pathname.toLocaleLowerCase()
+        var ProjectActivemenu = "View Bid Items";
+        $(".project-menu").each(function (index, el) {
+            if (ProjectActivemenu && el.children[0].text.toLowerCase().indexOf(ProjectActivemenu.toLowerCase()) >= 0) {
+                $(this).removeClass("project-menu")
+                $(this).children().addClass("proj-active");
+            }
+            else {
+                $(this).children().removeClass("proj-inactive");
+            }
+        });
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+
+        @*if('@ViewBag.selectedBids'!=''){
+            var selectedBids = '@ViewBag.selectedBids';
+            selectedBids = selectedBids.split(',');
+            var tableRows = $(".table tbody tr");
+            for (var i = 1; i < tableRows.length; i++) {
+                if(selectedBids.indexOf(parseInt($(tableRows[i]).find('td:nth(1)').text().trim())>-1)){
+                    $(tableRows[i]).find('td:nth(0)').attr('checked', true);
+                }
+            }
+        }*@
+        $("#btnSaveQuote").on("click", function () {
+            var ids = $(".table tr:has(input:checked)").map(function () {
+                var $tr = $(this);// parseInt($(this).closest('tr').find('td:nth(1)').text().trim())
+                var id = $tr.find("td:nth(1)").text().trim();
+                return id;
+            }).toArray();
+
+            var BIDID = ids.join(", ");
+            data = {
+                "PRJID": $("#projId").val(),
+                "BIDID": BIDID
+            };
+            $.ajax({
+                url: baseUrl() + "Quote/CreateQuote",
+                data: JSON.stringify(data),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data != -2) {
+                        window.location.href = baseUrl() + "quote/id/" + $("#projId").val()
+                    }
+                    else {
+                        handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                    }
+                },
+                error: function (response) {
+                    handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                },
+                failure: function (response) {
+                    handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                }
+            });
+
+        });
+    });
+</script>
+<style>
+    table td, th {
+        font-size: medium !important;
+        color: #0E2D4C;
+        text-align: center;
+    }
+
+    .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+        line-height: 1.1;
+        text-align: center;
+    }
+
+    .shortWidth {
+        width: 6% !important;
+    }
+
+    .longWidth {
+        width: 14% !important;
+    }
+</style>

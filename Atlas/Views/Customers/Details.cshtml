@@ -1,0 +1,174 @@
+﻿@model Atlas.Models.CustomerProfileViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@ViewBag.Title</h1>
+        </div>
+        <div class="col-md-4">
+            <button class="btn-shadow bottom-shadow" onclick="location.href='@Url.Action("create","customers",
+                                                              routeValues:new { id = Model.sal02_Contact.SalContId })'">
+                Edit
+            </button>
+            <button class="btn-shadow bottom-shadow" onclick="deleteConfirmAction()">Delete</button>
+        </div>
+    </div>
+    <hr />
+    <div class="container" style="padding:0 0 15px 0px !important">
+        <div class="col-md-pull-4">
+            <div class="col-sm-5">
+                <h3 style="color:#4B4B4B">@Model.sal02_Contact.SalContFirstName @Model.sal02_Contact.SalContLastName</h3>
+                <p>
+                    @Model.sal02_Contact.SalContAddress<br />
+                    @Model.sal02_Contact.SalContCity, @Model.sal02_Contact.SalContState @Model.sal02_Contact.SalContZip<br />
+                    @Model.sal02_Contact.SAL01_Company.SalCompName
+                </p>
+                <p>
+                    <label style="font-weight:bold">
+                        Phone:&nbsp;
+                    </label><span class="phone"> @(String.IsNullOrWhiteSpace(Model.sal02_Contact.SalContPhone) ? Atlas.Models.BusinessConstants.NA : Model.sal02_Contact.SalContPhone)</span>
+                    <label style="font-weight:bold">
+                        &nbsp;  Ext:&nbsp;
+                    </label> @(String.IsNullOrWhiteSpace(Model.sal02_Contact.SalContPhoneExt) ? " " + Atlas.Models.BusinessConstants.NA : " " + Model.sal02_Contact.SalContPhoneExt)<br />
+
+                    <label style="font-weight:bold">
+                        Mobile:&nbsp;
+                    </label> <span class="phone">
+                        @(String.IsNullOrWhiteSpace(Model.sal02_Contact.SalContMobile) ? " " + Atlas.Models.BusinessConstants.NA : " " + Model.sal02_Contact.SalContMobile)
+                    </span><br />
+                    <label style="font-weight:bold">
+                        Email:&nbsp;
+                    </label> @(String.IsNullOrWhiteSpace(Model.sal02_Contact.SalContEmail) ? " " + Atlas.Models.BusinessConstants.NA : " " + Model.sal02_Contact.SalContEmail) <br />
+                    <label style="font-weight:bold">     Fax:&nbsp; </label><span class="phone">@(String.IsNullOrWhiteSpace(Model.sal02_Contact.SalContFax) ? " " + Atlas.Models.BusinessConstants.NA : " " + Model.sal02_Contact.SalContFax)</span>
+                </p>
+                <button type="button" class="btn-brown" onclick='window.location.href ="@Url.Action("create","appointments",
+                                                                                        routeValues:new { id = Model.sal02_Contact.SalContId, assign = 1 })"'>
+                    Schedule an Appointment  &nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-calendar white"></span>
+                </button>
+
+                <div class="project-section">
+                    <h4 style="line-height:1.1">Appointments Scheduled</h4>
+                    @if (Model.sal03_ResAppointments.Count > 0)
+                    {
+                        <p>
+                            @foreach (var schedule in Model.sal03_ResAppointments.OrderBy(j => j.SalApptStartDate))
+                            {
+                                <span>
+                                    @Convert.ToDateTime(schedule.SalApptStartDate).ToLongDateString() 
+                                    @schedule.SalApptStartTime &nbsp;  
+                                </span>
+                                <a class="hyperlinks"> View</a><br />
+
+                            }
+                        </p>
+                    }
+                    else
+                    {
+                        <p>@Atlas.Models.BusinessConstants.NoAppointments </p>
+                    }
+
+                </div>
+                <br />
+                <p class="small-text">
+                    <span class="small-text">Active - @Model.sal02_Contact.SalContActiveFlag </span><br />
+                    <span class="small-text">Source - @Model.sal02_Contact.PRJ06_LedSource.LedSourceName </span><br />
+                    <span class="small-text">
+                        Customer Account Date Created on -
+                        @if (@Model.sal02_Contact.SalContDateCreated.HasValue)
+                        {
+                            @Model.sal02_Contact.SalContDateCreated.Value.ToShortDateString();
+                        }
+                        else
+                        {
+                            @Atlas.Models.BusinessConstants.NA
+                        }
+                    </span>
+
+                </p>
+            </div>
+
+        </div>
+        <div class="col-md-push-7">
+            <div class="col-sm-7">
+                <p><h2>Open Projects <a href="../../Project/index" style="padding-left:15px;font-size:14pt" class="normal-heading-bold-text">Create a New Project</a></h2></p>
+                <div class="project-section">
+                    @if (Model.prj01_Headers.Count > 0)
+                    {
+                        <p>
+                            @foreach (var project in Model.prj01_Headers.Where(i => i.PRJDateActivated == null).OrderBy(j => j.PRJID))
+                            {
+                                var ProjectNo = @project.JobNumber == null ? "N/A" : @project.JobNumber;
+                                <a href="#" class="hyperlinks"> @ProjectNo</a><span> - @project.ProjectName - </span>
+                                <a href="#" class="hyperlinks">View Bid Items</a><span> - </span>
+                                <a href="#" class="hyperlinks">View Quotes</a><br />
+                            }
+                        </p>
+                    }
+                    else
+                    {
+                        <p>@Atlas.Models.BusinessConstants.QuotedProjectsNA </p>
+                    }
+                </div>
+                <br />
+                <hr />
+            </div>
+
+            <div class="col-sm-7">
+                <p><h2>Active Projects</h2></p>
+                <div class="project-section">
+                    @if (Model.prj01_Headers.Count > 0)
+                    { <p>
+
+                        @foreach (var project in Model.prj01_Headers.Where(i => i.PRJDateActivated != null).OrderBy(j => j.PRJID))
+                        {
+                            var ProjectNo = @project.JobNumber == null ? "N/A" : @project.JobNumber;
+                            <a href="#" class="hyperlinks"> @ProjectNo</a><span> - @project.ProjectName - </span>
+                            <a href="#" class="hyperlinks">View Bid Items</a><span> - </span>
+                            <a href="#" class="hyperlinks">View Quotes</a><br />
+                        }
+                    </p>
+                    }
+                    else
+                    {
+                        <p>@Atlas.Models.BusinessConstants.ActiveProjectsNA</p>
+                    }
+                </div>
+                <br />
+                <hr />
+            </div>
+            <div class="col-sm-7">
+                <p><h2>Notes <a style="padding-left:15px;font-size:14pt" class="normal-heading-bold-text">Add a New Note</a></h2></p>
+                <div class="project-section">
+                    @if (Model.projectNotes.Count > 0)
+                    {
+                        <p>
+                            @foreach (var notes in Model.projectNotes.OrderBy(j => j.PRJDateEntered))
+                            {
+                                var @noteDate = notes.PRJDateEntered;
+                                <span>@noteDate.ToShortDateString()</span><br />
+                                <span>@notes.PRJNotes</span><br /> <br />
+                            }
+                        </p>
+                    }
+                    else
+                    {
+                        <p>@Atlas.Models.BusinessConstants.ProjectNotesNA </p>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="~/Scripts/UtilScript.js"></script>
+<script>
+    var deleteConfirmAction = function () {
+
+        if (confirm("Are you sure want to delete @Model.sal02_Contact.SalContFirstName?")) {
+            window.location.href = '@Url.Action("delete","customers",routeValues:new { id = Model.sal02_Contact.SalContId })';
+        }
+    }
+</script>
+

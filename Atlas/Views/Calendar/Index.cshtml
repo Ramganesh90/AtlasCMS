@@ -1,0 +1,119 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="pull-left"><h2>@ViewBag.Title</h2></div>
+        <div class="pull-right col-md-3">
+            <h3>
+                <button type="submit" class="btn btn-primary btn-block" name="newPersonalAppt" onclick="location.href='@Url.Action("personal", "appointments")'">
+                    <span class="glyphicon glyphicon-plus white"></span> Add Personal Appointment
+                </button>
+            </h3>
+        </div>
+    </div>
+    <div class="row pull-right col-md-4">
+        <div class="form-group">
+            @Html.Label("Salesperson", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownList("Salesperson", ViewBag.AssignToList as SelectList, "-Select-",
+                                          new { @class = "form-control-static", style = "font-size: 11pt;padding: 5px; width: 70%; " })
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="container">
+            <div id="calendar" style="margin-top: 2em;">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link href="~/Scripts/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <link href="~/Scripts/fullcalendar/fullcalendar.print.min.css" media="print" rel="stylesheet" />
+    <script src="~/Scripts/fullcalendar/moment.min.js"></script>
+    <script src="~/Scripts/fullcalendar/fullcalendar.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            var baseUrl = function () {
+                var href = window.location.href.split('/');
+                return href[0] + '//' + href[2] + '/' + href[3] + '/';
+            }
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listWeek'
+                },
+                minTime:"07:00:00",
+                maxTime:"20:00:00",
+                navLinks: true, // can click day/week names to navigate views
+                eventLimit: true, 
+                eventMouseover: function (data, event, view) {
+                    var starttime = new Date(data.start).toGMTString();
+                    starttime = starttime.substring(0,starttime.length -7);
+                    tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#f5f5f5;position:absolute;z-index:10001;padding:10px;border-radius:3px;">' + '<b>Title:</b> ' + data.title + '</br>' + '<b>Start Time:</b> ' + starttime + '</div>';
+                    $("body").append(tooltip);
+                    $(this).mouseover(function (e) {
+                        $(this).css('z-index', 10000);
+                        $(this).css('cursor','pointer');
+                        $('.tooltiptopicevent').fadeIn('500');
+                        $('.tooltiptopicevent').fadeTo('10', 1.9);
+                    }).mousemove(function (e) {
+                        $('.tooltiptopicevent').css('top', e.pageY + 10);
+                        $('.tooltiptopicevent').css('left', e.pageX + 20);
+                    });
+
+
+                },
+                eventMouseout: function (data, event, view) {
+                    $(this).css('z-index', 8);
+                    $('.tooltiptopicevent').remove();
+
+                },
+                eventClick: function(calEvent, jsEvent, view) {
+                    $(this).css('border-color', '#ccc');
+                    window.location.href =  baseUrl() + 'appointments/details/'+calEvent.id;
+                },
+                events: {
+                    url: baseUrl() + 'calendar/GetCalendarEvents',
+                    type: 'POST',
+                    ignoreTimezone : false,
+                    timeFormat: 'h:mm tt',
+                    data: {
+                        commId:  $('#Salesperson').val()
+                    },
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    },
+                }
+            });
+
+            $('#Salesperson').on('change',function(){
+                var events = {
+                    url: baseUrl() + 'calendar/GetCalendarEvents',
+                    type: 'POST',
+                    data: {
+                        commId:  $('#Salesperson').val()
+                    }
+                }
+                $('#calendar').fullCalendar('removeEventSource', events);
+                $('#calendar').fullCalendar('addEventSource', events);         
+                $('#calendar').fullCalendar('refetchEvents');
+            });
+
+          
+
+
+        });
+
+    </script>
+
+
+
+}
+

@@ -1,0 +1,212 @@
+﻿@model Atlas.DAL.Personal_Appointment
+
+<div class="container form-appointments">
+    <div class="row">
+        <div class="col-md-10">
+            <h2>@ViewBag.Title</h2>
+        </div>
+        <div class="col-md-2">
+            <button id="deleteAppt" style="width: 100%;" class="btn-shadow bottom-shadow" onclick="deleteConfirmAction()">Delete</button>
+        </div>
+    </div>
+    <hr>
+    <div class="col-md-offset-1 col-sm-offset-1">
+
+        @using (Html.BeginForm("savePersonalAppt", "Appointments", FormMethod.Post, new { role = "form" }))
+        {
+            if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+            {  <div class="row">
+            <div class="col-md-8 col-sm-6 alert alert-error">
+                <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            </div>
+        </div>
+            }
+
+            <br />
+
+            <div class="row form-group">
+                @Html.LabelFor(model => model.CommID, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.CommID, ViewBag.AssignToList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CommID, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <div class="row form-group">
+                @Html.LabelFor(model => model.ApptDesc, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ApptDesc, ViewBag.ApptDescriptions as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ApptDesc, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="row form-group">
+                @Html.LabelFor(model => model.SalApptStartDate, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    <div class="appStartDate">
+                        @Html.EditorFor(model => model.SalApptStartDate, new { htmlAttributes = new { @class = "form-control", id = "appStartDate", @aria_describedby = "start-date" } })
+                        <span id="start-date"></span>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.SalApptStartDate, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.SalApptStartTime, htmlAttributes: new { @class = "control-label col-md-1 right-align", @style="padding:0px" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.SalApptStartTime, ViewBag.ShowApptTime as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SalApptStartTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.SalApptEndDate, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                    <div class="col-md-4">
+                        <div>
+                            @Html.EditorFor(model => model.SalApptEndDate, new { htmlAttributes = new { @class = "form-control", id = "appEndDate", @aria_describedby = "end-date" } })
+                            <span id="end-date"></span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.SalApptEndDate, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.SalApptEndTime, htmlAttributes: new { @class = "control-label col-md-1 right-align", @style = "padding:0px" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.SalApptEndTime, ViewBag.ShowApptTime as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalApptEndTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+              
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                    <div class="col-md-4">
+                        @Html.TextAreaFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                        @Html.HiddenFor(model => model.SalApptId, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                        <div class="row form-group">
+                            <div class="col-md-offset-4 col-md-4">
+                                <input type="submit" value="Save Personal Appointment" class="btn btn-block btn-primary" />
+                            </div>
+                        </div>
+
+        }
+        
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+    <script>
+        $(function () {
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+            var checkin = $('#appStartDate').datepicker({
+                startDate: new Date(),
+                todayBtn: 'linked',
+                todayHighlight: true,
+                orientation: 'bottom right',
+                beforeShowDay: function (date) {
+                    return date.valueOf() >= now.valueOf();
+                },
+                autoclose: true
+
+            }).on('changeDate', function (ev) {
+                if(!ev.date){
+                    var newDate = new Date();
+                    newDate.setDate(newDate.getDate());
+                    checkout.datepicker("update", newDate);
+                }
+                else if (ev.date &&   ev.date.valueOf() > checkout.datepicker("getDate").valueOf() || !checkout.datepicker("getDate").valueOf()) {
+                    var newDate = new Date(ev.date);
+                    newDate.setDate(newDate.getDate());
+                    checkout.datepicker("update", newDate);
+                }
+                $(this).blur();
+                $(this).datepicker('hide');
+                $('#SalApptStartTime')[0].focus();
+            });
+            var checkout = $('#appEndDate').datepicker({
+                startDate: new Date(),
+                todayHighlight: true,
+                todayBtn: 'linked',
+                orientation: 'top right',
+                beforeShowDay: function (date) {
+                    return date.valueOf() >= now.valueOf();
+                },
+                autoclose: true
+
+            }).on('changeDate', function (ev) {
+                if (ev.date.valueOf() < checkin.datepicker("getDate").valueOf()) {
+                    alert('The end date can not be less then the start date');
+                    checkout.datepicker("update", '');
+                }
+                $(this).blur();
+                $(this).datepicker('hide');
+                $('#SalApptEndTime')[0].focus();
+            });
+        });
+
+        $(document).ready(function () {
+
+            $("#SalApptStartTime").change(function () {
+                if ($("#SalApptStartTime option").length - 1 == $("#SalApptStartTime option:selected").index()){
+                    $("#SalApptStartTime").prop('selectedIndex', 0);
+                    $("#SalApptEndTime").prop('selectedIndex', 0);
+                    alert("Cannot set appointment at this time")
+                }
+                else if ($("#SalApptStartTime option").length - 2 == $("#SalApptStartTime option:selected").index())
+                {
+                    $("#SalApptEndTime").prop('selectedIndex', $("#SalApptStartTime option:selected").index()+1);
+                }
+                else
+                {
+                     $("#SalApptEndTime").prop('selectedIndex', $("#SalApptStartTime option:selected").index()+2);
+                }
+            });
+
+            $("#SalApptEndTime").change(function () {
+                if ($("#SalApptEndTime option").length - 1 == $("#SalApptEndTime option:selected").index()) {
+                    $("#SalApptEndTime").prop('selectedIndex', 0);
+                            alert("Cannot set appointment at this time")
+                }
+
+                if ($("#SalApptEndTime option:selected").index() <= $("#SalApptStartTime option:selected").index()) {
+                    $("#SalApptEndTime").prop('selectedIndex', 0);
+                    alert("Appointment End Time cannot be before the start time! Please set end time later");
+                }
+            });
+
+            var id = $("#SalApptId").val();
+            if (parseInt(id) == 0) {
+                $("#deleteAppt").hide();
+            }
+
+            $("#Notes").addClass("notesAppt");
+            
+        });
+        var deleteConfirmAction = function () {
+
+            if (confirm("Are you sure want to delete @Model.SalApptFirstName?")) {
+                window.location.href = '@Url.Action("delete","appointments",routeValues:new { id = Model.SalApptId })';
+            }
+        }
+    </script>
+
+}
+

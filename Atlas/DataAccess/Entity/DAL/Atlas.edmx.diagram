@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="14d4d584f96c4b0ab2331c6c9a05daf3" Name="Diagram1">
+        <EntityTypeShape EntityType="Atlas.A_CommonFieldNamesDataTypes" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID01_Headers" Width="1.5" PointX="11.25" PointY="40.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID02_LaborItems" Width="1.5" PointX="16.5" PointY="43.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID03_MaterialHeader" Width="1.5" PointX="19.5" PointY="46.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID04_MaterialDetail" Width="1.5" PointX="21.75" PointY="54.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID06_CrewProfile" Width="1.5" PointX="13.5" PointY="54.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID07_Concrete" Width="1.5" PointX="13.5" PointY="59.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID08_OtherCosts" Width="1.5" PointX="13.5" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID09_EquipmentBurden" Width="1.5" PointX="16.5" PointY="39.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID10_Status" Width="1.5" PointX="9" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID11_Notes" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID12_PFQHeader" Width="1.5" PointX="19.5" PointY="41.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID13_PFQMaterial" Width="1.5" PointX="21.75" PointY="38" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID14_PFQLabor" Width="1.5" PointX="24.75" PointY="41.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID15_PFQEquipmentBurden" Width="1.5" PointX="24.75" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID16_PFQCrewProfile" Width="1.5" PointX="19.5" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID17_PFQConcrete" Width="1.5" PointX="21.75" PointY="50.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BID18_PFQOtherCosts" Width="1.5" PointX="24.75" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BOM01_Headers" Width="1.5" PointX="22.5" PointY="61.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BOM02_MaterialBills" Width="1.5" PointX="24.75" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.BOM03_LaborRoutings" Width="1.5" PointX="24.75" PointY="60" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.FRM01_TableFormName" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.GUI01_LbrFrmTypes" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.GUI02_LaborFormParams" Width="1.5" PointX="22.5" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV01_Master" Width="1.5" PointX="20.25" PointY="60.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV02_ProdLines" Width="1.5" PointX="7.5" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV03_CatalogLayout" Width="1.5" PointX="9.75" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV04_Class" Width="1.5" PointX="15.75" PointY="60.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV05_SubClass" Width="1.5" PointX="18" PointY="58" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV06_ProcurementTypes" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV07_UnitOfMeasure" Width="1.5" PointX="18" PointY="66.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV09_MasterPricingFamilies" Width="1.5" PointX="18" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV10_MasVendorPricing" Width="1.5" PointX="22.5" PointY="68" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV11_VendorPartNumCrossRef" Width="1.5" PointX="22.5" PointY="64.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV12_ImageFiles" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV13_ImageFileTypes" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV15_WebSiteDetails" Width="1.5" PointX="20.25" PointY="80.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.INV18_Color" Width="1.5" PointX="12" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PFP01_Header" Width="1.5" PointX="14.25" PointY="42.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PFP02_Material" Width="1.5" PointX="22.5" PointY="45" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PFP03_Labor" Width="1.5" PointX="22.5" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PFP04_Concrete" Width="1.5" PointX="16.5" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PFP10_Catagory" Width="1.5" PointX="12" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PFP11_ComponentType" Width="1.5" PointX="12" PointY="64.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRJ01_Headers" Width="1.5" PointX="3" PointY="43.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRJ02_ContractPg" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRJ03_ContractVerbiage" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRJ04_JobSites" Width="1.5" PointX="9.75" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRJ05_JobStatus" Width="1.5" PointX="0.75" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRJ06_LedSource" Width="1.5" PointX="3" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRJ07_BillingType" Width="1.5" PointX="0.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRJ08_BillingInfo" Width="1.5" PointX="0.75" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRL01_Employees" Width="1.5" PointX="3" PointY="50.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRL07_TimeEntryHeader" Width="1.5" PointX="19.5" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRL08_TimeEntryDetail" Width="1.5" PointX="24.75" PointY="50.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.PRL09_TimeEntryMhs" Width="1.5" PointX="24.75" PointY="54.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.SAL01_Company" Width="1.5" PointX="3" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.SAL02_Contacts" Width="1.5" PointX="5.25" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.SAL03_ResAppointments" Width="1.5" PointX="7.5" PointY="49.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.SAL05_Notes" Width="1.5" PointX="5.25" PointY="60.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.SAL06_ActionTaken" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.SAL10_SalesTypes" Width="1.5" PointX="5.25" PointY="63.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup00_EarningCodes" Width="1.5" PointX="3" PointY="56" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.SetUp00_PayrollTaxes" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup00_ProductionCodes" Width="1.5" PointX="22.5" PointY="58.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup00_WorkCompRates" Width="1.5" PointX="6" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup01_ConstructionType" Width="1.5" PointX="6.75" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup01_Divisions" Width="1.5" PointX="0.75" PointY="46.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup02_MhRates" Width="1.5" PointX="6" PointY="44" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup03_DefaultCrewSize" Width="1.5" PointX="8.25" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup04_DefaultCrewEquipment" Width="1.5" PointX="12.25" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup10_EquipmentCosts" Width="1.5" PointX="14.25" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup11_OtherCostTypes" Width="1.5" PointX="11.25" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup23_FieldLaborTypes" Width="1.5" PointX="20.25" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup24_FieldLaborDetails" Width="1.5" PointX="22.5" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup25_FenceFamily" Width="1.5" PointX="6.75" PointY="57.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup25_FenceTypes" Width="1.5" PointX="9" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup26_FenceHts" Width="1.5" PointX="9" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup27_FootageRanges" Width="1.5" PointX="9" PointY="57.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup28_FencePostTypes" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup30_DigTypes" Width="1.5" PointX="9" PointY="59.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup31_ShopLocations" Width="1.5" PointX="20.25" PointY="75.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup32_ShopLabors" Width="1.5" PointX="22.5" PointY="76.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup96_TaxCalcTypes" Width="1.5" PointX="9" PointY="62.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup97_ZipCodes" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.Setup98_SalesCommissions" Width="1.5" PointX="5.25" PointY="51.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.TempLaborDetail" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.v_aTableNames" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDConcreteCost" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDCrewRate" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDCrewTimeSheetComplete" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDCrewTimeSheetDrive" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDCrewTimeSheetLoad" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDCrewTimeSheetOnsite" Width="1.5" PointX="6.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDCrewTimeSheetReport" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDEquipmentCost" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDLaborCost" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDMaterialCost" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDMhsOnsite" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDMhsOnsiteDetail" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDOtherCost" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDPreBid" Width="1.5" PointX="14.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDPreBidRollUp" Width="1.5" PointX="10.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDSubTimeSheetComplete" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDSubTimeSheetDrive" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDSubTimeSheetLoad" Width="1.5" PointX="4.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDSubTimeSheetOnsite" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBIDSubTimeSheetReport" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMCombinedDetail" Width="1.5" PointX="16.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMCostLbr" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMCostMat" Width="1.5" PointX="16.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMCostTotal" Width="1.5" PointX="6.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMMasCalcBurden" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMMissingLbrCost" Width="1.5" PointX="18.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMMissingMatCost" Width="1.5" PointX="18.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMReport" Width="1.5" PointX="18.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vBOMUpdateInventoryCostsAndWt" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vCatalogPricing" Width="1.5" PointX="18.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vCrewCostSummary" Width="1.5" PointX="14.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstCellularGateDouble" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstCellularGateSingle" Width="1.5" PointX="2.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstCellularPanel" Width="1.5" PointX="16.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstCellularPostBlank" Width="1.5" PointX="18.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstCellularPostCap" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstCellularPostCorner" Width="1.5" PointX="20.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstCellularPostEnd" Width="1.5" PointX="20.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstCellularPostLine" Width="1.5" PointX="20.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkBarbedWire" Width="1.5" PointX="20.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkBoulevardClamp" Width="1.5" PointX="8.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkBraceBand" Width="1.5" PointX="10.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkCarriageBolt" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkFenceSlat" Width="1.5" PointX="22.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateCantilever" Width="1.5" PointX="22.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateCloser" Width="1.5" PointX="22.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateDropRod" Width="1.5" PointX="22.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateHingeAssembly" Width="1.5" PointX="4.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateHingeFemale" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateHingeMale" Width="1.5" PointX="24.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateLatchAssembly" Width="1.5" PointX="24.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateLatchCollar" Width="1.5" PointX="12.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateLatchFork" Width="1.5" PointX="24.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateRollerCantilever" Width="1.5" PointX="24.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkGateSwing" Width="1.5" PointX="14.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkHogRing" Width="1.5" PointX="16.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkLinePost" Width="1.5" PointX="18.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkLinePostTie" Width="1.5" PointX="24.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkLinePostTopBWA" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkLinePostTopLoopCap" Width="1.5" PointX="26.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkPostBase" Width="1.5" PointX="26.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkRailEnd" Width="1.5" PointX="26.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkTensionBand" Width="1.5" PointX="26.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkTensionBar" Width="1.5" PointX="26.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkTensionWire" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkTermPost" Width="1.5" PointX="28.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkTopRail" Width="1.5" PointX="28.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkTopRailSleeve" Width="1.5" PointX="0.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkTrussRod" Width="1.5" PointX="28.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkTrussRodTightener" Width="1.5" PointX="28.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstChainLinkWire" Width="1.5" PointX="28.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstOrnaGateSingle" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstOrnaPanel" Width="1.5" PointX="30.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCGateCloser" Width="1.5" PointX="30.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCGateDouble" Width="1.5" PointX="30.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCGateDropRod" Width="1.5" PointX="16.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCGateHinge" Width="1.5" PointX="30.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCGateLatch" Width="1.5" PointX="24.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCGateSingle" Width="1.5" PointX="30.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCPanel" Width="1.5" PointX="26.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCPostBlank" Width="1.5" PointX="28.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCPostCap" Width="1.5" PointX="30.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCPostCorner" Width="1.5" PointX="32.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCPostEnd" Width="1.5" PointX="32.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCPostLine" Width="1.5" PointX="32.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstPVCPostStiffener" Width="1.5" PointX="32.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodCellularGateCloser" Width="1.5" PointX="32.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodCellularGateDropRod" Width="1.5" PointX="32.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodCellularGateHinge" Width="1.5" PointX="32.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodCellularGateLatch" Width="1.5" PointX="34.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodGateDouble" Width="1.5" PointX="34.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodGateSingle" Width="1.5" PointX="34.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodPanel" Width="1.5" PointX="34.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodPostBlank" Width="1.5" PointX="34.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodPostCap" Width="1.5" PointX="34.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodPostCorner" Width="1.5" PointX="34.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodPostEnd" Width="1.5" PointX="2.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vEstWoodPostLine" Width="1.5" PointX="26.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vGeoDrawPricing" Width="1.5" PointX="28.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vGeoDrawPricingGateDouble" Width="1.5" PointX="6.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vGeoDrawPricingGateSingle" Width="1.5" PointX="8.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vGeoDrawPricingPanel" Width="1.5" PointX="16.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vGeoDrawStyleSetup" Width="1.5" PointX="36.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFPConcreteCost" Width="1.5" PointX="21.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFPCost" Width="1.5" PointX="36.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFPCrewRate" Width="1.5" PointX="36.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFPEquipmentCost" Width="1.5" PointX="36.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFPLaborCost" Width="1.5" PointX="36.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFPMaterialCost" Width="1.5" PointX="36.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFPMaterialOnlyPrice" Width="1.5" PointX="36.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFPMhsOnsite" Width="1.5" PointX="30.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQConcreteCost" Width="1.5" PointX="36.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQConcreteCostDetail" Width="1.5" PointX="32.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQCrewRate" Width="1.5" PointX="34.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQCrewRatesDetail" Width="1.5" PointX="36.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQEquipCostByHeader" Width="1.5" PointX="38.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQEquipmentCost" Width="1.5" PointX="38.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQEquipmentCostDetail" Width="1.5" PointX="38.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQLaborCost" Width="1.5" PointX="38.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQLaborCostDetail" Width="1.5" PointX="38.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQMaterialCost" Width="1.5" PointX="38.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQMaterialCostByPartNum" Width="1.5" PointX="38.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQMaterialCostDetail" Width="1.5" PointX="38.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQMhsOnsite" Width="1.5" PointX="38.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQMhsOnsiteDetail" Width="1.5" PointX="38.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQOtherCost" Width="1.5" PointX="38.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQOtherCostDetail" Width="1.5" PointX="30.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQPreBid" Width="1.5" PointX="40.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vPFQPrebidDetail" Width="1.5" PointX="40.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_BomBurden" Width="1.5" PointX="40.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_BomLbr" Width="1.5" PointX="40.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_BomMaterial" Width="1.5" PointX="40.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_Boms" Width="1.5" PointX="2.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_BomSinglePass" Width="1.5" PointX="40.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_ExtDesc" Width="1.5" PointX="26.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_ExtDescCI" Width="1.5" PointX="40.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_InvMaster" Width="1.5" PointX="40.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_InvPricing" Width="1.5" PointX="40.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_LvlPricing" Width="1.5" PointX="36.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_MiscChrgCode" Width="1.5" PointX="38.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Atlas.vw_MAS_Imp_VendorPricing" Width="1.5" PointX="40.75" PointY="39.75" IsExpanded="true" />
+        <AssociationConnector Association="Atlas.FK_BID01_Headers_BID10_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID01_Headers_PRJ01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID01_Headers_Setup25_FenceTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID01_Headers_Setup26_FenceHts" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID01_Headers_Setup27_FootageRanges" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID01_Headers_Setup30_DigTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID01_Headers_Setup96_TaxCalcTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID02_LaborItems_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID03_MaterialHeader_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID06_CrewProfile_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID07_Concrete_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID08_OtherCosts_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID09_EquipmentBurden_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID12_PerFootQuoteHeader_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID16_PFQCrewProfile_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRL07_TimeEntryHeader_BID01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID02_LaborItems_Setup24_FieldLaborDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID03_MaterialHeader_PRL01_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID04_MaterialDetail_BID03_MaterialHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID08_OtherCosts_Setup11_OtherCostTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID09_EquipmentBurden_Setup10_EquipmentCosts" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID12_PFQHeader_PFP01_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID13_PerFootQuoteLabor_BID12_PerFootQuoteHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID13_PerFootQuoteMaterial_BID12_PerFootQuoteHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID15_PFQEquipmentBurden_BID12_PFQHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID17_PFQConcrete_BID12_PFQHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID18_PFQOtherCosts_BID12_PFQHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID14_PFQLabor_Setup24_FieldLaborDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID15_PFQEquipmentBurden_Setup10_EquipmentCosts" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID16_PFQCrewProfile_Setup03_DefaultCrewSize" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BID18_PFQOtherCosts_Setup11_OtherCostTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BOM01_Headers_INV01_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BOM02_MaterialBills_BOM01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BOM03_LaborRoutings_BOM01_Headers" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BOM02_MaterialBills_INV01_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_BOM03_LaborRoutings_Setup32_ShopLabors" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_GUI02_LaborFormParams_Setup23_FieldLaborTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV05_SubClass" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV07_UnitOfMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV07_UnitOfMeasure1" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV07_UnitOfMeasure2" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV07_UnitOfMeasure3" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV07_UnitOfMeasure4" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV07_UnitOfMeasure5" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV07_UnitOfMeasure6" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV09_MasterPricingFamilies" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV01_Master_INV18_Color" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV10_MasVendorPricing_INV01_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV11_VendorPartNumCrossRef_INV01_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP02_Material_INV01_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV03_CatalogLayout_INV02_ProdLines" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV04_Class_INV03_CatalogLayout" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP10_Catagory_INV03_CatalogLayout" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV05_SubClass_INV04_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV15_WebSiteDetails_INV05_SubClass" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_INV12_ImageFiles_INV13_ImageFileTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP01_Header_INV18_Color" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP01_Header_PFP10_Catagory" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP01_Header_PFP11_ComponentType" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP01_Header_Setup02_MhRates" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP01_Header_Setup25_FenceTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP01_Header_Setup26_FenceHts" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP01_Header_Setup27_FootageRanges" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP01_Header_Setup30_DigTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP02_Material_PFP01_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP03_Labor_PFP01_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP04_Concrete_PFP01_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PFP03_Labor_Setup24_FieldLaborDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRJ01_Headers_PRJ04_JobSites" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRJ01_Headers_PRJ05_JobStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRJ01_Headers_PRJ07_BillingType" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRJ01_Headers_PRJ08_BillingInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRJ01_Headers_Setup01_Divisions" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRJ01_Headers_Setup02_MhRates" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRJ04_JobSites_SAL03_ResAppointments" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_SAL02_Contacts_PRJ06_LedSource" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRL01_Employees_Setup01_Divisions" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRL09_TimeEntryMhs_PRL01_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup98_SalesCommissions_PRL01_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRL07_TimeEntryHeader_Setup00_EarningCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRL08_TimeEntryDetail_PRL07_TimeEntryHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRL09_TimeEntryMhs_PRL07_TimeEntryHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRL08_TimeEntryDetail_Setup00_ProductionCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_PRL08_TimeEntryDetail_Setup24_FieldLaborDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_SAL02_Contacts_SAL01_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_SAL03_ResAppointments_SAL02_Contacts1" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_SAL03_ResAppointments_SAL05_Notes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_SAL03_ResAppointments_SAL10_SalesTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_SAL03_ResAppointments_Setup25_FenceTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_SAL03_ResAppointments_Setup98_SalesCommissions" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup00_EarningCodes_Setup01_Divisions" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup03_DefaultCrewSize_SetUp00_WorkCompRates1" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup02_MhRates_Setup01_ConstructionType" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup25_FenceTypes_Setup01_ConstructionType" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup02_MhRates_Setup01_Divisions" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup25_FenceTypes_Setup01_Divisions" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup03_DefaultCrewSize_Setup02_MhRates" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup22_DefaultCrewEquipment_Setup10_EquipmentCosts" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup22_DefaultCrewEquipment_Setup25_FenceTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup23_FieldLaborTypes_Setup25_FenceFamily" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup24_FieldLaborDetails_Setup23_FieldLaborTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup25_FenceTypes_Setup25_FenceFamily" ManuallyRouted="false" />
+        <AssociationConnector Association="Atlas.FK_Setup32_ShopLabors_Setup31_ShopLocations" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

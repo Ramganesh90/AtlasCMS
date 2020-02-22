@@ -1,0 +1,174 @@
+﻿@model IEnumerable<Atlas.Models.DBO.BidItems>
+@{
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+
+<div class="container" style="padding:1%">
+    <h2 style="margin-top:12px !important">Bid Items - Project #@ViewBag.Title</h2>
+    <table class="table table-bordered table-dark">
+        <tr>
+            <th class="shortWidth">
+                @Html.DisplayNameFor(model => model.IncludeInRollup)
+            </th>
+            <th class="shortWidth">
+                @Html.DisplayNameFor(model => model.BidItemId)
+            </th>
+            <th class="shortWidth">
+                @Html.DisplayNameFor(model => model.PreBid)
+            </th>
+            <th class="longWidth">
+                @Html.DisplayNameFor(model => model.BidItemName)
+            </th>
+            <th class="longWidth">
+                @Html.DisplayNameFor(model => model.FenceType)
+            </th>
+            <th class="shortWidth">
+                Timesheet
+            </th>
+            <th class="shortWidth">
+                MRO
+            </th>
+        </tr>
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.CheckBoxFor(modelItem => item.IncludeInRollup)
+                    </td>
+                    <td>
+                        @{
+                            var bid = item.BidItemId;
+                            if (!string.IsNullOrWhiteSpace(bid))
+                            {
+                                bid = item.BidItemId;
+                            }
+                        }
+                        @Html.ActionLink(bid,
+                                       "selectheight",
+                                       new { bid = item.BidItemId, fence = item.FenceTypeId },
+                                       new { @class = "normal-heading-text" })
+                    </td>
+                    <td>
+                        @{
+                            var PreBid = item.BidItemId;//item.PreBid;
+                            if (!string.IsNullOrWhiteSpace(PreBid))
+                            {
+                                PreBid = "View"; //+ PreBiditem.PreBid;
+                                @Html.ActionLink(PreBid, null, null,
+                                      new { @class = "normal-heading-text prebid", @Href = "#", data_val = item.BidItemId })}
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BidItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FenceType)
+                    </td>
+                    <td>
+                        <select class="timesheet">
+                            <option>-Select-</option>
+                            <option>Crew Timesheet</option>
+                            <option>Sub Timesheet</option>
+                        </select>
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", null, null,
+                                      new { @class = "normal-heading-text packaging", @Href = "#", data_val = item.BidItemId })
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<div class="pull-right">
+    <div class="form-group">
+        <div>
+            <button type="button" id="btnAddbid" class="btn btn-primary" style="width: 95%;">
+                Add Bid Item <span class="glyphicon glyphicon-arrow-right white"></span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="modal fade in" id="PrebidModal" tabindex="-1" role="dialog" aria-labelledby="PrebidModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @Html.Partial("PreBidForm")
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="~/Scripts/UtilScript.js"></script>
+<script>
+
+    $(function () {
+        var locationAddr = window.location.pathname.toLocaleLowerCase()
+        var ProjectActivemenu = "View Bid Items";
+        $(".project-menu").each(function (index, el) {
+            if (ProjectActivemenu && el.children[0].text.toLowerCase().indexOf(ProjectActivemenu.toLowerCase()) >= 0) {
+                $(this).removeClass("project-menu")
+                $(this).children().addClass("proj-active");
+            }
+            else {
+                $(this).children().removeClass("proj-inactive");
+            }
+        });
+        $("select option").css("font-size", "14px")
+        $(".project-nav").find("li:gt(1)").hide();
+        $("#btnAddbid").on("click", function () {
+            location.href = '@Url.Action("selectheight", "project")';
+        });
+
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+
+        $('.table .prebid').click(function (e) {
+            e.preventDefault();
+            var bidid = $(this).attr('data-val');
+            $('input[type="hidden"]').val(bidid);
+            $('#PrebidModal').modal('show');
+        });
+
+        $(".timesheet").change(function (e) {
+            if ($(this).prop('selectedIndex') > 0) {
+                var url = baseUrl()+"report/timesheet/id/" + $(this).prop('selectedIndex') + "/bid/" + parseInt($(this).closest('tr').find('td:nth(1)').text().trim());
+                window.open(url,"_blank");
+            }
+        });
+
+        $(".packaging").click(function (e) {
+                var url = baseUrl() + "report/mro/bid/" + parseInt($(this).closest('tr').find('td:nth(1)').text().trim());
+                window.open(url, "_blank");
+        });
+
+    });
+</script>
+<style>
+    table td, th {
+        font-size: medium !important;
+        color: #0E2D4C;
+        text-align: center;
+    }
+
+    .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+        line-height: 1.1;
+        text-align: center;
+    }
+
+    .shortWidth {
+        width: 6% !important;
+    }
+    .longWidth{
+        width:14% !important;
+    }
+</style>

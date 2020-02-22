@@ -1,0 +1,1086 @@
+﻿@model Atlas.Models.DBO.BILabour
+
+@{
+    ViewBag.Title = "Enter Labor";
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+<h2 style="margin-top:12px !important">@ViewBag.Title</h2>
+<div id="errorMsg" style="display:none">
+</div>
+
+
+<div>
+    <div class="col-md-8" style="padding:0px">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingOne">
+                    <h5 class="panel-title">
+                        <a style="text-decoration:none" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseMainLabour" aria-expanded="true" aria-controls="collapseMainLabour">
+                            Main Labor Items
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseMainLabour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+
+                        <table id="mainLabour" class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th align="center" style="padding-left:25px">UOM</th>
+                                    <th align="center" style="padding-left:25px">Qty</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.LabourDetails)
+                            {
+                                <tr>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap">
+                                        @Html.DisplayFor(modelItem => item.labourLabel, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:57%">
+                                        @Html.DropDownListFor(modelItem => item.FieldLaborId, item.labourDdlForUI as SelectList, "-Select-", new { @class = "form-control labourDdlForUI" })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(modelItem => item.UOM, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control", type = "number", min = 0, style="width:80px" } })
+                                    </td>
+                                    <td style="line-height: 1.6">
+                                        <a style="font-size:12px" class="addNewRow" href="#">Add</a>
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDLaborItemsID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingTwo">
+                    <h5 class="panel-title">
+                        <a style="text-decoration:none" class="collapsed" role="button" data-toggle="" data-parent="#accordion" href="#collapseAddlnLabour" aria-expanded="false" aria-controls="collapseAddlnLabour">
+                            Additional Labor
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseAddlnLabour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <table id="addlnLabour" class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>UOM</th>
+                                    <th>Qty</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.AddlnLabourDetails)
+                            {
+                                <tr>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap">
+                                        @Html.DisplayFor(modelItem => item.labourLabel, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:57%">
+                                        @Html.DropDownListFor(modelItem => item.FieldLaborId, item.labourDdlForUI as SelectList, "-Select-", new { @class = "form-control labourDdlForUI" })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(modelItem => item.UOM, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control", type = "number", min = 0 } })
+                                    </td>
+                                    <td style="line-height: 1.6"></td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDLaborItemsID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingThree">
+                    <h5 class="panel-title">
+                        <a style="text-decoration:none" class="collapsed" role="button" data-toggle="" data-parent="#accordion" href="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
+                            Review Labor Details
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseReview" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        @if (Model.ReviewLabourDetails.Count >0)
+                        {
+                            <table id="reviewLabour" class="table table-borderless" style="margin:10px">
+                            <thead>
+                                <tr style="border-bottom:1px solid #808080">
+                                    <th>Field Labour Desc</th>
+                                    <th>Qty</th>
+                                    <th>Mhs Ea</th>
+                                    <th>Mhs Total</th>
+                                    <th>Crew Pay Ea</th>
+                                    <th>Crew Pay Total</th>
+                                    <th>Sub Pay Ea</th>
+                                    <th>Sub Pay Total</th>
+
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.ReviewLabourDetails)
+                            {
+                                <tr>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap">
+                                        @Html.DisplayFor(modelItem => item.FieldLbrDesc, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                      <td style="width:12%;line-height: 1.6;white-space:nowrap;text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap;text-align:right">
+                                        @Html.DisplayFor(modelItem => item.MhsEa, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap;text-align:right">
+                                        @Html.DisplayFor(modelItem => item.MhsTotal, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap;text-align:right">
+                                        @Html.DisplayFor(modelItem => item.CrewPayEa, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap;text-align:right">
+                                        @Html.DisplayFor(modelItem => item.CrewPayTotal, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap;text-align:right">
+                                        @Html.DisplayFor(modelItem => item.SubPayEa, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:12%;line-height: 1.6;white-space:nowrap;text-align:right">
+                                        @Html.DisplayFor(modelItem => item.SubPayTotal, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                   
+                                    <td style="line-height: 1.6"></td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        }
+                        else
+                        {
+                            <p>Review Labour Details - Work In Progress</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingFour">
+                    <h5 class="panel-title">
+                        <a style="text-decoration:none" class="collapsed" role="button" data-toggle="" data-parent="#accordion" href="#collapseConcrete" aria-expanded="false" aria-controls="collapseConcrete">
+                            Concrete
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseConcrete" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <table id="tblConcrete" class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Post Type</th>
+                                    <th>Concrete Type</th>
+                                    <th style="white-space:nowrap">Qty Of Holes</th>
+                                    <th style="white-space:nowrap">Holes Dia (in)</th>
+                                    <th style="white-space:nowrap">Holes Depth (in)</th>
+                                    <th style="white-space:nowrap">Round Factor</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.ConcreteDetails)
+                            {
+                                <tr>
+                                    <td style="width:19%;line-height: 1.6">
+                                        @Html.DropDownListFor(modelItem => item.PstTypId, item.PostTypeDdlForUI as SelectList, "-Select-", new { @class = "form-control PostTypeDdl" })
+                                    </td>
+                                    <td style="width:25%">
+                                        @Html.DropDownListFor(modelItem => item.ConcreteType, item.ConcreteTypeDdlForUI as SelectList, "-Select-", new { @class = "form-control" })
+                                    </td>
+                                    <td style="width:10%">
+                                        @Html.EditorFor(modelItem => item.HoleQty, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:10%">
+                                        @Html.EditorFor(modelItem => item.HoleDia, new { htmlAttributes = new { @class = "form-control", type = "number", min = 0 } })
+                                    </td>
+                                    <td style="width:10%">
+                                        @Html.EditorFor(modelItem => item.HoleDepth, new { htmlAttributes = new { @class = "form-control", type = "number", min = 0 } })
+                                    </td>
+                                    <td style="width:10%">
+                                        @Html.DropDownListFor(modelItem => item.RoundFactor, item.RoundFactorDdlForUI as SelectList, "-Select-", new { @class = "form-control" })
+                                    </td>
+                                    <td style="line-height: 1.6; white-space:nowrap">
+                                        <a style="font-size:12px" href="#" class="addNewRow">Add</a>&nbsp;
+                                        <a style="font-size:12px" class="removeRow" href="#">Remove</a>
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.CONCID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingFive">
+                    <h5 class="panel-title">
+                        <a style="text-decoration:none" class="collapsed" role="button" data-toggle="" data-parent="#accordion" href="#collapseOtherCosts" aria-expanded="false" aria-controls="collapseOtherCosts">
+                            Other Costs
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseOtherCosts" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                    <div class="panel-body">
+                        <table id="tblOtherCost" class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th style="white-space:nowrap">Other Cost Type</th>
+                                    <th>Quantity</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.BidOtherCosts)
+                            {
+                                <tr>
+                                    <td style="width:19%;line-height: 1.6">
+                                        @Html.DropDownListFor(modelItem => item.OtherCostTypeID, item.OtherCostTypeDdlForUI as SelectList, "-Select-", new { @class = "form-control" })
+                                    </td>
+                                    <td style="width:17%">
+                                        @Html.EditorFor(modelItem => item.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="width:15%">
+                                        @Html.EditorFor(modelItem => item.Cost, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="line-height: 1.6">
+                                        <a style="font-size:12px" href="#" class="addNewRow">Add</a>&nbsp;
+                                        <a style="font-size:12px" class="removeRow" href="#">Remove</a>
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.OtherCostID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingSix">
+                    <h5 class="panel-title">
+                        <span class="required">*</span>
+                        <a style="text-decoration:none" class="collapsed" role="button" data-toggle="" data-parent="#accordion" href="#collapseCrew" aria-expanded="false" aria-controls="collapseCrew">
+                            Crew Size
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseCrew" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                    <div class="panel-body">
+                        <table id="tblCrewProfile" class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Crew Position</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.BidCrewProfile)
+                            {
+                                <tr>
+                                    <td style="width:19%;line-height: 1.6">
+                                        @Html.DropDownListFor(modelItem => item.CrewPositionID, item.CrewPositionDdlForUI as SelectList, "-Select-", new { @class = "form-control" })
+                                    </td>
+                                    <td style="width:17%">
+                                        @Html.EditorFor(modelItem => item.HeadCount, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="line-height: 1.6">
+                                        <a style="font-size:12px" href="#" class="addNewRow">Add</a>&nbsp;
+                                        <a style="font-size:12px" class="removeRow" href="#">Remove</a>
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDDefineCrewID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-inactive" role="tab" id="headingSeven">
+                    <h5 class="panel-title">
+                        <span class="required">*</span>
+                        <a style="text-decoration:none" class="collapsed" role="button" data-toggle="" data-parent="#accordion" href="#collapseEquipment" aria-expanded="false" aria-controls="collapseEquipment">
+                            Equipment
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseEquipment" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                    <div class="panel-body">
+                        <table id="tblEquipment" class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Equipment Burden</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.BidEquipmentBurden)
+                            {
+                                <tr>
+                                    <td style="width:19%;line-height: 1.6">
+                                        @Html.DropDownListFor(modelItem => item.EquipCostID, item.EquipCostDdlForUI as SelectList, "-Select-", new { @class = "form-control", style="width:240px" })
+                                    </td>
+                                    <td style="width:17%">
+                                        @Html.EditorFor(modelItem => item.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td style="line-height: 1.6">
+                                        <a style="font-size:12px" href="#" class="addNewRow">Add</a>&nbsp;
+                                        <a style="font-size:12px" class="removeRow" href="#">Remove</a>
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.BIDID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.EquipBurdID, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="float:right;width: 34%;">
+    <div class="col-md-8" style="padding:0px">
+        <button type="button" class="btn btn-primary btnSaveLabours" id="save_viewBid">
+            Save & View Bid Item <span class="glyphicon glyphicon-arrow-right white"></span>
+        </button>
+        <button type="button" class="btn btn-primary btnSaveLabours" id="save_addBid">
+            Save & Add Bid Item <span class="glyphicon glyphicon-arrow-right white"></span>
+        </button>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<style>
+    .RowSuccess{
+        border:1px solid green;
+    }
+</style>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+    var jq = $.noConflict();
+    $(function () {
+        var locationAddr = window.location.pathname.toLocaleLowerCase()
+        var ProjectActivemenu = "@ViewBag.Title";
+        $(".project-menu").each(function (index, el) {
+            if (ProjectActivemenu && el.children[0].text.toLowerCase().indexOf(ProjectActivemenu.toLowerCase()) >= 0) {
+                $(this).removeClass("project-menu")
+                $(this).children().addClass("proj-active");
+            }
+            else {
+                $(this).children().removeClass("proj-inactive");
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        var getUniqueId = function () {
+            return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+        }
+        var labourRows = $("#mainLabour tbody tr");
+        for (var i = 0; i < labourRows.length; i++) {
+            if (!$(labourRows[i]).attr("id")) {
+                $(labourRows[i]).attr("id", getUniqueId());
+            }
+            if($(labourRows[i]).find("select:first option:selected").val() > 0){
+                //$(labourRows[i]).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>");
+                $(labourRows[i]).find("select:first").addClass("RowSuccess");
+            }
+        }
+        var addnLabourRows = $("#addlnLabour tbody tr");
+        for (var i = 0; i < addnLabourRows.length; i++) {
+            if (!$(addnLabourRows[i]).attr("id")) {
+                $(addnLabourRows[i]).attr("id", getUniqueId());
+            }
+            if ($(addnLabourRows[i]).find("select:first option:selected").val() > 0) {
+               // $(addnLabourRows[i]).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>");
+                $(addnLabourRows[i]).find("select:first").addClass("RowSuccess");
+            }
+        }
+
+        var ConcreteRows = $("#tblConcrete tbody tr");
+        for (var i = 0; i < ConcreteRows.length; i++) {
+            if (!$(ConcreteRows[i]).attr("id")) {
+                $(ConcreteRows[i]).attr("id", getUniqueId());
+            }
+            if ($(ConcreteRows[i]).find("select:first option:selected").val() !="") {
+                //$(ConcreteRows[i]).find("select:first").css("display", "inline").css("margin-bottom","5px");
+                //$(ConcreteRows[i]).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>")
+                //.css("width", "27%")
+                //.css("margin-right", "0px").css("padding-right", "15px");
+                $(ConcreteRows[i]).find("select:first").addClass("RowSuccess");
+            }
+        }
+
+        var otherCostRows = $("#tblOtherCost tbody tr");
+        for (var i = 0; i < otherCostRows.length; i++) {
+            if (!$(otherCostRows[i]).attr("id")) {
+                $(otherCostRows[i]).attr("id", getUniqueId());
+            }
+            if ($(otherCostRows[i]).find("select:first option:selected").val() > 0) {
+                //$(otherCostRows[i]).find("select:first").css("display", "inline").css("margin-bottom","5px");
+                //$(otherCostRows[i]).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>").css("width", "27%")
+                //.css("margin-right", "0px").css("padding-right", "15px");
+                $(otherCostRows[i]).find("select:first").addClass("RowSuccess");
+            }
+        }
+
+        var crewRows = $("#tblCrewProfile tbody tr");
+        for (var i = 0; i < crewRows.length; i++) {
+            if (!$(crewRows[i]).attr("id")) {
+                $(crewRows[i]).attr("id", getUniqueId());
+            }
+            if ($(crewRows[i]).find("select:first option:selected").val() > 0) {
+                //$(crewRows[i]).find("select:first").css("display", "inline").css("margin-bottom","5px");
+                //$(crewRows[i]).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>").css("width", "27%")
+                //.css("margin-right", "0px").css("padding-right", "15px");
+                $(crewRows[i]).find("select:first").addClass("RowSuccess");
+            }
+        }
+
+        var equipRows = $("#tblEquipment tbody tr");
+        for (var i = 0; i < equipRows.length; i++) {
+            if (!$(equipRows[i]).attr("id")) {
+                $(equipRows[i]).attr("id", getUniqueId());
+            }
+            if ($(equipRows[i]).find("select:first option:selected").val() !="") {
+                //$(equipRows[i]).find("select:first").css("display", "inline").css("margin-bottom","5px");
+                //$(equipRows[i]).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>").css("width", "27%")
+                //.css("margin-right", "0px").css("padding-right", "15px");
+                $(equipRows[i]).find("select:first").addClass("RowSuccess");
+            }
+        }
+
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+        var checkCommId = function () {
+            var commId = "@Convert.ToString(Session["CommID"])";
+            if (!commId) {
+                handleError('Project cannot be processed for saving, only view is applicable as user is part of Sales group!');
+                return false;
+            }
+        }
+        var setInactiveHeader = function (inactiveId) {
+            jq(".panel-default .panel-heading").each(function (index, elem) {
+                if (index != inactiveId) {
+                    jq(elem).removeClass("panel-heading-active").addClass("panel-heading-inactive");
+                }
+                else {
+                    jq(elem).removeClass("panel-heading-inactive").addClass("panel-heading-active");
+                }
+            });
+        }
+        var handleError = function (msg) {
+            if (jq("#errorMsg").html().trim().length == 0) {
+                var errorText = "<div class=\"col-md-8 col-sm-6 alert alert-error\">" +
+         "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" style=\"font-size:14px\">close X</button>" +
+         "<div class=\"validation-summary-errors alert alert-danger\">" +
+           "<ul><li>" + msg + " </li></ul></div></div>"
+                jq("#errorMsg").html(errorText);
+                jq("#errorMsg").show();
+            }
+            else {
+                jq("#errorMsg").show();
+                jq("#errorMsg li").remove();
+                jq("#errorMsg ul").append("<li>" + msg + "</li>");
+            }
+        }
+
+        $(".panel-default .panel-heading").each(function (index, elem) {
+            if (index != 0) {
+                $(elem).addClass("panel-heading-inactive");
+            }
+            else {
+                $(elem).removeClass("panel-heading-inactive").addClass("panel-heading-active");
+            }
+        });
+        $('table').on('click', '.addNewRow', function (e) {
+            addNewRowFn($(this));
+            e.preventDefault();
+        });
+
+        var addNewRowFn = function (obj) {
+            var html = $(obj).closest('tr').html();
+            var bidid = $(obj).closest('tr').find("input#item_BIDID").val();
+            var id = getUniqueId();
+            var newRow = "<tr id='" + id + "'>" + html + "</tr>";
+            $(newRow).find("td:last input").val(0);
+            $(obj).closest("tr").after(newRow);
+            //$(obj).closest("tr").closest('table').find("tr:last").find("td:last input").val();
+            $("tr#" + id + " input,tr#" + id + " select").val("");
+            $("tr#" + id + " input,tr#" + id + " select").removeClass("RowSuccess");
+            $("tr#" + id + " input#item_BIDID").val(bidid);
+            return false;
+        }
+
+        $('table').on('click', '.removeRow', function (e) {
+            if (confirm("Are you sure want to remove?")) {
+                var getVal = parseInt($(this).closest('tr').find(("td:last input")).val());
+                var getAttr = $(this).closest('tr').find("td:last input").attr('id');
+                var tblId = $(this).closest('table').attr('id');
+                var RowCount = $("#" + tblId + " tbody tr").length;
+                var DelRecord = {
+                    "id": getVal,
+                    "section": tblId,
+                    "idName": getAttr
+                }
+                if (RowCount == 1) {
+                    addNewRowFn($(this));
+                    if (getVal && getVal > 0) {
+                        removeRecordFromDb(DelRecord);
+                        $(this).closest('tr').remove();
+                    }
+                    else {
+                        $(this).closest('tr').remove();
+                    }
+                }
+                else {
+                    if (getVal && getVal > 0) {
+                        removeRecordFromDb(DelRecord);
+                        $(this).closest('tr').remove();
+                    }
+                    else {
+                        $(this).closest('tr').remove();
+                    }
+                }
+                e.preventDefault();
+            }
+        });
+
+
+        var removeRecordFromDb = function (record) {
+            jq.ajax({
+                url: baseUrl() + 'Project/RemoveRecord',
+                data: JSON.stringify(record),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data != -2) {
+                        alert('Record is removed');
+                    }
+                    else {
+                        handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                    }
+                },
+                error: function (response) {
+                    handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                },
+                failure: function (response) {
+                    handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                }
+            });
+        }
+        $('#mainLabour,#addlnLabour').on('change', '.labourDdlForUI', function (e) {
+            var id = $(this).closest('tr').find("td:eq(1) option:selected").val();
+            if (parseInt(id) > 0) {
+                var d = getUOM(id, $(this).closest('tr'));
+                e.preventDefault();
+                return false;
+            }
+
+        });
+        $('#tblConcrete').on('change', '.PostTypeDdl', function (e) {
+            var elem = $(this).closest('tr').find("select:last");
+            if ($(elem.context).val() != "" || parseInt(elem.val()) > 0)
+                $(this).closest('tr').find("select:last").val(5);
+
+        });
+        var getUOM = function (id, obj) {
+            data = { "id": id };
+            jq.ajax({
+                url: baseUrl() + "Project/GetUOMDesc",
+                data: JSON.stringify(data),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data != -2) {
+                        $(obj).find("#item_UOM").val(data);
+                        $(obj).find("#item_Quantity").val(1);
+                    }
+                    else {
+                        handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                    }
+                },
+                error: function (response) {
+                    handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                },
+                failure: function (response) {
+                    handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                }
+            });
+        }
+
+        jq('a[href = "#collapseMainLabour"]').on("click", function (e) {
+            saveEquipmentRows();
+            $('.panel-collapse.in').collapse('hide');
+            $("#collapseMainLabour").collapse('show');
+            setInactiveHeader(0);
+        });
+
+        jq('a[href = "#collapseAddlnLabour"]').on("click", function (e) {
+            saveLabourRows("mainLabour");
+        });
+
+        jq('a[href = "#collapseReview"]').on("click", function (e) {
+            saveLabourRows("addlnLabour");
+        });
+
+        jq('a[href = "#collapseConcrete"]').on("click", function (e) {
+            saveReviewLabour();
+        });
+
+        jq('a[href = "#collapseOtherCosts"]').on("click", function (e) {
+            saveConcreteRows();
+        });
+        jq('a[href = "#collapseCrew"]').on("click", function (e) {
+            saveOtherCostRows();
+        });
+        jq('a[href = "#collapseEquipment"]').on("click", function (e) {
+            saveCrewRows();
+        });
+
+        var saveLabourRows = function (type) {
+            var labourRows = $("#" + type + " tbody tr");
+            var MainLabourList = [];
+            for (var i = 0; i < labourRows.length; i++) {
+                var labourId = $(labourRows[i]).find("td:eq(1) option:selected").val()
+                if (labourId) {
+                    var LabourDetails = {
+                        "RowNum": $(labourRows[i]).attr('id'),
+                        "FieldLaborId": labourId,
+                        "UOM": $(labourRows[i]).find("td:eq(2) input").val(),
+                        "Quantity": $(labourRows[i]).find("td:eq(3) input").val(),
+                        "BIDID": $(labourRows[i]).find("td:eq(5) input").val(),
+                        "BIDLaborItemsID": $(labourRows[i]).find("td:eq(6) input").val(),
+                    };
+                    MainLabourList.push(LabourDetails);
+                }
+
+            }
+            if (MainLabourList.length == 0) {
+                alert("No Data Saved/Changed!");
+                switch (type) {
+                    case "addlnLabour":
+                        {
+                            $('.panel-collapse.in').collapse('hide');
+                            $("#collapseReview").collapse('show');
+                            setInactiveHeader(2);
+                        }
+                        break;
+                }
+            }
+            else {
+                jq.ajax({
+                    url: baseUrl() + 'Project/saveMainLabor',
+                    data: JSON.stringify(MainLabourList),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data != null) {
+                            jq("#errorMsg").hide();
+                            for (var i = 0; i < data.length; i++) {
+                                var rec = $("#" + type + " tbody tr#" + data[i].RowNum);
+                                $(rec).find("td:eq(6) input").val(data[i].BIDLaborItemsID);
+                                $(rec).find("td:nth(0) i").remove();
+                                //$(rec).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>");
+                                $(rec).find("select:first").addClass("RowSuccess");
+                            }
+                            switch (type) {
+                                case "mainLabour":
+                                    {
+                                        $('.panel-collapse.in').collapse('hide');
+                                        $("#collapseAddlnLabour").collapse('show');
+                                        setInactiveHeader(1);
+
+                                    }
+                                    break;
+                                case "addlnLabour":
+                                    {
+                                        $('.panel-collapse.in').collapse('hide');
+                                        $("#collapseReview").collapse('show');
+                                        setInactiveHeader(2);
+                                    }
+                                    break;
+                            }
+                        }
+                        else {
+                            handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                        }
+                    },
+                    error: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    },
+                    failure: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+        }
+
+        var saveReviewLabour = function () {
+            $('.panel-collapse.in').collapse('hide');
+            $("#collapseConcrete").collapse('show');
+            setInactiveHeader(3);
+        }
+
+        var saveConcreteRows = function () {
+            var ConcreteRows = $("#tblConcrete tbody tr");
+            var ConcreteList = [];
+            for (var i = 0; i < ConcreteRows.length; i++) {
+                var PstTypId = $(ConcreteRows[i]).find("td:eq(0) option:selected").val();
+                if (PstTypId) {
+                    var ConcreteDetails = {
+                        "RowNum": $(ConcreteRows[i]).attr('id'),
+                        "PstTypId": PstTypId,
+                        "ConcreteType": $(ConcreteRows[i]).find("td:eq(1) option:selected").val(),
+                        "HoleQty": $(ConcreteRows[i]).find("td:eq(2) input").val(),
+                        "HoleDia": $(ConcreteRows[i]).find("td:eq(3) input").val(),
+                        "HoleDepth": $(ConcreteRows[i]).find("td:eq(4) input").val(),
+                        "RoundFactor": $(ConcreteRows[i]).find("td:eq(5) option:selected").val(),
+                        "BIDID": $(ConcreteRows[i]).find("td:eq(7) input").val(),
+                        "CONCID": $(ConcreteRows[i]).find("td:eq(8) input").val(),
+                    };
+                    ConcreteList.push(ConcreteDetails);
+                }
+
+            }
+
+            if (ConcreteList.length == 0) {
+                alert("No Data Saved/Changed!");
+                $('.panel-collapse.in').collapse('hide');
+                $("#collapseOtherCosts").collapse('show');
+                setInactiveHeader(4);
+            }
+            else {
+                jq.ajax({
+                    url: baseUrl() + 'Project/saveConcrete',
+                    data: JSON.stringify(ConcreteList),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data != null) {
+                            jq("#errorMsg").hide();
+                            for (var i = 0; i < data.length; i++) {
+                                var rec = $("#tblConcrete tbody tr#" + data[i].RowNum);
+                                $(rec).find("td:eq(8) input").val(data[i].CONCID);
+                                $(rec).find("td:nth(0) i").remove();
+                                //$(rec).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>");
+                                $(rec).find("select:first").addClass("RowSuccess");
+                            }
+                            $('.panel-collapse.in').collapse('hide');
+                            $("#collapseOtherCosts").collapse('show');
+                            setInactiveHeader(4);
+                        }
+                        else {
+                            handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                        }
+                    },
+                    error: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    },
+                    failure: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+        }
+
+        var saveOtherCostRows = function () {
+            var OtherCostRows = $("#tblOtherCost tbody tr");
+            var OtherCostList = [];
+            for (var i = 0; i < OtherCostRows.length; i++) {
+                var OtherCostTypeId = $(OtherCostRows[i]).find("td:eq(0) option:selected").val();
+                if (OtherCostTypeId) {
+                    var OtherCostDetails = {
+                        "RowNum": $(OtherCostRows[i]).attr('id'),
+                        "OtherCostTypeID": OtherCostTypeId,
+                        "Qty": $(OtherCostRows[i]).find("td:eq(1) input").val(),
+                        "Cost": $(OtherCostRows[i]).find("td:eq(2) input").val(),
+                        "BIDID": $(OtherCostRows[i]).find("td:eq(4) input").val(),
+                        "OtherCostID": $(OtherCostRows[i]).find("td:eq(5) input").val(),
+                    };
+                    OtherCostList.push(OtherCostDetails);
+                }
+
+            }
+            if (OtherCostList.length == 0) {
+                alert("No Data Saved/Changed!");
+                $('.panel-collapse.in').collapse('hide');
+                $("#collapseCrew").collapse('show');
+                setInactiveHeader(5);
+            }
+            else {
+
+                jq.ajax({
+                    url: baseUrl() + 'Project/saveotherCosts',
+                    data: JSON.stringify(OtherCostList),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data != null) {
+                            jq("#errorMsg").hide();
+                            for (var i = 0; i < data.length; i++) {
+                                var rec = $("#tblOtherCost tbody tr#" + data[i].RowNum);
+                                $(rec).find("td:last input").val(data[i].OtherCostID);
+                                $(rec).find("td:nth(0) i").remove();
+                                //$(rec).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>");
+                                $(rec).find("select:first").addClass("RowSuccess");
+                            }
+
+                            $('.panel-collapse.in').collapse('hide');
+                            $("#collapseCrew").collapse('show');
+                            setInactiveHeader(5);
+                        }
+                        else {
+                            handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                        }
+                    },
+                    error: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    },
+                    failure: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+        }
+
+        var saveCrewRows = function () {
+            var CrewRows = $("#tblCrewProfile tbody tr");
+            var CrewRowsList = [];
+            for (var i = 0; i < CrewRows.length; i++) {
+                var CrewPositionID = $(CrewRows[i]).find("td:eq(0) option:selected").val();
+                if (CrewPositionID) {
+                    var CrewDetails = {
+                        "RowNum": $(CrewRows[i]).attr('id'),
+                        "CrewPositionID": CrewPositionID,
+                        "HeadCount": $(CrewRows[i]).find("td:eq(1) input").val(),
+                        "BIDID": $(CrewRows[i]).find("td:eq(3) input").val(),
+                        "BIDDefineCrewID": $(CrewRows[i]).find("td:eq(4) input").val(),
+                    };
+                    CrewRowsList.push(CrewDetails);
+                }
+            }
+
+            if (CrewRowsList.length == 0) {
+                alert("No Data Saved/Changed!");
+                $('.panel-collapse.in').collapse('hide');
+                $("#collapseEquipment").collapse('show');
+                setInactiveHeader(6);
+            }
+            else {
+
+                jq.ajax({
+                    url: baseUrl() + 'Project/saveCrewSize',
+                    data: JSON.stringify(CrewRowsList),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data != null) {
+                            jq("#errorMsg").hide();
+                            for (var i = 0; i < data.length; i++) {
+                                var rec = $("#tblCrewProfile tbody tr#" + data[i].RowNum);
+                                $(rec).find("td:last input").val(data[i].BIDDefineCrewID);
+                                $(rec).find("td:nth(0) i").remove();
+                                //$(rec).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>");
+                                $(rec).find("select:first").addClass("RowSuccess");
+                            }
+
+                            $('.panel-collapse.in').collapse('hide');
+                            $("#collapseEquipment").collapse('show');
+                            setInactiveHeader(6);
+                        }
+                        else {
+                            handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                        }
+                    },
+                    error: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    },
+                    failure: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+        }
+
+        var saveEquipmentRows = function () {
+            var EquipmentRows = $("#tblEquipment tbody tr");
+            var EquipmentList = [];
+            for (var i = 0; i < EquipmentRows.length; i++) {
+                var EquipCostID = $(EquipmentRows[i]).find("td:eq(0) option:selected").val();
+                if (EquipCostID) {
+                    var EquipmentDetails = {
+                        "RowNum": $(EquipmentRows[i]).attr('id'),
+                        "EquipCostID": EquipCostID,
+                        "Qty": $(EquipmentRows[i]).find("td:eq(1) input").val(),
+                        "BIDID": $(EquipmentRows[i]).find("td:eq(3) input").val(),
+                        "EquipBurdID": $(EquipmentRows[i]).find("td:eq(4) input").val(),
+                    };
+                    EquipmentList.push(EquipmentDetails);
+                }
+            }
+            if (EquipmentList.length == 0) {
+                alert("No Data Saved/Changed!");
+                $('.panel-collapse.in').collapse('hide');
+                $("#collapseEquipment").collapse('hide');
+                setInactiveHeader(0);
+            }
+            else {
+                jq.ajax({
+                    url: baseUrl() + 'Project/saveEquipments',
+                    data: JSON.stringify(EquipmentList),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data != null) {
+                            jq("#errorMsg").hide();
+                            for (var i = 0; i < data.length; i++) {
+                                var rec = $("#tblEquipment tbody tr#" + data[i].RowNum);
+                                $(rec).find("td:last input").val(data[i].EquipBurdID);
+                                $(rec).find("td:nth(0) i").remove();
+                                //$(rec).find("td:nth(0)").append("<i class='glyphicon glyphicon-ok'></i>");
+                                $(rec).find("select:first").addClass("RowSuccess");
+                            }
+
+                            $('.panel-collapse.in').collapse('hide');
+                            setInactiveHeader(7);
+                        }
+                        else {
+                            handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                        }
+                    },
+                    error: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    },
+                    failure: function (response) {
+                        handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                    }
+                });
+            }
+        }
+
+        $(".btnSaveLabours").on("click", function () {
+            var id = ($(this).attr('id'));
+
+            var hashVal = $('.panel-collapse.in').attr("id")
+            switch (hashVal) {
+                case "collapseMainLabour":
+                    saveLabourRows("mainLabour");
+                    break;
+                case "collapseAddlnLabour":
+                    saveLabourRows("addlnLabour");
+                    break;
+                case "collapseReview":
+                    saveReviewLabour();
+                    break;
+                case "collapseConcrete":
+                    saveConcreteRows();
+                    break;
+                case "collapseOtherCosts":
+                    saveOtherCostRows();
+                    break;
+                case "collapseCrew":
+                    saveCrewRows();
+                    break;
+                case "collapseEquipment":
+                    saveEquipmentRows();
+                    break;
+            }
+
+            //if($("#tblEquipment tbody tr").length ==0
+            var EquipmentRows = $("#tblEquipment tbody tr");
+            var EquipmentList = [];
+            for (var i = 0; i < EquipmentRows.length; i++) {
+                var EquipCostID = $(EquipmentRows[i]).find("td:eq(0) option:selected").val();
+                if (EquipCostID) {
+                    EquipmentList.push(EquipCostID);
+                }
+            }
+
+                var CrewRows = $("#tblCrewProfile tbody tr");
+                var CrewRowsList = [];
+                for (var i = 0; i < CrewRows.length; i++) {
+                    var CrewPositionID = $(CrewRows[i]).find("td:eq(0) option:selected").val();
+                    if (CrewPositionID) {
+                        CrewRowsList.push(CrewPositionID);
+                    }
+                }
+                if (EquipmentList.length > 0 && CrewRowsList.length > 0) {
+                    if (id == "save_viewBid")
+                        location.href = '@Url.Action("viewbid", "project")';
+                    else {
+                        location.href = '@Url.Action("selectheight","project")';
+                    }
+                }
+                else {
+                    alert("Please add Crew Size & Equipment record details!");
+                }
+        });
+    });
+</script>
+<style>
+    table td, th {
+        font-size: small !important;
+        white-space:nowrap;
+    }
+
+    .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+        line-height: 1.0;
+        border: none;
+    }
+</style>
+
+

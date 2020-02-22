@@ -1,0 +1,314 @@
+﻿@model Atlas.DAL.BID01_Headers
+
+@{
+    ViewBag.Title = "selectheight";
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+<div id="errorMsg" style="display:none">
+    </div>
+    @using (Html.BeginForm("saveStyleHeight", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+        {  <div class="row">
+                <div class="col-md-8 col-sm-6 alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                </div>
+           </div>
+        }
+
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.HiddenFor(model => model.BIDID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.BIDMatHeaderID, new { htmlAttributes = new { @class = "form-control", style = "width:102%" } })
+
+
+                </div>
+            </div>
+            <div class="col-md-8" style="padding:0px">
+                <div>
+                    @Html.LabelFor(model => model.BIDName, htmlAttributes: new { @class = "control-label col-md-3 project-labels" })
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.BIDName, new { htmlAttributes = new { @class = "form-control", style = "width:102%" } })
+                        @Html.ValidationMessageFor(model => model.BIDName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3" style="padding-left: 4px;margin-left: -6%;">
+                <div>
+                    @Html.LabelFor(model => model.QtyOfBI, htmlAttributes: new { @class = "control-label col-md-10 project-labels" })
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.QtyOfBI, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0"} })
+                        @Html.ValidationMessageFor(model => model.QtyOfBI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-1" style="padding:0px;margin-left: -4%;width: 15%;">
+                <div>
+                    @Html.LabelFor(model => model.UnitOfMeasure, htmlAttributes: new { @class = "control-label col-md-7 project-labels" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.UnitOfMeasure, new SelectList(ViewBag.UOMTypes, "Value", "Text"),
+                           "-Select-", new { @class = "form-control col-md-8" })
+                        @Html.ValidationMessageFor(model => model.UnitOfMeasure, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div style="border: 1px solid #dddddd;margin: 8px 0px 0px 16px;padding: 5px !important;" class="col-md-3 panel-default">
+                <div>
+                    @Html.LabelFor(model => model.FenceTypeID, htmlAttributes: new { @class = "control-label col-md-9 project-labels" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.FenceTypeID, new SelectList(ViewBag.FenceTypes, "Value", "Text"),
+                           "-Select-", new { @class = "form-control col-md-4" })
+                        @Html.ValidationMessageFor(model => model.FenceTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.FenceHtID, htmlAttributes: new { @class = "control-label col-md-9 project-labels" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.FenceHtID, new SelectList(ViewBag.FenceHts, "Value", "Text"),
+                           "-Select-", new { @class = "form-control col-md-4" })
+                        @Html.ValidationMessageFor(model => model.FenceHtID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.FtRangeID, htmlAttributes: new { @class = "control-label col-md-9 project-labels" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.FtRangeID, new SelectList(ViewBag.FootageRanges, "Value", "Text"),
+                           "-Select-", new { @class = "form-control col-md-4" })
+                        @Html.ValidationMessageFor(model => model.FtRangeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.DigTypeID, htmlAttributes: new { @class = "control-label col-md-10 project-labels" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.DigTypeID, new SelectList(ViewBag.DigTypes, "Value", "Text"),
+                           "-Select-", new { @class = "form-control col-md-4" })
+                        @Html.ValidationMessageFor(model => model.DigTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div style="border: 1px solid #dddddd;margin: 8px 0px 0px 15px;padding: 5px !important;" class="col-md-4">
+                             @Html.TextBoxFor(m => m.CFSFiles, new { type = "file", name = "CFSFiles" })<br /> 
+                <div>
+                    @Html.LabelFor(model => model.CFSFileName, htmlAttributes: new { @class = "control-label col-md-6 project-labels" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CFSFileName, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.ValidationMessageFor(model => model.CFSFileName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.MaterialCost, htmlAttributes: new { @class = "control-label col-md-12 project-labels" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.MaterialCost, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MaterialCost, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding:0px">
+                        @Html.LabelFor(model => model.OverrideCost, htmlAttributes: new { @class = "control-label col-md-8 project-labels" })
+                        <div class="col-md-6">
+                            <label class="checkbox-inline" style="font-size:11pt !important">
+                                @Html.CheckBoxFor(model => model.OverrideCost, new {htmlAttributes = new { @class = "form-control", style = "margin-top: -7px; height: 20px;width: 20px;" } })
+                            </label><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="border: 1px solid #dddddd;margin: 8px 0px 0px 15px;padding: 5px !important;" class="col-md-4">
+                <div class="row">
+                    @Html.LabelFor(model => model.BIType, htmlAttributes: new { @class = "control-label col-md-6 project-labels" })
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(model => model.BIType, new SelectList(ViewBag.BiTypes, "Value", "Text"),
+                           "-Select-", new { @class = "form-control", @style = "margin-bottom:5px" })
+                        @Html.ValidationMessageFor(model => model.BIType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.RelatedBI, htmlAttributes: new { @class = "control-label col-md-6 project-labels" })
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(model => model.RelatedBI, new SelectList(ViewBag.RelatedBIs, "Value", "Text"),
+                           "-Select-", new { @class = "form-control", @style = "margin-bottom:5px" })
+                        @Html.ValidationMessageFor(model => model.RelatedBI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CalcDriveTimeFlag, htmlAttributes: new { @class = "control-label col-md-6 project-labels" })
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(model => model.CalcDriveTimeFlag, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "1" },
+                                           new SelectListItem() { Text = "No", Value = "0"}
+                            }, new { @class = "form-control", @style = "margin-bottom:5px" })
+                            @Html.ValidationMessageFor(model => model.CalcDriveTimeFlag, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LaborDiscount, htmlAttributes: new { @class = "control-label col-md-6 project-labels" })
+                        <div class="col-md-5">
+                            @Html.EditorFor(model => model.LaborDiscount, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", max = "100", style = "margin-bottom:5px" } })
+                            @Html.ValidationMessageFor(model => model.LaborDiscount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LbrHoldBack, htmlAttributes: new { @class = "control-label col-md-6 project-labels" })
+                        <div class="col-md-5">
+                            @Html.EditorFor(model => model.LbrHoldBack, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", max = "100", style = "margin-bottom:5px" } })
+                            @Html.ValidationMessageFor(model => model.LbrHoldBack, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.TaxCalcTypeID, htmlAttributes: new { @class = "control-label col-md-12 project-labels" })
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.TaxCalcTypeID, new SelectList(ViewBag.TaxCalcTypes, "Value", "Text"),
+                           "-Select-", new { @class = "form-control col-md-4" })
+                        @Html.ValidationMessageFor(model => model.TaxCalcTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-8">
+                <button type="submit" class="btn btn-primary" id="saveStyleHt">
+                    Save & View Make Items <span class="glyphicon glyphicon-arrow-right white"></span>
+                </button>
+            </div>
+        </div>
+       
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="~/Scripts/jquery.inputmask.bundle.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/blueimp-file-upload@9/js/jquery.fileupload.min.js"></script>
+        <script>
+          
+            $(function () {
+                var locationAddr = window.location.pathname.toLocaleLowerCase()
+                var ProjectActivemenu = "Select Style & Height";
+                $(".project-menu").each(function (index, el) {
+                    if (ProjectActivemenu && el.children[0].text.toLowerCase().indexOf(ProjectActivemenu.toLowerCase()) >= 0) {
+                        $(this).removeClass("project-menu")
+                        $(this).children().addClass("proj-active");
+                    }
+                    else //if(activemenu == el.children[0].text.toLowerCase())
+                    {
+                        $(this).children().removeClass("proj-inactive");
+                    }
+                });
+                $(".project-nav").find("li").show();
+                //$(".project-nav").find("li:gt(2)").hide();
+            });
+
+            $(document).ready(function () {
+                var checkCommId = function () {
+                    var commId = "@Convert.ToString(Session["CommID"])";
+                    if (!commId) {
+                        handleError('Project cannot be processed for saving, only view is applicable as user is part of Sales group!');
+                        return false;
+                    }
+                }
+                //$(".container .project-class").removeClass("project-class");
+                //5px 0px 0px 15px
+                $(".project-labels").css("margin", "5px 0px 0px 15px");
+                var baseUrl = function () {
+                    var href = window.location.href.split('/');
+                    return href[0] + '//' + href[2] + '/' + href[3] + '/';
+                }
+                if (!$("#BIDID").val()) {
+                    $("#OverrideCost").attr("checked", false);
+                    $("#LbrHoldBack,#LaborDiscount,#QtyOfBI").val(0);
+                    $("#QtyOfBI").val(1);
+                    $("#UnitOfMeasure").prop('selectedIndex', 4);
+                }
+                $("#CFSFileName").attr("readonly", "readonly");
+                $("#OverrideCost").on("change", function () {
+                    $("#MaterialCost").attr("readonly", !$("#OverrideCost").is(':checked'));
+                });
+
+                $("#MaterialCost").attr("readonly", !($("#OverrideCost").attr("checked")));
+
+                $('input[type="file"]').change(function (e) {
+                    var fileName = e.target.files[0].name;
+                    if (!CheckForFileValid(fileName)) {
+                        var file = this.files[0];
+                        $("#MaterialCost").attr("readonly", "readonly");
+                        $("#OverrideCost").attr("checked", true);
+                        var reader = new FileReader();
+                        reader.onload = function (progressEvent) {
+                            // Entire file
+                                // console.log(this.result);
+                            // By lines
+                            var lines = this.result.split('\n');
+                            //for (var line = 0; line < lines.length; line++) {
+                                  //    console.log(lines[line]);
+                            //}
+                            $("#MaterialCost").val(lines[3]);
+                        };
+                        reader.readAsText(file);
+                    }
+                });
+                $('#saveStyleHt').on("click", function (e) {
+                    if (!$("#CFSFileName").val()) {
+                        //$("#MaterialCost").rules("remove", "required");
+                        CheckForFileValid();
+                    }
+                    checkCommId();
+                });
+
+                var CheckForFileValid = function (fileName) {
+                    var nofile = true;
+                    if (fileName) {
+                        $("#errorMsg li").remove();
+                        $("#errorMsg").hide();
+                        var files = fileName.split('.');
+                        if (files.length > 1 && files[1].substring(0, 1) == "J") {
+                            nofile = false;
+                            $("#CFSFileName").val(fileName);
+                        }
+                        else {
+                            nofile = true;
+                        }
+                    }
+
+                    if (nofile) {
+                        handleError("Please choose an Valid CFS File");
+                        $("#MaterialCost").val('');
+                        $("#CFSFileName").val('');
+                    }
+                    return nofile;
+                }
+
+                var handleError = function (msg) {
+                    if ($("#errorMsg").html().trim().length == 0) {
+                        var errorText = "<div class=\"col-md-8 col-sm-6 alert alert-error\">" +
+                 "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" style=\"font-size:14px\">"+
+                        "close X</button><div class=\"validation-summary-errors alert alert-danger\">" +
+                            "<ul><li>" + msg + " </li></ul></div></div>"
+                        $("#errorMsg").html(errorText);
+                        $("#errorMsg").show();
+                    }
+                    else {
+                        $("#errorMsg").show();
+                        $("#errorMsg li").remove();
+                        $("#errorMsg ul").append("<li>" + msg + "</li>");
+                    }
+                }
+            });
+        </script>
+
+    }

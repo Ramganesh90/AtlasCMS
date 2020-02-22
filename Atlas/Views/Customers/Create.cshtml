@@ -1,0 +1,389 @@
+﻿@model Atlas.DAL.SAL02_Contacts
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr>
+    <div class="col-md-offset-2 col-sm-offset-1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @*@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })*@
+        if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+        {  <div class="row">
+            <div class="col-md-8 col-sm-6 alert alert-error">
+                <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            </div>
+        </div>
+        }
+        <div class="row">
+            <div class="col-md-8 col-sm-6">
+                <div class="form-group">
+                    @Html.Label("Choose Company Name", new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.SalCompId,
+                           new SelectList(ViewBag.sal01_Company, "Value", "Text"),
+                           "-Select-", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2" style="padding:0px !important">
+                <div class="form-group">
+                    <br />
+                    @Html.ActionLink(" ", "create", "company", null, htmlAttributes: new
+                   {
+                       @class = "glyphicon glyphicon-plus",
+                       @style = "padding-top:5px;",
+                       data_toggle = "tooltip",
+                       data_placement = "right",
+                       title = "Enter new company"
+                   })
+                </div>
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContFirstName, new { @class = "control-label" })<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.SalContFirstName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalContFirstName)
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContLastName, htmlAttributes: new { @class = "control-label" })<span class="required">*</span>
+
+                        @Html.EditorFor(model => model.SalContLastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SalContLastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContAddress, htmlAttributes: new { @class = "control-label" })<span class="required">*</span>
+                        @Html.EditorFor(model => model.SalContAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SalContAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContZip, htmlAttributes: new { @class = "control-label" })<span class="required">*</span>
+
+                        @Html.EditorFor(model => model.SalContZip, new { htmlAttributes = new { @class = "form-control", type = "number", maxlength = "5" } })
+                        @Html.ValidationMessageFor(model => model.SalContZip, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContCity, htmlAttributes: new { @class = "control-label" })<span class="required">*</span>
+
+                        @Html.EditorFor(model => model.SalContCity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SalContCity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContState, htmlAttributes: new { @class = "control-label" })<span class="required">*</span>
+                        @Html.DropDownListFor(model => model.SalContState, ViewBag.StateList as SelectList, "-Select-",
+                        new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalContState, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContPhone, htmlAttributes: new { @class = "control-label" })<span class="required">*</span>
+
+                        @Html.EditorFor(model => model.SalContPhone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SalContPhone, "", new { @class = "text-danger" })
+                        <span id="phoneValid" class="phonevalidate" data-valmsg-for="SalContPhone" data-valmsg-replace="true" style="display:none">
+                            <span for="SalContPhone" class="validation-warning">Phone/Mobile Number field is required.</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContPhoneExt, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.SalContPhoneExt, new { htmlAttributes = new { @class = "form-control", @type = "number", maxlength =5 } })
+                        @Html.ValidationMessageFor(model => model.SalContPhoneExt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContMobile, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.SalContMobile, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SalContMobile, "", new { @class = "text-danger" })
+                        <span id="mobileValid" class="phonevalidate" data-valmsg-for="SalContMobile" data-valmsg-replace="true" style="display:none">
+                            <span for="SalContMobile" class="validation-warning">Phone/Mobile Number field is required.</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContFax, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.SalContFax, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SalContFax, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EmailExists, htmlAttributes: new { @class = "control-label"})
+                        @Html.DropDownListFor(model => model.EmailExists, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "true" },
+                                           new SelectListItem() { Text = "No", Value = "false"}
+                                        }, new { @class = "form-control", style = "font-size:12pt;" })
+                        @Html.ValidationMessageFor(model => model.EmailExists, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContEmail, htmlAttributes: new { @class = "control-label" })<span class="required">*</span>
+                        @Html.EditorFor(model => model.SalContEmail, new { htmlAttributes = new { @class = "form-control",type="email" } })
+                        @Html.ValidationMessageFor(model => model.SalContEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalContActiveFlag)<span class="required">*</span>
+                        @Html.DropDownListFor(model => model.SalContActiveFlag, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "Y" },
+                                           new SelectListItem() { Text = "No", Value = "N"}
+                                        }, new { @class = "form-control", style = "font-size:12pt;" })
+                        @Html.ValidationMessageFor(model => model.SalContActiveFlag)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    @Html.LabelFor(model => model.PRJ06_LedSource.LedSourceId, "How did you hear about us?")
+                    @Html.DropDownListFor(model => model.LedSourceId,
+                           new SelectList(ViewBag.LedSources, "Value", "Text"),
+                           "-Select-", new { @class = "form-control" })
+
+                    @Html.HiddenFor(model => model.SalContId)
+                    @Html.ValidationMessageFor(model => model.PRJ06_LedSource.LedSourceName)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-offset-1 col-sm-offset-1 col-md-6">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" name="submitCustomertoAppointment" data-val="save">
+                            Save Customer & Schedule Appointment
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" name="submitCustomer" data-val="save">
+                            Save Customer
+                        </button>
+                        <button style="display:none" class="btn btn-primary btn-block" name="submitCustomerToProject" data-val="save">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+    <script>
+
+        var emailEnableTrigger = function () {
+
+        }
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $(function () {
+            var baseUrl = function () {
+                var href = window.location.href.split('/');
+                return href[0] + '//' + href[2] + '/' + href[3] + '/';
+            }
+            $("#SalContZip").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: baseUrl() + '/Company/getStateAndCity/',
+                        data: "{ 'zip_prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.length > 0) {
+                                response($.map(data, function (item) {
+                                    return item;
+                                }))
+                            }
+                            else {
+                                $("#SalContCity").val('');
+                                $("#SalContState").val('');
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#SalContCity").val(i.item.city);
+                    $("#SalContState").val(i.item.state);
+                },
+                change: function (e, i) {
+                    if ($("#SalContZip").val().length == 0) {
+                        $("#SalContCity").val('');
+                        $("#SalContState").val('');
+                    }
+                    else {
+                        $("#SalContCity").val(i.item.city);
+                        $("#SalContState").val(i.item.state);
+                    }
+                },
+                minLength: 3
+            });
+
+            $("#SalContZip").change(function () {
+                var inputEl = $("#SalContZip").val();
+                if ((inputEl.length <= 4)) {
+                    $("#SalContCity").val('');
+                    $("#SalContState").val('');
+                }
+
+                else if ((inputEl) && (inputEl.length == 5)) {
+                    $.ajax({
+                        url: baseUrl() + '/Company/getStateAndCity/',
+                        data: "{ 'zip_prefix': '" + inputEl + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.length > 0) {
+                                $("#SalContState").val(data[0].state);
+                                $("#SalContCity").val(data[0].city);
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                }
+            });
+        });
+
+        $(document).ready(function () {
+         //   $(".phonevalidate").hide();
+            if (window.location.search && window.location.search.split("=")[1])
+                $("#SalCompId").val(window.location.search.split("=")[1]).change();
+            $("#SalContFirstName").focus();
+
+            $("#SalContPhone").blur(function () {
+                if (!phoneMobileValidCheck(this)) {
+                    $(".phonevalidate").show();
+                }
+                else {
+                    $(".phonevalidate").hide();
+                }
+            });
+
+            $("#SalContMobile").blur(function () {
+                if (!phoneMobileValidCheck(this)) {
+                    $(".phonevalidate").show();
+                }
+                else {
+                    $(".phonevalidate").hide();
+                }
+
+            });
+
+            var phoneMobileValidCheck = function (elem) {
+                var num = $(elem).val().replace(/[^0-9]/g, '');
+                return num.length > 0;
+            }
+
+            $("button[data-val='save']").click(function () {
+                if (!(phoneMobileValidCheck("#SalContPhone") || phoneMobileValidCheck("#SalContMobile"))) {
+                    $(".phonevalidate").show();
+                    return false;
+                }
+                var saveNavigate = $(this).attr("name");
+                var form = $($('form')[1]);
+                form.attr('action', '');
+                switch (saveNavigate) {
+                    
+                    case "submitCustomertoAppointment":
+                        form.attr('action',form.attr('action') + "?submitCustomertoAppointment=save");
+                        form.submit();
+                        break;
+                    case "submitCustomer":
+                        if (document.referrer.toLowerCase().indexOf("project") > 0) {
+                            form.attr('action', form.attr('action') + "?submitCustomerToProject=save");
+                            form.submit();
+                        }
+                        else
+                        {
+                            form.attr('action',form.attr('action') + "?submitCustomer=save");
+                            form.submit();
+                        }
+                        break;
+                    default:
+                        form.attr('action',form.attr('action') + "?submitCustomerToProject=save");
+                        form.submit();
+                        break;
+                }
+            });
+
+            //$("button[name='submitCustomer']").click(function (event) {
+            //    event.preventDefault();
+            //    if(document.referrer.toLowerCase().indexOf("project") >0){
+            //        $("button[name='submitCustomerToProject']").submit();
+            //    }
+            //    else
+            //    {
+            //        $("button[name='submitCustomer']").submit();
+            //    }
+            //    //submitCustomerToProject
+
+            //});
+        });
+
+        $("#EmailExists").on('change', function () {
+            if ($("#EmailExists").val()==="true") {
+                $("#SalContEmail").attr('disabled', false);
+                $("#SalContEmail").next().show();
+            }
+            else {
+                $("#SalContEmail").attr('disabled', true);
+                $("#SalContEmail").val("");
+                $("#SalContEmail").next().hide();
+            }
+        });
+        $('#EmailExists').trigger('change');
+
+        $("#SalContMobile, #SalContPhone, #SalContFax").inputmask({ "mask": "(999) 999-9999" });
+    </script>
+}

@@ -1,0 +1,501 @@
+﻿@model Atlas.DAL.SAL03_ResAppointments
+
+<div class="container form-appointments">
+    <h2>@ViewBag.Title</h2>
+    <hr>
+    <div class="col-md-offset-1 col-sm-offset-1">
+
+        @using (Html.BeginForm("Create", "Appointments", FormMethod.Post, new { role = "form" }))
+        {
+            if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+            {  <div class="row">
+                <div class="col-md-8 col-sm-6 alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                </div>
+            </div>
+            }
+
+
+            <div class="row">
+                <div class="row form-group col-md-offset-10">
+                    <a id="getCustomer" class="normal-heading-bold-text" data-toggle="modal" href="#" data-target="#CustomerModal">Search Customers</a>
+                </div>
+            </div>
+            <div class="row form-group">
+
+                @Html.LabelFor(model => model.SalApptFirstName, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalApptFirstName, "", new { @class = "text-danger" })
+                </div>
+
+
+
+                @Html.LabelFor(model => model.SalApptLastName, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptLastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalApptLastName, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="row form-group">
+
+                @Html.LabelFor(model => model.SalApptAddress, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalApptAddress, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.SalApptState, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.SalApptState, ViewBag.StatesList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SalApptState, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="row form-group">
+                @Html.LabelFor(model => model.SalApptCity, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptCity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalApptCity, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.SalApptZip, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptZip, new { htmlAttributes = new { @class = "form-control", type = "number", maxlength = "5" } })
+                    @Html.ValidationMessageFor(model => model.SalApptZip, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                @Html.LabelFor(model => model.SalApptPhone, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptPhone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalApptPhone, "", new { @class = "text-danger" })
+                    <span id="phoneValid" class="phonevalidate" data-valmsg-for="SalApptPhone" data-valmsg-replace="true" style="display:none">
+                        <span for="SalApptPhone" class="validation-warning">Phone/Mobile Number field is required.</span>
+                    </span>
+                </div>
+
+                @Html.LabelFor(model => model.SalApptPhoneExt, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.SalApptPhoneExt, new { htmlAttributes = new { @class = "form-control", maxLength = 5 } })
+                    @Html.ValidationMessageFor(model => model.SalApptPhoneExt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                @Html.LabelFor(model => model.SalApptMobile, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptMobile, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalApptMobile, "", new { @class = "text-danger" })
+                    <span id="mobileValid" class="phonevalidate" data-valmsg-for="SalApptPhone" data-valmsg-replace="true" style="display:none">
+                        <span for="SalApptPhone" class="validation-warning">Phone/Mobile Number field is required.</span>
+                    </span>
+                </div>
+
+                @Html.LabelFor(model => model.SalApptFax, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptFax, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalApptFax, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                @Html.LabelFor(model => model.EmailExists, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.EmailExists, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "true" },
+                                           new SelectListItem() { Text = "No", Value = "false"}
+                                        }, new { @class = "form-control", style = "font-size:12pt;" })
+                    @Html.ValidationMessageFor(model => model.EmailExists, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.SalApptEmail, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.SalApptEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SalApptEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row form-group">
+                @Html.LabelFor(model => model.SalApptStartDate, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    <div class="appStartDate">
+                        @Html.EditorFor(model => model.SalApptStartDate, new { htmlAttributes = new { @class = "form-control", id = "appStartDate", @aria_describedby = "start-date" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.SalApptStartDate, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.SalApptStartTime, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.SalApptStartTime, ViewBag.ShowApptTime as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SalApptStartTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row form-group">
+                @Html.LabelFor(model => model.SalApptEndDate, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    <div>
+                        @Html.EditorFor(model => model.SalApptEndDate, new { htmlAttributes = new { @class = "form-control", id = "appEndDate", @aria_describedby = "end-date" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.SalApptEndDate, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.SalApptEndTime, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.SalApptEndTime, ViewBag.ShowApptTime as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SalApptEndTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row form-group">
+                @Html.LabelFor(model => model.FenceTypeID, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.FenceTypeID, ViewBag.FenceTypesList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FenceTypeID, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.SalTypeId, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.SalTypeId, ViewBag.SalesTypeCallList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SalTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                @Html.LabelFor(model => model.CommID, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.CommID, ViewBag.AssignToList as SelectList, "-Select-",
+                                          new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CommID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2 right-align" })
+                    <div class="col-md-4">
+                        @Html.TextAreaFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        @Html.HiddenFor(model => model.SalContId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.HiddenFor(model => model.SalApptId, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-offset-4 col-md-4">
+                        <input type="submit" id="btnSaveAppt" value="Save Appointment" class="btn btn-block btn-primary" />
+                    </div>
+                </div>
+
+        }
+        <div class="modal fade in" id="CustomerModal" tabindex="-1" role="dialog" aria-labelledby="CustomerModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    @Html.Partial("_CustomerSearch")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+    <script>
+        $(function () {
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+            var checkin = $('#appStartDate').datepicker({
+                startDate: new Date(),
+                todayBtn: 'linked',
+                todayHighlight: true,
+                orientation: 'bottom right',
+                beforeShowDay: function (date) {
+                    return date.valueOf() >= now.valueOf();
+                },
+                autoclose: true
+
+            }).on('changeDate', function (ev) {
+                if (!ev.date) {
+                    var newDate = new Date();
+                    newDate.setDate(newDate.getDate());
+                    checkout.datepicker("update", newDate);
+                }
+                else if (ev.date && ev.date.valueOf() > checkout.datepicker("getDate").valueOf() || !checkout.datepicker("getDate").valueOf()) {
+                    var newDate = new Date(ev.date);
+                    newDate.setDate(newDate.getDate());
+                    checkout.datepicker("update", newDate);
+                }
+                $(this).blur();
+                $(this).datepicker('hide');
+                $('#SalApptStartTime')[0].focus();
+            });
+            var checkout = $('#appEndDate').datepicker({
+                startDate: new Date(),
+                todayHighlight: true,
+                todayBtn: 'linked',
+                orientation: 'top right',
+                beforeShowDay: function (date) {
+                    return date.valueOf() >= now.valueOf();
+                },
+                autoclose: true
+
+            }).on('changeDate', function (ev) {
+                if (ev.date.valueOf() < checkin.datepicker("getDate").valueOf()) {
+                    alert('The end date can not be less then the start date');
+                    checkout.datepicker("update", '');
+                }
+                $(this).blur();
+                $(this).datepicker('hide');
+                $('#SalApptEndTime')[0].focus();
+            });
+        });
+        $(function () {
+
+            $("#SalApptZip").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: baseUrl() + '/Company/getStateAndCity/',
+                        data: "{ 'zip_prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.length > 0) {
+                                response($.map(data, function (item) {
+                                    return item;
+                                }))
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                minLength: 3
+            });
+
+            $("button[name='btnSearch']").click(function () {
+                $('select#SalApptState option').prop('disabled', false);
+                CustomerSearch();
+            });
+
+
+            var CustomerSearch = function () {
+                url = baseUrl() + '/Customers/search';
+                $.ajax({
+                    url: url,
+                    data: "{ 'lastName': '" + $("input[name='lastName']").val() + "','zipCode':'" + $("input[name='ZipCode']").val() + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $("#contactsList").html('');
+                        if (data.length > 0) {
+                            $.each(data, function (key, val) {
+                                $('<p id="customer-details' + val.SalContId + '"><a class="contact-name-link" href="#" data-val=' + val.SalContId + '>' + val.SalContLastName + ', ' + val.SalContFirstName + '</a> - ' +
+                                    '<span>' + val.SalContAddress + ', </span>' +
+                                    '<span>' + val.SalContCity + ', </span>' +
+                                    '<span>' + val.SalContState + ' </span>' +
+                                    '<span>' + val.SalContZip + ' </span>' +
+                                    '</p>')
+                                    .appendTo('#contactsList');
+
+                                $("p#customer-details" + val.SalContId).click(function () {
+                                    var custdetails = $(this).children();
+                                    $('#CustomerModal').modal('hide');
+                                    $('.modal-backdrop').remove();
+                                    CustomerSearchById(custdetails[0].getAttribute('data-val'));
+                                });
+                            });
+                        }
+                        else {
+                            $('<p class="contact-name-link">No Search results founds</p>')
+                                   .appendTo('#contactsList');
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+        });
+
+        $(document).ready(function () {
+            //   $(".phonevalidate").hide();
+            $("#SalApptStartTime").change(function () {
+                if ($("#SalApptStartTime option").length - 1 == $("#SalApptStartTime option:selected").index()) {
+                    $("#SalApptStartTime").prop('selectedIndex', 0);
+                    $("#SalApptEndTime").prop('selectedIndex', 0);
+                    alert("Cannot set appointment at this time")
+                }
+                else if ($("#SalApptStartTime option").length - 2 == $("#SalApptStartTime option:selected").index()) {
+                    $("#SalApptEndTime").prop('selectedIndex', $("#SalApptStartTime option:selected").index() + 1);
+                }
+                else {
+                    $("#SalApptEndTime").prop('selectedIndex', $("#SalApptStartTime option:selected").index() + 2);
+                }
+            });
+
+            $("#SalApptEndTime").change(function () {
+                if ($("#SalApptEndTime option").length - 1 == $("#SalApptEndTime option:selected").index()) {
+                    $("#SalApptEndTime").prop('selectedIndex', 0);
+                    alert("Cannot set appointment at this time")
+                }
+
+                if ($("#SalApptEndTime option:selected").index() <= $("#SalApptStartTime option:selected").index()) {
+                    $("#SalApptEndTime").prop('selectedIndex', 0);
+                    alert("Appointment End Time cannot be before the start time! Please set end time later");
+                }
+            });
+
+            $("#EmailExists").on('change', function () {
+                if ($("#EmailExists").val() === "true") {
+                    $("#SalApptEmail").attr('disabled', false);
+                    $("#SalApptEmail").next().show();
+                }
+                else {
+                    $("#SalApptEmail").attr('disabled', true);
+                    $("#SalApptEmail").val("");
+                    $("#SalApptEmail").next().hide();
+                }
+            });
+            $('#EmailExists').trigger('change');
+            $("#SalApptFirstName,#SalApptLastName").attr('readonly', 'readonly');
+
+            $("#SalApptPhone").blur(function () {
+                if (!phoneMobileValidCheck(this)) {
+                    $(".phonevalidate").show();
+                }
+                else {
+                    $(".phonevalidate").hide();
+                }
+            });
+
+            $("#SalApptMobile").blur(function () {
+                if (!phoneMobileValidCheck(this)) {
+                    $(".phonevalidate").show();
+                }
+                else {
+                    $(".phonevalidate").hide();
+                }
+
+            });
+
+            var phoneMobileValidCheck = function (elem) {
+                var num = $(elem).val().replace(/[^0-9]/g, '');
+                return num.length > 0;
+            }
+
+            $("#btnSaveAppt").click(function () {
+                if (!(phoneMobileValidCheck("#SalApptPhone") || phoneMobileValidCheck("#SalApptMobile"))) {
+                    $(".phonevalidate").show();
+                    return false;
+                }
+            });
+
+            $('#EmailExists').trigger('change');
+            $("#Notes").addClass("notesAppt");
+
+
+        });
+
+        $("#SalApptMobile, #SalApptPhone, #SalApptFax").inputmask({ "mask": "(999) 999-9999" });
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+        var CustomerSearchById = function (id) {
+            url = baseUrl() + '/Customers/search';
+            $.ajax({
+                url: url,
+                data: "{ 'ContId': '" + id + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data && data.SalContId > 0) {
+                        $("#SalApptFirstName").val(data.SalContFirstName);
+                        $("#SalApptFirstName").next().hide();
+                        $("#SalApptLastName").val(data.SalContLastName);
+                        $("#SalApptLastName").next().hide();
+                        $("#SalContId").val(data.SalContId);
+                        $("#SalApptAddress").val(data.SalContAddress);
+                        $("#SalApptAddress").next().hide();
+                        $("#SalApptCity").val(data.SalContCity);
+                        $("#SalApptCity").next().hide();
+                        $("#SalApptState").val(data.SalContState);
+                        $("#SalApptState").next().hide();
+                        $("#SalApptZip").val(data.SalContZip);
+                        $("#SalApptZip").next().hide();
+                        if (data.SalContPhone) {
+                            $("#SalApptPhone").val(data.SalContPhone);
+                            $("#SalApptPhone").trigger("blur");
+                        }
+                        $("#SalApptPhoneExt").val(data.SalContPhoneExt);
+                        $("#SalApptPhoneExt").next().hide();
+                        if (data.SalContMobile) {
+                            $("#SalApptMobile").val(data.SalContMobile);
+                            $("#SalApptMobile").trigger("blur");
+                        }
+                        $("#SalApptFax").val(data.SalContFax);
+                        $("#SalApptFax").next().hide();
+                        if (data.SalContEmail && data.SalContEmail != "" && data.SalContEmail != null && data.SalContEmail != "N/A") {
+                            $("#SalApptEmail").val(data.SalContEmail);
+                            $("#SalApptEmail").attr("disabled", false);
+                            $("#SalApptEmail").next().hide();
+                            $("#EmailExists").val("true");
+
+                        }
+                        else {
+                            $("#SalApptEmail").attr("disabled", true);
+                            $("#SalApptEmail").val("");
+                            $("#EmailExists").val("false");
+                        }
+                    }
+                    else {
+                        alert("Customer Details not found!");
+                        window.location.href = baseUrl() + "/appointments";
+                    }
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+        if (window.location.search.split("=").length > 0 && window.location.search.split("=")[1] == "1") {
+            var id = window.location.href.split("/")[window.location.href.split("/").length - 1].split("?")[0]
+            CustomerSearchById(id);
+        }
+    </script>
+
+}
+

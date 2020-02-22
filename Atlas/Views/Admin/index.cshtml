@@ -1,0 +1,247 @@
+﻿@model Atlas.DAL.PRL01_Employees
+@{
+    ViewBag.Title = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="container" style="padding-bottom:15px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary btn-block" name="" onclick="location.href='@Url.Action("search","admin")'">
+                    <span class="glyphicon glyphicon-share white"></span>   Generate PunchList
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary btn-block" name="" id="btnViewPunchList">
+                    <span class="glyphicon glyphicon-list-alt white"></span>   View PunchList
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <button type="submit" class="btn btn-primary btn-block" name="" onclick="location.href='@Url.Action("billing","admin")'">
+                    <span class="glyphicon glyphicon-calendar white"></span> Job Billing Date Maintenance
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-md-5">
+            @Html.Label("Browse Projects", new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.EmployeeID,
+                           new SelectList(ViewBag.salesEmployeesList, "Value", "Text"),
+                           "-Pick a Salesman-", new { @class = "form-control col-md-4" })
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="col-md-5">
+            <h4>JOB COMPLETION</h4>
+            <div class="input-group">
+                @Html.Label("Mark a Job as Complete:", new { @class = "control-label" })
+                <input type="text" class="form-control col-md-4" placeholder="Enter ProjectHeaderID Eg: 6443" name="jobComplete">
+                <div class="input-group-btn">
+                    <button name="jobComplete" class="btn btn-primary" style="margin: 29px 0px 0px 0px; padding: 10px 10px 0px 10px;" type="submit">
+                        <span class="glyphicon glyphicon-saved white"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                @Html.Label("Mark a Bid Item as Complete:", new { @class = "control-label" })
+                <input type="text" class="form-control col-md-4" placeholder="Enter BidItemHeaderID eg: 122406" name="bidComplete">
+                <div class="input-group-btn">
+                    <button name="bidComplete" class="btn btn-primary" style="margin: 29px 0px 0px 0px; padding: 10px 10px 0px 10px;" type="submit">
+                        <span class="glyphicon glyphicon-saved white"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <hr style="border:1px solid #808080;" />
+    <br />
+    <div class="container">
+        <div class="col-md-5">
+            <h4>JOB ACTIVATION/DE-ACTIVATION</h4>
+            <div class="input-group">
+                @Html.Label("Activate a Project:", new { @class = "control-label" })
+                <input type="text" class="form-control col-md-4" placeholder="Enter ProjectHeaderID eg: 6443" name="jobActivate">
+                <div class="input-group-btn">
+                    <button name="jobActivate" class="btn btn-primary" style="margin: 29px 0px 0px 0px; padding: 10px 10px 0px 10px;" type="submit">
+                        <span class="glyphicon glyphicon-saved white"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                @Html.Label("De-Activate a Project:", new { @class = "control-label" })
+                <input type="text" class="form-control col-md-4" placeholder="Enter ProjectHeaderID eg: 6443" name="jobDeactivate">
+                <div class="input-group-btn">
+                    <button name="jobDeactivate" class="btn btn-primary" style="margin: 29px 0px 0px 0px; padding: 10px 10px 0px 10px;" type="submit">
+                        <span class="glyphicon glyphicon-saved white"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <h4>BID ITEM ACTIVATION/DE-ACTIVATION</h4>
+            <div class="input-group">
+                @Html.Label("Activate a BidItem:", new { @class = "control-label" })
+                <input type="text" class="form-control col-md-4" placeholder="Enter BidItemHeaderID eg: 6443" name="bidActivate">
+                <div class="input-group-btn">
+                    <button name="bidActivate" class="btn btn-primary" style="margin: 29px 0px 0px 0px; padding: 10px 10px 0px 10px;" type="submit">
+                        <span class="glyphicon glyphicon-saved white"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                @Html.Label("De-Activate a BidItem:", new { @class = "control-label" })
+                <input type="text" class="form-control col-md-4" placeholder="Enter BidItemHeaderID eg: 6443" name="bidDeactivate">
+                <div class="input-group-btn">
+                    <button name="bidDeactivate" class="btn btn-primary" style="margin: 29px 0px 0px 0px; padding: 10px 10px 0px 10px;" type="submit">
+                        <span class="glyphicon glyphicon-saved white"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <hr style="border:1px solid #808080;" />
+    <br />
+    <div class="container">
+        <div class="col-md-5">
+            <h4>EDIT BIDITEM ACTIVATION</h4>
+            <div class="input-group">
+                @Html.Label("Activate to Edit BidItem:", new { @class = "control-label" })
+                <input type="text" class="form-control col-md-4" placeholder="Enter BidItemHeaderID eg: 122406" name="bidEditActivate">
+                <div class="input-group-btn">
+                    <button name="bidEditActivate" class="btn btn-primary" style="margin: 29px 0px 0px 0px; padding: 10px 10px 0px 10px;" type="submit">
+                        <span class="glyphicon glyphicon-saved white"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade in" id="punchListMaintenance" tabindex="-1" role="dialog" aria-labelledby="punchListMaintenance" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @Html.Partial("ViewPunchList")
+            </div>
+        </div>
+    </div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="~/Scripts/UtilScript.js"></script>
+<script>
+    var baseUrl = function () {
+        var href = window.location.href.split('/');
+        return href[0] + '//' + href[2] + '/' + href[3] + '/';
+    }
+    $("select").change(function (e) {
+        if ($("select option:selected").val() != "") {
+            var jsonData = {
+                "ID": $("select option:selected").val()
+            }
+            $.ajax({
+                url: baseUrl() + 'Admin/UpdateCommission',
+                data: JSON.stringify(jsonData),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data != -2) {
+                        location.href = baseUrl();
+                    }
+                    else {
+                        alert("@Atlas.Models.BusinessConstants.contactAdmin");
+                    }
+                },
+                error: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                },
+                failure: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                }
+            });
+
+        }
+    });
+
+    $(".input-group-btn button").click(function (e) {
+        var actionName = this.name;
+        if (actionName == "" || actionName == null || actionName==undefined) {
+            return false;
+        }
+       
+        var title = "";
+        switch(actionName){
+            case "jobComplete":
+                title ="Job";break;
+            case "bidComplete":
+                title ="Bid";break;
+            case "jobActivate":
+                title = "Job"; break;
+            case "jobDeactivate":
+                title = "Job"; break;
+            case "bidActivate":
+                title = "Bid"; break;
+            case "bidDeactivate":
+                title = "Bid"; break;
+            case "bidEditActivate":
+                title = "Bid"; break;
+            default:break;
+                
+        }
+
+        var dataValue = $('input[name="' + actionName + '"]').val();
+        if (dataValue == null || dataValue == "" || isNaN(dataValue)) {
+            $('input[name="' + actionName + '"]').val('');
+            alert("Please Enter Valid " + title + "id");
+            return false;
+        }
+        if (confirm("Are you sure want to update "+title+"?")) {
+            var processData = {
+                "id": $('input[name="' + actionName + '"]').val(),
+                "title": title.toLowerCase(),
+                "action":actionName
+            }
+            $.ajax({
+                url: baseUrl() + 'Admin/UpdateProjectBid',
+                data: JSON.stringify(processData),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data != -2) {
+                        alert("Successfully processed");
+                        $('input[name="' + actionName + '"]').val('');
+                    }
+                    else {
+                        alert("@Atlas.Models.BusinessConstants.contactAdmin");
+                    }
+                },
+                error: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                },
+                failure: function (response) {
+                    alert("@Atlas.Models.BusinessConstants.ValidateEntries");
+                }
+            });
+        };
+    });
+    
+    $('#btnViewPunchList').click(function (e) {
+        e.preventDefault();
+        $('#punchListMaintenance').modal('show');
+    });
+</script>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Atlas.Models.Menu>
+<div id="menu-wrap" style="margin: 0px !important">
+
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-nav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse main-nav">
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    @foreach (var menuOne in Model.Where(i => i.Level == 1).OrderBy(j => j.MenuId))
+                    {
+                    <li><a href='@menuOne.MenuLink' target="_blank">@menuOne.Name</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @*<img src="~/Content/images/logo.png" id="logo" class="img-responsive" width='40%' alt="logo" />*@
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <img src="~/Content/images/logo.png" id="logo" class="img-responsive" width="60%" alt="logo" />
+                </div>
+                <div class="col-md-3">
+                    <div style="margin:25px 0px 0px 30px">
+                        @**@
+                        @Html.Partial("_LoginPartial")
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="navbar navbar-inverse">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sub-nav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse sub-nav">
+                <ul class="nav navbar-nav navbar-right">
+                    @foreach (var menuTwo in Model.Where(i => i.Level == 2).OrderBy(j => j.MenuId))
+                    {
+                    <li class="submenu">@Html.ActionLink(@menuTwo.Name, "index", @menuTwo.MenuLink)</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function WinOpen(navigateUrl) {
+        var params = [
+                       'height=' + screen.height,
+                       'width=' + screen.width,
+                       'fullscreen=yes' // only works in IE, but here for completeness
+        ].join(',');
+        var popup = window.open(navigateUrl, '', params);
+        popup.moveTo(0, 0);
+    }
+</script>

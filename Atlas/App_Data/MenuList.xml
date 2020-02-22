@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Atlas>
+  <Menu>
+    <MenuId>1</MenuId>
+    <Name>Our Website</Name>
+    <Level>1</Level>
+    <MenuLink>https://www.atlasoutdoor.com</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>2</MenuId>
+    <Name>Photo Galleries</Name>
+    <Level>1</Level>
+    <MenuLink>https://www.atlasoutdoor.com/fence-gate-photo-gallery</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>3</MenuId>
+    <Name>Online Product Brochure</Name>
+    <Level>1</Level>
+    <MenuLink>http://www.mydigitalpublication.com/publication/frame.php?i=219228&#x26;p=&#x26;pn=&#x26;ver=html5</MenuLink>
+  </Menu>
+
+  <Menu>
+    <MenuId>1</MenuId>
+    <Name>PROJECTS</Name>
+    <Level>2</Level>
+    <MenuLink>/</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>2</MenuId>
+    <Name>CALENDAR</Name>
+    <Level>2</Level>
+    <MenuLink>calendar</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>3</MenuId>
+    <Name>APPOINTMENTS</Name>
+    <Level>2</Level>
+    <MenuLink>appointments</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <Name>CUSTOMERS</Name>
+    <Level>2</Level>
+    <MenuLink>customers</MenuLink>
+  </Menu>
+
+  <Menu>
+    <MenuId>1</MenuId>
+    <Name>Project Setup</Name>
+    <Level>3</Level>
+    <MenuLink>project</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>2</MenuId>
+    <Name>Select Material</Name>
+    <Level>3</Level>
+    <MenuLink>project</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <Name>Select Style &amp; Height</Name>
+    <Level>3</Level>
+    <MenuLink>project</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <Name>Add Measurements</Name>
+    <Level>3</Level>
+    <MenuLink>project</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <Name>Edit Bid</Name>
+    <Level>3</Level>
+    <MenuLink>project</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <Name>View Bid Items</Name>
+    <Level>3</Level>
+    <MenuLink>project</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <Name>View Quote</Name>
+    <Level>3</Level>
+    <MenuLink>project</MenuLink>
+  </Menu>
+
+  <Menu>
+    <MenuId>1</MenuId>
+    <Name>Project Setup</Name>
+    <Level>4</Level>
+    <MenuLink>project</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>2</MenuId>
+    <Name>View Bid Items</Name>
+    <Level>4</Level>
+    <MenuLink>project/ViewBid</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>3</MenuId>
+    <Name>Select Style &amp; Height</Name>
+    <Level>4</Level>
+    <MenuLink>project/SelectHeight</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <Name>View Make Items</Name>
+    <Level>4</Level>
+    <MenuLink>project/viewmakeitems</MenuLink>
+  </Menu>
+
+  <Menu>
+    <MenuId>5</MenuId>
+    <Name>Enter Labor</Name>
+    <Level>4</Level>
+    <MenuLink>project/labourdetails</MenuLink>
+  </Menu>
+  <Menu>
+    <MenuId>6</MenuId>
+    <Name>View Quotes</Name>
+    <Level>4</Level>
+    <MenuLink>quote</MenuLink>
+  </Menu>
+</Atlas>

@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Atlas.Models.Menu>
+@{
+    ViewBag.Title = "_ProjectMenu";
+}
+@*<div>
+    <div class="projectmenu navbar navbar-default navbar-static-top" style="min-height:35px !important;font-family:MyriadProRegularBold;margin: 3px !important" >
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".project-nav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse project-nav">
+                <ul class="nav navbar-nav navbar-left">
+                    @foreach (var menu in Model.Where(i => i.Level == 3).OrderBy(j => j.MenuId))
+                    {
+                        <li class="project-menu">@Html.ActionLink(@menu.Name, "index", @menu.MenuLink)</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>*@
+<div>
+    <div class="projectmenu navbar navbar-default navbar-static-top" style="min-height:35px !important;font-family:MyriadProRegularBold;margin: 3px !important">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".project-nav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse project-nav">
+                <ul class="nav navbar-nav navbar-left">
+                    @foreach (var menu in Model.Where(i => i.Level == 4).OrderBy(j => j.MenuId))
+                    {
+                        <li class="project-menu">@Html.ActionLink(@menu.Name, "index", @menu.MenuLink)</li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .projectmenu, .project-menu >a {
+  background-color: #DFD6B8;
+  border-color: #DFD6B8;
+  color:#3F3F3F !important;
+  font-weight:bold;
+}
+.projectmenu .navbar-default .navbar-brand {
+  color: #3F3F3F;
+}
+.projectmenu .navbar-default .navbar-brand:hover,
+.projectmenu .navbar-default .navbar-brand:focus {
+  color: #ffffff;
+}
+.projectmenu .navbar-default .navbar-text {
+  color: #3F3F3F;
+}
+.projectmenu .navbar-default .navbar-nav > li > a {
+  color: #3F3F3F;
+}
+.projectmenu .navbar-default .navbar-nav > li > a:hover,
+.projectmenu .navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+}
+.projectmenu .navbar-default .navbar-nav > .active > a,
+.projectmenu .navbar-default .navbar-nav > .active > a:hover,
+.projectmenu .navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #B9B298;
+}
+.projectmenu .navbar-default .navbar-nav > .open > a,
+.projectmenu .navbar-default .navbar-nav > .open > a:hover,
+.projectmenu .navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #DFD6B8;
+}
+.projectmenu .navbar-default .navbar-toggle {
+  border-color: #DFD6B8;
+}
+.projectmenu .navbar-default .navbar-toggle:hover,
+.projectmenu .navbar-default .navbar-toggle:focus {
+  background-color: #DFD6B8;
+}
+.projectmenu .navbar-default .navbar-toggle .icon-bar {
+  background-color: #3F3F3F;
+}
+.projectmenu .navbar-default .navbar-collapse,
+.projectmenu .navbar-default .navbar-form {
+  border-color: #3F3F3F;
+}
+.projectmenu .navbar-default .navbar-link {
+  color: #3F3F3F;
+}
+.projectmenu .navbar-default .navbar-link:hover {
+  color: #ffffff;
+}
+
+.proj-active{
+    color: #FFF !important;
+    background-color: #B9B298 !important;
+}
+
+@@media (max-width: 767px) {
+  .projectmenu .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #3F3F3F;
+  }
+  .projectmenu .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .projectmenu .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+  }
+  .projectmenu .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .projectmenu .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .projectmenu .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #B9B298;
+    background-color: #DFD6B8;
+  }
+}
+</style>

@@ -1,0 +1,547 @@
+﻿<div id="Prebid-layout">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 class="modal-title"></h2>
+        <button type="button" class="btn btn-primary btn-sm pull-right" id="print" style="margin-top: -34px;margin-right: 22px;">
+            Print <span class="glyphicon glyphicon-print white"></span>
+        </button>
+    </div>            <!-- /modal-header -->
+    <div class="modal-body">
+        <div class="container">
+
+            <table id="bidinfo" class="table">
+                <tbody>
+                    <tr>
+                        <td><span class="appt-label-bold">Form Type: </span></td>
+                        <td><span id="FormType"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="appt-label-bold">Job Number: </span></td>
+                        <td><span id="JobNumber"></span></td>
+                        <td><span class="appt-label-bold">Job Name: </span></td>
+                        <td><span id="JobName"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="appt-label-bold">BI Number: </span></td>
+                        <td><span id="BINumber"></span></td>
+                        <td><span class="appt-label-bold">BI Name: </span></td>
+                        <td><span id="BIName"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="appt-label-bold">Sales Person:</span></td>
+                        <td><span id="SalesPerson"></span></td>
+                        <td><span class="appt-label-bold">Company:</span></td>
+                        <td><span id="Company"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="appt-label-bold">Fence Type:</span></td>
+                        <td><span id="FenceType"></span></td>
+                        <td><span class="appt-label-bold">Rate Type:</span></td>
+                        <td><span id="RateType"></span></td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-danger">
+                Pre-Tax Sold For  is quoted less than Suggested Price
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <table id="preBidSales" class="table table-condensed">
+                        <tbody>
+
+                            <tr>
+                                <td>Material Cost:</td>
+                                <td id="Material"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Material Handling Charge:</td>
+                                <td id="MaterialHandling"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Concrete:</td>
+                                <td id="Concrete"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Material Total:</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="MaterialTotal"></td>
+                                <td id="MaterialCOSPercent"></td>
+                            </tr>
+                            <tr class="blank_row">
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td>Onsite Labor:</td>
+                                <td id="OnsiteLabor"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Load Labor:</td>
+                                <td id="LoadLabor"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Drive Labor:</td>
+                                <td id="DriveLabor"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Supervisor:</td>
+                                <td id="Supervisor"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Labor Reserve:</td>
+                                <td id="LaborReserve"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Labor Total:</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="LaborTotal"></td>
+                                <td id="LaborCOSPercent"></td>
+                            </tr>
+                            <tr class="blank_row">
+                                <td colspan="4"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Other Charges:</td>
+                                <td id="OtherCharges"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges Markup:</td>
+                                <td id="OtherChargesMarkup"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges Total:</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="OtherChargesTotal"></td>
+                                <td id="OtherCOSPercent"></td>
+                            </tr>
+                            <tr class="blank_row">
+                                <td colspan="4"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Equipment Cost:</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="EquipmentCost"></td>
+                                <td id="EquipmentCOSPercent"></td>
+                            </tr>
+                            <tr class="blank_row">
+                                <td colspan="4"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Benefits:</td>
+                                <td id="Benefits"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Retirement:</td>
+                                <td id="Retirement"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Payroll Tax:</td>
+                                <td id="PayrollTax"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Workers Comp:</td>
+                                <td id="WorkersComp"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Indirect Total:</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="IndirectTotal"></td>
+                                <td id="IndirectCOSPercent"></td>
+                            </tr>
+                            <tr class="blank_row">
+                                <td colspan="4"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Job Cost:</td>
+                                <td id="JobCost"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Job MarkUp</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="JobMarkUpTotal"></td>
+                                <td id="JobMarkupPercent"></td>
+                            </tr>
+                            <tr>
+                                <td>Suggested Sold For:</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="SuggestdSoldFor"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Pre-Tax Sold For:</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="PreTaxSoldFor"><input type="text" /></td>
+                                <td></td>
+                            </tr>
+                            <tr class="blank_row">
+                                <td colspan="4"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Sales Tax Type:</td>
+                                <td id="SalesTaxType"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Sales Tax Percent:</td>
+                                <td id="SalesTaxPercent"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Sales Tax Total:</td>
+                                <td></td>
+                                <td class="appt-label-bold" id="SalesTaxTotal"></td>
+                                <td></td>
+                            </tr>
+                            <tr class="blank_row">
+                                <td colspan="4"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-3 blue-font-medium">Crew Head Count:</div>
+                        <div id="CrewHeadCount" class="col-sm-6 blue-font-medium"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 blue-font-medium">Days On Site:</div>
+                        <div id="DaysOnsite" class="col-sm-6 blue-font-medium"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 blue-font-medium">Crew Labor Budget:</div>
+                        <div id="CrewLaborBudget" class="col-sm-6 blue-font-medium"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 blue-font-medium">Rev Per Mh:</div>
+                        <div id="RevPerMh" class="col-sm-6 blue-font-medium"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>            <!-- /modal-body -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <input type="hidden" id="prebidid" />
+        <input type="hidden" id="pretax_saved" />
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<style>
+    .modal-dialog {
+        width: 760px;
+    }
+
+    .modal-header {
+        padding: 10px 10px;
+        color: #FFF;
+        border-bottom: 2px solid #0E2D4C;
+    }
+
+    .blank_row {
+        height: 28px !important; /* overwrites any other rules */
+        background-color: #FFFFFF;
+    }
+
+    #bidinfo {
+        padding: 0px;
+        margin-left: -15px;
+    }
+
+        #bidinfo td {
+            text-align: left;
+            border: none;
+            padding: 3px !important;
+        }
+
+            #bidinfo td:first-child {
+                width: 16%;
+            }
+
+            #bidinfo td:nth-child(3) {
+                width: 14%;
+            }
+
+            #bidinfo td:nth-child(2) {
+                width: 28%;
+            }
+
+    .numeric {
+        text-align: right !important;
+        border: 1px solid #b3aeae;
+        width: 21%;
+    }
+
+    #PreTaxSoldFor input {
+        width: 100%;
+        text-align: right;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+        $.each($('#preBidSales tbody tr'), function () {
+            $(this).find('td:first').css("text-align", "left");
+            $(this).find('td:nth(1)').addClass('numeric');
+            $(this).find('td:nth(2)').addClass('numeric');
+            $(this).find('td:nth(3)').addClass('numeric');
+        });
+
+        $(".alert").hide();
+
+        var editMode = function () {
+            $(".label").replaceWith(function () {
+                return "<input class='tax' type=\"text\" value=\"" + $(this).html() + "\" />";
+            });
+        }
+        var viewMode = function () {
+            $(".text").replaceWith(function () {
+                return "<label>" + $(this).val() + "</label>";
+            });
+        }
+        function formatCurrency(n, currency) {
+            return currency + "" + parseFloat(n).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+        }
+
+        $('#PrebidModal').on('hide.bs.modal', function (e) {
+
+        });
+        var ValidateForPretax = function (PreTaxSoldFor, SuggestdSoldFor) {
+            if (PreTaxSoldFor < SuggestdSoldFor) {
+                $(".alert").show();
+                $(".alert").html("Pre-Tax Sold For " + formatCurrency(PreTaxSoldFor, "$") + " is quoted less than Suggested Price " + formatCurrency(SuggestdSoldFor, "$"));
+            }
+            else {
+                $(".alert").hide();
+            }
+        }
+        $('input[type="hidden"]').bind("keypress", function (e) {
+            var specialKeys = new Array();
+            specialKeys.push(8); //Backspace
+            var keyCode = e.which ? e.which : e.keyCode
+            var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+            alert("Invalid Tax Amount");
+            return ret;
+        });
+        $('input[type="hidden"]').bind("paste", function (e) {
+            return false;
+        });
+        $('input[type="hidden"]').bind("drop", function (e) {
+            return false;
+        });
+        $(document).on('focusin', 'input', function () {
+            $(this).data('val', $(this).val());
+        }).on('focusout', 'input', function () {
+            if (isNaN($(this).val())) {
+                $(this).val(0);
+            }
+            var prev = $(this).data('val');
+            var current = $(this).val();
+            $("#PreTaxSoldFor").attr("prev", prev);
+            $("#PreTaxSoldFor").attr("current", current);
+            if (current != null || current != "" || current != undefined) {
+                $("#PreTaxSoldFor input").val(formatCurrency(current, ''));
+                current = current.trim().replace(',', '');
+                if (current != prev) {
+                    savePretax(prev, current);
+                }
+            }
+        });
+
+        var savePretax = function (prev, current) {
+            var preTax = current;
+            var suggested = $("#SuggestdSoldFor").html();
+            var formattedSuggested = parseFloat(suggested.trim().replace(',', ''));
+            var currentTax = current;
+            var prevTax = prev;
+            var boolAllow = false;
+            if ("@Session["Role"]" != "M" && (parseFloat(preTax) > formattedSuggested)) {
+                boolAllow = true;
+            }
+            else if ("@Session["Role"]" == "M") {
+                boolAllow = true;
+                if (parseFloat(preTax) < formattedSuggested) {
+                    $(".alert").html("Pre-Tax Sold For " + formatCurrency(parseFloat(currentTax), "$") + " is quoted less than Suggested Price " + formatCurrency(formattedSuggested, "$"));
+                    $(".alert").show();
+                }
+            }
+
+            if (boolAllow) {
+                var BidId = $("#BINumber").html();
+                var preTaxSold = current;
+                var updateData = {
+                    "BidId": BidId, "preTaxSold": preTaxSold
+                };
+                $.ajax({
+                    url: baseUrl() + 'Home/UpdatePrebidForTax',
+                    data: JSON.stringify(updateData),
+                    dataType: "json",
+                    processData: true,
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data != null) {
+                            alert('Pre-Tax Sold For updated!');
+                            $("#PreTaxSoldFor input").val(formatCurrency(preTaxSold, ''));
+                            BidLoad();
+                        }
+                    }
+                });
+            }
+            else {
+                $(".alert").html("Pre-Tax Sold For " + formatCurrency(parseFloat(currentTax), "$") + " is quoted less than Suggested Price " + formatCurrency(formattedSuggested, "$"));
+                $(".alert").show();
+                var value = $("#pretax_saved").val();
+                $("#PreTaxSoldFor input").val(formatCurrency(value, ''));
+                //$("#PreTaxSoldFor input").focus();
+                alert("Pre-Tax cannot be saved");
+                return false;
+
+            }
+        }
+
+        $('#PrebidModal').on('show.bs.modal', function (e) {
+            //$('.modal-title').html($('input[type="hidden"]').val());
+
+            BidLoad();
+
+        });
+
+        var BidLoad = function () {
+            var searchData = {
+                "BidId": $('input[type="hidden"]').val()
+            };
+            $.ajax({
+                url: baseUrl() + 'Home/GetPreBidByBid',
+                data: JSON.stringify(searchData),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data != null) {
+                        if (data.JobNumber == null || data.JobNumber == "" || data.JobNumber == undefined) {
+                            data.JobNumber = "@Atlas.Models.BusinessConstants.NA";
+                        }
+                        $('.modal-title').html("Pre-Bid [" + data.PRJID + "] Bid Item #" + data.BINumber);
+                        $("#FormType").html(data.FormType);
+                        $("#JobNumber").html(data.JobNumber);
+                        $("#JobName").html(data.JobName);
+                        $("#BINumber").html(data.BINumber);
+                        $("#BIName").html(data.BIName);
+                        $("#Company").html(data.Company);
+                        $("#SalesPerson").html(data.SalesPerson);
+                        $("#FenceType").html(data.FenceType);
+                        $("#RateType").html(data.RateType);
+
+                        $("#Material").html(formatCurrency(data.Material, ''));
+                        $("#MaterialHandling").html(formatCurrency(data.MaterialHandling, ''));
+                        $("#Concrete").html(formatCurrency(data.Concrete, ''));
+                        $("#MaterialTotal").html(formatCurrency(data.MaterialTotal, ''));
+                        $("#MaterialCOSPercent").html(formatCurrency(data.MaterialCOSPercent, '') + '%');
+
+                        $("#OnsiteLabor").html(formatCurrency(data.OnsiteLabor, ''));
+                        $("#LoadLabor").html(formatCurrency(data.LoadLabor, ''));
+                        $("#DriveLabor").html(formatCurrency(data.DriveLabor, ''));
+                        $("#Supervisor").html(data.Supervisor);
+                        $("#LaborReserve").html(formatCurrency(data.LaborReserve, ''));
+                        $("#LaborTotal").html(formatCurrency(data.LaborTotal, ''));
+                        $("#LaborCOSPercent").html(formatCurrency(data.LaborCOSPercent, '') + '%');
+
+                        $("#OtherCharges").html(formatCurrency(data.OtherCharges, ''));
+                        $("#OtherChargesMarkup").html(formatCurrency(data.OtherChargesMarkup, ''));
+                        $("#OtherChargesTotal").html(formatCurrency(data.OtherChargesTotal, ''));
+                        $("#OtherCOSPercent").html(formatCurrency(data.OtherCOSPercent, '') + '%');
+
+                        $("#EquipmentCost").html(formatCurrency(data.EquipmentCost, ''));
+                        $("#EquipmentCOSPercent").html(formatCurrency(data.EquipmentCOSPercent, '') + '%');
+
+                        $("#Benefits").html(formatCurrency(data.Benefits, ''));
+                        $("#Retirement").html(formatCurrency(data.Retirement, ''));
+                        $("#PayrollTax").html(formatCurrency(data.PayrollTax, ''));
+                        $("#WorkersComp").html(formatCurrency(data.WorkersComp, ''));
+                        $("#IndirectTotal").html(formatCurrency(data.IndirectTotal, ''));
+                        $("#IndirectCOSPercent").html(formatCurrency(data.IndirectCOSPercent, '') + '%');
+
+                        $("#JobCost").html(formatCurrency(data.JobCost, ''));
+                        $("#JobMarkUpTotal").html(formatCurrency(data.JobMarkUpTotal, ''));
+                        $("#JobMarkupPercent").html(formatCurrency(data.JobMarkupPercent, '') + '%');
+                        $("#SuggestdSoldFor").html(formatCurrency(data.SuggestdSoldFor, ''));
+                        $("#PreTaxSoldFor input").val(formatCurrency(data.PreTaxSoldFor, ''));
+                        $("#pretax_saved").val(data.PreTaxSoldFor);
+
+                        $("#SalesTaxType").html(data.SalesTaxType);
+                        $("#SalesTaxPercent").html(formatCurrency(data.SalesTaxPercent, '') + '%');
+                        $("#SalesTaxTotal").html(formatCurrency(data.SalesTaxTotal, ''));
+
+                        $("#CrewHeadCount").html(data.CrewHeadCount);
+                        $("#DaysOnsite").html(formatCurrency(data.DaysOnsite, ''));
+                        $("#CrewLaborBudget").html(formatCurrency(data.CrewLaborBudget, ''));
+                        $("#RevPerMh").html(formatCurrency(data.RevPerMh, ''));
+                        ValidateForPretax(data.PreTaxSoldFor, data.SuggestdSoldFor);
+                    }
+                },
+                failure: function (err) {
+                    alert(err);
+                }
+            });
+        }
+
+        $("#print").click(function () {
+            window.open(baseUrl() + 'PreBid/BidItem/print/id/' + $("#BINumber").text())
+
+        });
+    });
+
+</script>

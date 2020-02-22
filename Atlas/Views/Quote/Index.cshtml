@@ -1,0 +1,185 @@
+﻿@model IEnumerable<Atlas.Models.DBO.Quotes>
+@{
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+<div class="container">
+    <h2 style="margin-top:12px !important">@ViewBag.Title</h2>
+    <input type="hidden" value="@ViewBag.PRJID" id="projId" />
+    <br />
+    <div class="container">
+        @if (Model != null && Model.Count()>0)
+            {
+                foreach (var quotes in Model)
+                {
+                <table cellpadding="4">
+                    <tr>
+                        <td colspan="3">
+                            <h4>Quote #@Html.DisplayFor(model => quotes.QuoteGroup)</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a class="normal-heading-text" href="#" name="printQuote">
+                                <span class="glyphicon glyphicon-print"></span> View and Print
+                            </a>
+                        </td>
+                        <td>
+                            <a class="normal-heading-text" href="#" name="editQuote">
+                                <span class="glyphicon glyphicon-edit"></span> Edit
+                            </a>
+                        </td>
+                    </tr>
+
+                    @foreach (var quote in quotes.QuotesItem)
+                    {
+                        <tr>
+                            <td>BID # <span>@Html.DisplayFor(modelItem => quote.BIDID)</span></td>
+                            <td>- @Html.DisplayFor(modelItem => quote.BidName)</td>
+                            <td>
+                                <a class="normal-heading-text" href="#" name="removeQuote">
+                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <br />
+            }
+
+        }
+        else
+        {
+            <p>No Quotes saved for this project.</p>
+        }
+
+        <div class="pull-right">
+            <div class="form-group">
+                <div>
+                    <button type="button" name="AddQuote" class="btn btn-primary btnQuoteAction">
+                        Add New Quote <span class="glyphicon glyphicon-arrow-right white"></span>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" name="AddBid" class="btn btn-primary btnQuoteAction">
+                        Add New Bid Item <span class="glyphicon glyphicon-arrow-right white"></span>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" name="ViewBid" class="btn btn-primary btnQuoteAction">
+                        View All Bid Items <span class="glyphicon glyphicon-arrow-right white"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    td, a {
+        font-size: 14px !important;
+    }
+</style>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="~/Scripts/jquery.inputmask.bundle.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-file-upload@9/js/jquery.fileupload.min.js"></script>
+<script>
+
+    $(function () {
+        var locationAddr = window.location.pathname.toLocaleLowerCase()
+        var ProjectActivemenu = "View Quotes";
+        $(".project-menu").each(function (index, el) {
+            if (ProjectActivemenu && el.children[0].text.toLowerCase().indexOf(ProjectActivemenu.toLowerCase()) >= 0) {
+                $(this).removeClass("project-menu")
+                $(this).children().addClass("proj-active");
+            }
+            else //if(activemenu == el.children[0].text.toLowerCase())
+            {
+                $(this).children().removeClass("proj-inactive");
+            }
+        });
+        $(".project-nav").find("li").show();
+        //$(".project-nav").find("li:gt(2)").hide();
+    });
+
+    $(document).ready(function () {
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+        $('.btnQuoteAction').click(function () {
+            var btnAction = $(this).attr('name');
+            switch (btnAction) {
+                case "AddQuote": {
+                    window.location.href = baseUrl() + "quote/project/" + $("#projId").val() + "/create";
+                    break;
+                }
+                case "AddBid": {
+                    window.location.href = baseUrl() + "project/selectheight";
+                    break;
+                }
+                case "ViewBid": {
+                    window.location.href = baseUrl() + "Project/viewbid/proj/" + $("#projId").val();
+                    break;
+                }
+                default: break;
+            }
+        });
+
+        $('a').click(function () {
+            var action = $(this).attr("name");
+            switch (action) {
+                case "removeQuote": {
+                    if (confirm("Are you sure want to delete the Quote?")) {
+                        var jsonData = {
+                            "PRJID": $("#projId").val(),
+                            "BidId": $(this).closest("tr").find("td:nth(0) > span").text(),
+                            "QuoteGroup": $(this).closest("table").find("h4").text().match(/\d+/g)[0]
+                        };
+                        var NoOfBids = $(this).closest("table").find("tr:gt(1)").length;
+                        if (NoOfBids == 1) {
+                            alert("Quote cannot be deleted, and must have atleast one bid for processing!");
+                            return false;
+                        }
+                        $.ajax({
+                            url: baseUrl() + "Quote/Delete",
+                            data: JSON.stringify(jsonData),
+                            dataType: "json",
+                            processData: true,
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                if (data != -2) {
+                                    window.location.href = baseUrl() + "quote/id/" + $("#projId").val()
+                                }
+                                else {
+                                    handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                                }
+                            },
+                            error: function (response) {
+                                handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                            },
+                            failure: function (response) {
+                                handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                            }
+                        });
+                    }
+                    break;
+                }
+                case "editQuote": {
+                    window.location.href = baseUrl() + "quote/project/" + $("#projId").val() + "/group/" + $(this).closest("table").find("h4").text().match(/\d+/g)[0] + "/edit";
+                    break;
+                }
+
+                case "printQuote":
+                    window.open(baseUrl() + 'Report/Project/id/' + $("#projId").val() + "/quote/" + $(this).closest("table").find("h4").text().match(/\d+/g)[0]+ "/projectQuote");
+                    break;
+            }
+
+
+
+        });
+    })
+</script>

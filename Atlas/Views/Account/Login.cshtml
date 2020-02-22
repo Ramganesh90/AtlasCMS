@@ -1,0 +1,56 @@
+﻿@model Atlas.Models.LoginViewModel
+@{
+    ViewBag.Title = "User Login";
+}
+<div class="container">
+    <div class="col-md-offset-4 col-sm-offset-1">
+        <h2>@ViewBag.Title</h2>
+        <hr>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+            {  <div class="row">
+            <div class="col-md-8 col-sm-6 alert alert-error">
+                <button type="button" class="close" data-dismiss="alert"style="font-size:14px">close X</button>
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            </div>
+        </div>
+            }
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, new { @class = "control-label" })<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password)<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "password" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" value="Log in" class="btn btn-primary" />
+                    </div>
+                    <p>
+                        @Html.ActionLink("Forgot Password?", "ForgotPassword")
+                    </p>
+                </div>
+               
+            </div>
+        }
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Atlas.Models.DBO.ProjectView>
+<div class="container">
+    <div class="row">
+        <div class="pull-left"><h2>Projects</h2></div>
+        <div class="pull-right col-md-3">
+            <h3>
+                <button type="submit" class="btn btn-primary btn-block" name="newCustomer" onclick="location.href='@Url.Action("index", "project")'">
+                    <span class="glyphicon glyphicon-plus white"></span> Create a New Project
+                </button>
+            </h3>
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row pull-right">
+            <div class="form-group">
+                <p style="margin-right:15px">
+                    Filter <input type="text" placeholder="Name" name="Name" value="" class="input-text" /> and/or
+                    <input type="text" placeholder="City" name="City" value="" class="input-text" />
+                    <button class="btn-default" name="btnSearch">
+                        <span class="glyphicon glyphicon-search"></span> Search
+                    </button>
+                </p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+        {  <div class="row">
+        <div class="col-md-8 col-sm-6 alert alert-error">
+            <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+        </div>
+    </div>
+        }
+
+        <div class="col-md-push-7">
+            <div class="col-sm-12">
+                <p><h3>Quoted Projects</h3></p>
+                <div id="quote-proj" class="project-section">
+                </div>
+                <br />
+                <hr />
+            </div>
+
+            <div class="col-sm-12">
+                <p><h3>Active/Pending Projects</h3></p>
+                <div id="open-proj" class="project-section">
+                </div>
+                <br />
+                <hr />
+            </div>
+
+            <div class="col-sm-12">
+                <p><h3>Completed Projects</h3></p>
+                <div id="comp-proj" class="project-section">
+                </div>
+                <br />
+                <hr />
+            </div>
+        </div>
+    }
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="~/Scripts/UtilScript.js"></script>
+<script>
+    $(document).ready(function () {
+        var baseUrl = function () {
+            var href = window.location.href.split('/');
+            return href[0] + '//' + href[2] + '/' + href[3] + '/';
+        }
+        $(".col-md-push-7").hide();
+        $("button[name='btnSearch']").click(function (e) {
+            var quoteproj = $("#quote-proj");
+            var openproj = $("#open-proj");
+            var compproj = $("#comp-proj");
+            $(quoteproj).empty();
+            $(openproj).empty();
+            $(compproj).empty();
+            $(".col-md-push-7").show();
+            var searchData = {
+                "name": $("[name='Name']").val(),
+                "city": $("[name='City']").val()
+            };
+            $.ajax({
+                url: baseUrl() + 'Home/Details',
+                data: JSON.stringify(searchData),
+                dataType: "json",
+                processData: true,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data != null) {
+                        if (data.QuotedProjects.length > 0) {
+                            var QuotedProjects = data.QuotedProjects;
+                            for (var i = 0; i < data.QuotedProjects.length; i++) {
+                                var projName = QuotedProjects[i].ProjectName != "" ? QuotedProjects[i].ProjectName : "NA";
+                                var htmlRow = "<p>Project # " + QuotedProjects[i].PRJID + " " +
+                                    "<a href='" + baseUrl() + "Project/index/id/" + QuotedProjects[i].PRJID + "' class='hyperlinks'>" + projName + "</a> -" +
+                                    "<a href='" + baseUrl() + "Project/viewbid/proj/" + QuotedProjects[i].PRJID + "' class='hyperlinks'> View Bid Items</a><span> - </span>" +
+                                    "<a href='" + baseUrl() + "PreBid/Project/print/id/" + QuotedProjects[i].PRJID + "' class='hyperlinks' target='_blank'> View Rollup</a><span> - </span>" +
+                                    "<a href='" + baseUrl() + "Quote/id/" + QuotedProjects[i].PRJID + "' class='hyperlinks'> View Quotes</a><br />";
+
+                                $(quoteproj).append(htmlRow);
+                            }
+                        }
+                        else {
+                            $(quoteproj).append("<p>@Atlas.Models.BusinessConstants.QuotedProjectsNA </p>");
+                        }
+                        if (data.ActivePendingProjects.length > 0) {
+                            var ActivePendingProjects = data.ActivePendingProjects;
+                            for (var i = 0; i < data.ActivePendingProjects.length; i++) {
+                                var projName = ActivePendingProjects[i].ProjectName != "" ? ActivePendingProjects[i].ProjectName : "NA";
+                                var htmlRow = "<p>Project # " + ActivePendingProjects[i].PRJID + " " +
+                                    "<a href='" + baseUrl() + "Project/index/id/" + ActivePendingProjects[i].PRJID + "' class='hyperlinks'>" + projName + "</a> -" +
+                                    "<a href='" + baseUrl() + "Project/viewbid/proj/" + ActivePendingProjects[i].PRJID + "' class='hyperlinks'> View Bid Items</a><span> - </span>" +
+                                    "<a href='" + baseUrl() + "PreBid/Project/print/id/" + ActivePendingProjects[i].PRJID + "' class='hyperlinks' target='_blank'> View Rollup</a><span> - </span>" +
+                                    "<a href='" + baseUrl() + "Project/JobActivation/Checklist/" + ActivePendingProjects[i].PRJID + "' class='hyperlinks'>Create/Edit Job Activation Checklist</a><span> - </span>" +
+                                    "<a href='" + baseUrl() + "Quote/id/" + ActivePendingProjects[i].PRJID + "' class='hyperlinks'> View Quotes</a><br />";
+
+                                $(openproj).append(htmlRow);
+                            }
+                        }
+                        else {
+                            $(openproj).append("<p>@Atlas.Models.BusinessConstants.ActiveProjectsNA </p>");
+                        }
+
+                        if (data.CompletedProjects.length > 0) {
+                            var CompletedProjects = data.CompletedProjects;
+                            for (var i = 0; i < data.CompletedProjects.length; i++) {
+                                var projName = CompletedProjects[i].ProjectName != "" ? CompletedProjects[i].ProjectName : "NA";
+                                var htmlRow = "<p>Project # " + CompletedProjects[i].PRJID + " " +
+                                    "<a href='#' class='hyperlinks' style='text-decoration:none'>" + projName + "</a> -" +
+                                    "<a href='#' class='hyperlinks'> View Bid Items</a><span> - </span>" +
+                                    "<a href='" + baseUrl() + "Quote/id/" + CompletedProjects[i].PRJID + "' class='hyperlinks'> View Quotes</a><br />";
+
+                                $(compproj).append(htmlRow);
+                            }
+                        }
+                        else {
+                            $(compproj).append("<p>@Atlas.Models.BusinessConstants.CompletedProjectsNA</p>");
+                        }
+
+                    }
+                    else {
+                        handleError("@Atlas.Models.BusinessConstants.contactAdmin");
+                    }
+                },
+                error: function (response) {
+                    handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                },
+                failure: function (response) {
+                    handleError("@Atlas.Models.BusinessConstants.ValidateEntries");
+                }
+            });
+            e.preventDefault();
+        });
+
+        $("#print").click(function () {
+            window.open(baseUrl() + 'Home/printProjectForm?PRJID=' + $("#BINumber").text())
+        });
+    });
+</script>

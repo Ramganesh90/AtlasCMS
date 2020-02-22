@@ -1,0 +1,281 @@
+﻿@model Atlas.DAL.SAL01_Company
+
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr>
+    <div class="col-md-offset-1 col-sm-offset-1">
+
+        @using (Html.BeginForm())
+        {
+            if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+            {  <div class="row">
+                    <div class="col-md-8 col-sm-6 alert alert-error">
+                        <button type="button" class="close" data-dismiss="alert" style="font-size:14px">close X</button>
+                        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                    </div>
+                </div>               
+            }
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompName, new { @class = "control-label" })<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.SalCompName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalCompName)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompAddress)<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.SalCompAddress, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalCompAddress)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompZip)<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.SalCompZip, new { @class = "form-control", type = "number",maxlength="5" })
+                        @Html.ValidationMessageFor(model => model.SalCompZip)
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompCity)<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.SalCompCity, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalCompCity)
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompState)<span class="required">*</span>
+                        @Html.DropDownListFor(model => model.SalCompState, ViewBag.StateList as SelectList, "-Select-",
+                        new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.SalCompState)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompPhone)<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.SalCompPhone, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalCompPhone)
+                        <span id="phoneValid" class="phonevalidate" data-valmsg-for="SalCompPhone" data-valmsg-replace="true" style="display:none">
+                            <span for="SalCompPhone" class="validation-warning">Phone/Mobile Number field is required.</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-1 col-sm-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompPhoneExt)
+                        @Html.TextBoxFor(model => model.SalCompPhoneExt, new { @class = "form-control", type = "number" })
+                        @Html.ValidationMessageFor(model => model.SalCompPhoneExt)
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompMobile)
+                        @Html.TextBoxFor(model => model.SalCompMobile, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalCompMobile)
+                        <span id="mobileValid" class="phonevalidate" data-valmsg-for="SalCompMobile" data-valmsg-replace="true" style="display:none">
+                            <span for="SalCompMobile" class="validation-warning">Phone/Mobile Number field is required.</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompFax)
+                        @Html.TextBoxFor(model => model.SalCompFax, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalCompFax)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EmailExists, htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.EmailExists, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "true" },
+                                           new SelectListItem() { Text = "No", Value = "false"}
+                                        }, new { @class = "form-control", style = "font-size:12pt;" })
+                        @Html.ValidationMessageFor(model => model.EmailExists, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompEMail)<span class="required">*</span>
+                        @Html.TextBoxFor(model => model.SalCompEMail, new { @class = "form-control", type= "email" })
+                        @Html.ValidationMessageFor(model => model.SalCompEMail)
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SalCompActiveFlag)<span class="required">*</span>
+                        @Html.DropDownListFor(model => model.SalCompActiveFlag, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "true" },
+                                           new SelectListItem() { Text = "No", Value = "false"}
+                                        }, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalCompActiveFlag)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-offset-1 col-sm-offset-1 col-md-6">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" name="submitCompany" type="submit">
+                            Save Company
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+
+    <script>
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $(function () {
+            var baseUrl = function () {
+                var href = window.location.href.split('/');
+                return href[0] + '//' + href[2] + '/' + href[3] + '/';
+            }
+            $("#SalCompZip").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: baseUrl() + '/Company/getStateAndCity/',
+                        data: "{ 'zip_prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.length > 0) {
+                                response($.map(data, function (item) {
+                                    return item;
+                                }))
+                            }
+                            else {
+                                $("#SalCompCity").val('');
+                                $("#SalCompState").val('');
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#SalCompCity").val(i.item.city);
+                    $("#SalCompState").val(i.item.state);
+                },
+                change: function (e, i) {
+                    if ($("#SalCompCity").val().length == 0) {
+                        $("#SalCompCity").val('');
+                        $("#SalCompState").val('');
+                    }
+                },
+                minLength: 3
+            });
+          //  $(".phonevalidate").hide();
+
+            $("#SalCompZip").change(function () {
+                var inputEl = $("#SalCompZip").val();
+                if ((inputEl.length <= 4)) {
+                    $("#SalCompCity").val('');
+                    $("#SalCompState").val('');
+                }
+
+                else if ((inputEl) && (inputEl.length == 5)) {
+                    $.ajax({
+                        url: baseUrl() + '/Company/getStateAndCity/',
+                        data: "{ 'zip_prefix': '" + inputEl + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.length > 0) {
+                                $("#SalCompState").val(data[0].state);
+                                $("#SalCompCity").val(data[0].city);
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                }
+            });
+            $("#SalCompPhone").blur(function () {
+                if (!phoneMobileValidCheck(this)) {
+                    $(".phonevalidate").show();
+                }
+                else {
+                    $(".phonevalidate").hide();
+                }
+            });
+
+            $("#SalCompMobile").blur(function () {
+                if (!phoneMobileValidCheck(this)) {
+                    $(".phonevalidate").show();
+                }
+                else {
+                    $(".phonevalidate").hide();
+                }
+
+            });
+
+            var phoneMobileValidCheck = function (elem) {
+                var num = $(elem).val().replace(/[^0-9]/g, '');
+                return num.length > 0;
+            }
+
+            $("button[type='submit']").click(function () {
+                if (!(phoneMobileValidCheck("#SalCompPhone") || phoneMobileValidCheck("#SalCompMobile"))) {
+                    $(".phonevalidate").show();
+                    return false;
+                }
+            });
+        });
+
+        $("#EmailExists").on('change', function () {
+            if ($("#EmailExists").val() === "true") {
+                $("#SalCompEMail").attr('disabled', false);
+                $("#SalCompEMail").next().show();
+            }
+            else {
+                $("#SalCompEMail").attr('disabled', true);
+                $("#SalCompEMail").val("");
+                $("#SalCompEMail").next().hide();
+            }
+        });
+        $('#EmailExists').trigger('change');
+
+        $("#SalCompMobile, #SalCompPhone, #SalCompFax").inputmask({ "mask": "(999) 999-9999" });
+    </script>
+}

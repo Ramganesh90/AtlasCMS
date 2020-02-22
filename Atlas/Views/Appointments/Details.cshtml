@@ -1,0 +1,157 @@
+﻿@model Atlas.DAL.SAL03_ResAppointments
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h1>@ViewBag.Title</h1>
+        </div>
+        <div class="pull-right col-md-7" style="margin-right: -9%;">
+            <button style="width:23%" class="btn-shadow bottom-shadow" onclick="location.href='@Url.Action("create","appointments",
+                                                              routeValues:new { id = Model.SalApptId })'">
+                Edit
+            </button>
+            <button style="width:24%" class="btn-shadow bottom-shadow" onclick="deleteConfirmAction()">Delete</button>
+            <button style="width:28%" class="btn-shadow bottom-shadow" onclick="alert('Projects Unavailable')">Add New Project</button>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <div class="col-md-7">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Name:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <span>
+                            @String.Format("{0} {1}", Model.SalApptFirstName.Trim(), Model.SalApptLastName.Trim())
+                        </span>
+                    </div>
+                </div>
+                <div class="row-fluid" style="padding-bottom:5px">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Location:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <span>
+                            
+                                @Model.SalApptAddress<br />
+                            @String.Format("{0}, {1} {2}", Model.SalApptCity, Model.SalApptState, Model.SalApptZip)
+                       
+                        </span>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Phone:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <span class="phone">@String.Format("{0}", Model.SalApptPhone)</span>
+
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Mobile:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <span class="phone">@String.Format("{0}", Model.SalApptMobile)</span>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Email:", htmlAttributes: new { @class = "control-label col-md-3",  })
+                        <span class="appt-span-block" style="padding-bottom:15px">@Model.SalApptEmail</span>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Start Time:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <span>
+                            @String.Format("{0}-{1}", Convert.ToDateTime(Model.SalApptStartDate).ToLongDateString(),
+                                                  ViewBag.StartTime)
+                        </span>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="row form-group appt-details">
+                        @Html.Label("End Time:", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <span class="appt-span-block">
+                                @String.Format("{0}-{1}", Convert.ToDateTime(Model.SalApptEndDate).ToLongDateString().Trim(),
+                                                            ViewBag.EndTime)
+                            </span>
+                    </div>
+                </div>
+                <div class="row-fluid" style="margin-top: 10px;">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Fence Type:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <span>@ViewBag.FenceType</span>
+
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Sales Type:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <span>@ViewBag.SalesType</span>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="row form-group appt-details">
+                        @Html.Label("Notes:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.TextAreaFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-5">
+            <div class="container" style="padding: 25px;">
+                <a class="normal-heading-bold-text" target="_blank" href="@String.Format("{0}/{1}/{2}", Atlas.Models.BusinessConstants.GoogleMap,Atlas.Models.BusinessConstants.AtlasAddress,
+                                                        String.Format("{0} {1} {2} {3}",Model.SalApptAddress,Model.SalApptCity, Model.SalApptState, Model.SalApptZip))">
+                    Get Directions
+                    <img class="img-rounded img-responsive" src="~/Content/images/Atlas_direction.png" />
+                </a>
+
+                @*<iframe src="@String.Format("{0}/{1}/{2}", Atlas.Models.BusinessConstants.GoogleMapEmbed,Atlas.Models.BusinessConstants.AtlasAddress,
+                    String.Format("{0} {1} {2} {3}",Model.SalApptAddress,Model.SalApptCity, Model.SalApptState, Model.SalApptZip))" width="300" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
+            </div>
+            <div class="container">
+                <div class="row form-group appt-details">
+                    <span class="appt-label-bold">
+                        @Html.Label("Assigned To:", htmlAttributes: new { @class = "control-label col-md-3", @style = "padding: 0px !important;" })
+                    </span>
+                    <span class="appt-label-reg">
+                        @String.Format("{0}", Model.CommID)
+                    </span>
+                </div>
+                <div class="row form-group appt-details">
+                    <span class="appt-label-bold">
+                        @Html.Label("Entered By:", htmlAttributes: new { @class = "control-label col-md-3",@style = "padding: 0px !important;" })
+                    </span>
+                    <span class="appt-label-reg">
+                        @String.Format("{0}", Model.SalApptUserEntered)
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+    <script src="~/Scripts/UtilScript.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#SalApptMobile, #SalApptPhone").inputmask({ "mask": "(999) 999-9999" });
+            $("#Notes").addClass("appt-detail-note");
+            $(".form-group .row").addClass("margin0");
+        });
+        var deleteConfirmAction = function () {
+
+            if (confirm("Are you sure want to delete @Model.SalApptFirstName?")) {
+                window.location.href = '@Url.Action("delete","appointments",routeValues:new { id = Model.SalApptId })';
+            }
+        }
+    </script>
+}
