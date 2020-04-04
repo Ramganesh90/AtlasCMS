@@ -8,9 +8,10 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <p>
-                    <a href="javascript:document.getElementById('logoutForm').submit()" class="normal-heading-bold-text">Log out</a><br />
                     @if (Session["LoggedInUser"] != null)
                     {
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="normal-heading-bold-text">Log out</a><br />
+
                         <a class="normal-heading-text" href="#">@Session["LoggedInUser"].ToString()</a>
                         if (Session["Role"] != null && (Convert.ToString(Session["Role"]) == "A" || Convert.ToString(Session["Role"]) == "M"))
                         {
@@ -27,7 +28,7 @@
                     }
                     else
                     {
-                        <a class="normal-heading-text" href="#">@Convert.ToString(Request.Cookies["LoggedInUser"])</a>
+                        <a class="normal-heading-text" href="#">@Convert.ToString(Session["LoggedInUser"])</a>
                     }
                 </p>
             </li>

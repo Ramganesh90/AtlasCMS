@@ -17,6 +17,8 @@ namespace Atlas.Models
         public const string titleEditCustomer = "Edit Customer";
         public const string titleCustomerProfile = "Customer Account";
         public const string titleNewCompany = "Enter New Company";
+        public const string titleEditCompany = "Edit Company";
+
         public const string DETAILSNOTFOUND = "No Details Available";
 
         public const string QuotedProjectsNA = "No Quoted Projects available";

@@ -372,6 +372,7 @@ namespace Atlas.Controllers
                         matHeader.OverRideCost = Convert.ToByte(header.OverrideCost);
                         matHeader.OverRiddenCost = Convert.ToDecimal(header.MaterialCost);
                     }
+                    matHeader.BIDMatHeaderID = 0;
                     CFSProcessingDAL.DeleteExistingCFS(header.BIDID, 1);
                     header.BIDMatHeaderID = 0;
                     BIDMATID = ProjectDAL.saveMaterialHeader(matHeader);

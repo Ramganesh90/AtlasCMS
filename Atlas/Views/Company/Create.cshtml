@@ -124,6 +124,8 @@
                                            new SelectListItem() { Text = "No", Value = "false"}
                                         }, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.SalCompActiveFlag)
+
+                        @Html.HiddenFor(model => model.SalCompId)
                     </div>
                 </div>
             </div>
@@ -253,6 +255,10 @@
             var phoneMobileValidCheck = function (elem) {
                 var num = $(elem).val().replace(/[^0-9]/g, '');
                 return num.length > 0;
+            }
+
+            if (location.pathname.match(/\d+/g)) {
+                $("#SalCompName").attr("readonly", "true");
             }
 
             $("button[type='submit']").click(function () {

@@ -24,15 +24,28 @@ namespace Atlas.Controllers
         }
 
 
-        public ActionResult Create()
+        public ActionResult Create(string id = "")
         {
+            id = string.IsNullOrWhiteSpace(id) ? "0" : Convert.ToString(id);
+            int CompID = int.Parse(id);
             LoadCompanyDetails();
-            return View();
+            if (CompID == 0)
+            {
+                ViewBag.Title = BusinessConstants.titleNewCompany;
+                return View();
+            }
+            else
+            {
+                var Company  = CompanyDAL.getEditCompany(CompID);
+
+                ViewBag.Title = BusinessConstants.titleEditCompany;
+                Company.EmailExists = (!String.IsNullOrWhiteSpace(Company.SalCompEMail) || !Company.SalCompEMail.Equals(BusinessConstants.NA));
+                return View(Company);
+            }
         }
 
         private void LoadCompanyDetails()
         {
-            ViewBag.Title = BusinessConstants.titleNewCompany;
             var lstState = DataAccess.Entity.Common.getStates();
             SelectList statelist = new SelectList(lstState, "stateid", "statename");
             ViewBag.StateList = statelist;

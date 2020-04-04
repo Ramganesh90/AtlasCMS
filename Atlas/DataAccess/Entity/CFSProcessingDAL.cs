@@ -388,7 +388,9 @@ namespace Atlas.DataAccess.Entity
                     var stepOne = (iLength.Length - (iLength.IndexOf(".", 0, System.StringComparison.OrdinalIgnoreCase) + 1) + 1);
                     if (stepOne > iLength.Length)
                     {
-                        if (Convert.ToDouble(iLength.Substring(stepOne - iLength.Length)) <= 0.5)
+                        var tempLength = (Convert.ToString(iLength.Substring(stepOne - iLength.Length)));
+                        tempLength = string.IsNullOrWhiteSpace(tempLength) ? "0" : tempLength;
+                        if ((Convert.ToDouble(tempLength)) <= 0.5)
                         {
                             iLength = Convert.ToString(Int32.Parse(iLength) + "6");
                         }

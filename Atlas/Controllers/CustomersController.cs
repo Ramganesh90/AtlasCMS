@@ -39,6 +39,11 @@ namespace Atlas.Controllers
         public ActionResult Create(string id = "")
         {
             LoadCombos();
+            
+            if(String.IsNullOrWhiteSpace(id) && !String.IsNullOrWhiteSpace(Convert.ToString(Session["ContID"])))
+            {
+                id = Convert.ToString(Session["ContID"]);
+            }
             id = string.IsNullOrWhiteSpace(id) ? "0" : Convert.ToString(id);
             int ContID = int.Parse(id);
 
@@ -61,7 +66,7 @@ namespace Atlas.Controllers
                     Contact.SalContEmail = string.Empty;
                     Contact.EmailExists = false;
                 }
-
+                Session["ContID"] = ContID;
                 return View(Contact);
             }
         }
@@ -97,6 +102,8 @@ namespace Atlas.Controllers
                     var result = CustomerDAL.saveCustomer(modelContact);
                     if (result > 0)
                     {
+                        Session["ContID"] = "";
+                        Session.Remove("ContID");
                         if (submitCustomertoAppointment != null)
                         {
                             return RedirectToAction("create", "appointments", new { id = result, assign = "1" });

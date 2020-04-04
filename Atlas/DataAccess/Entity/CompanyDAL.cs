@@ -19,6 +19,15 @@ namespace Atlas.DataAccess.Entity
             _myConnection = dataObject.getConnection();
         }
 
+        public static SAL01_Company getEditCompany(int id)
+        {
+            var companies = getAllCompanies().Where(i => i.SalCompId == Convert.ToString(id)
+                                                        && i.SalCompActiveFlag.Equals(true));
+                
+                return companies.FirstOrDefault<SAL01_Company>();
+        }
+
+
         public static List<SAL01_Company> getAllCompanies()
         {
             var dataSet = SqlHelper.ExecuteDataset(_myConnection, CommandType.Text, "Select * from SAL01_Company order by SalCompName")
@@ -32,6 +41,7 @@ namespace Atlas.DataAccess.Entity
                 company.SalCompName = Convert.ToString(record["SalCompName"]);
                 company.SalCompAddress = Convert.ToString(record["SalCompAddress"]);
                 company.SalCompState = Convert.ToString(record["SalCompState"]);
+                company.SalCompCity = Convert.ToString(record["SalCompCity"]);
                 company.SalCompZip = Convert.ToString(record["SalCompZip"]);
                 company.SalCompPhone = Convert.ToString(record["SalCompPhone"]);
                 company.SalCompPhoneExt = Convert.ToString(record["SalCompPhoneExt"]);
@@ -67,19 +77,25 @@ namespace Atlas.DataAccess.Entity
             DataTable data = new DataTable();
             try
             {
-                data = SqlHelper.ExecuteDataset(_myConnection, CommandType.StoredProcedure, "spATL_CRM_Comp_Ins",
-                    new SqlParameter("@Company", modelCompany.SalCompName),
-                    new SqlParameter("@Address", modelCompany.SalCompAddress),
-                    new SqlParameter("@City", modelCompany.SalCompCity),
-                    new SqlParameter("@State", modelCompany.SalCompState),
-                    new SqlParameter("@Zip", modelCompany.SalCompZip),
-                    new SqlParameter("@Phone", modelCompany.SalCompPhone),
-                    new SqlParameter("@Ext", modelCompany.SalCompPhoneExt),
-                    new SqlParameter("@Fax", modelCompany.SalCompFax),
-                    new SqlParameter("@Mobile", modelCompany.SalCompMobile),
-                    new SqlParameter("@EMail", modelCompany.SalCompEMail),
-                    new SqlParameter("@DateEntered", DateTime.Now),
-                    new SqlParameter("@ActiveFlag", modelCompany.SalCompActiveFlag.Value)).Tables[0];
+                var sqlParamsList = new List<SqlParameter>();
+                if (!string.IsNullOrWhiteSpace(modelCompany.SalCompId))
+                {
+                    sqlParamsList.Add(new SqlParameter("@CompId", modelCompany.SalCompId));
+                }
+                sqlParamsList.Add(new SqlParameter("@Company", modelCompany.SalCompName));
+                sqlParamsList.Add(new SqlParameter("@Address", modelCompany.SalCompAddress));
+                sqlParamsList.Add(new SqlParameter("@City", modelCompany.SalCompCity));
+                sqlParamsList.Add(new SqlParameter("@State", modelCompany.SalCompState));
+                sqlParamsList.Add(new SqlParameter("@Zip", modelCompany.SalCompZip));
+                sqlParamsList.Add(new SqlParameter("@Phone", modelCompany.SalCompPhone));
+                sqlParamsList.Add(new SqlParameter("@Ext", modelCompany.SalCompPhoneExt));
+                sqlParamsList.Add(new SqlParameter("@Fax", modelCompany.SalCompFax));
+                sqlParamsList.Add(new SqlParameter("@Mobile", modelCompany.SalCompMobile));
+                sqlParamsList.Add(new SqlParameter("@EMail", modelCompany.SalCompEMail));
+                sqlParamsList.Add(new SqlParameter("@DateEntered", DateTime.Now));
+                sqlParamsList.Add(new SqlParameter("@ActiveFlag", modelCompany.SalCompActiveFlag.Value));
+
+                data = SqlHelper.ExecuteDataset(_myConnection, CommandType.StoredProcedure, "spATL_CRM_Comp_Ins", sqlParamsList.ToArray()).Tables[0];
 
             }
             catch (Exception e)

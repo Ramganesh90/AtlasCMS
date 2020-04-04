@@ -30,14 +30,26 @@
                 <div class="form-group">
                     <br />
                     @Html.ActionLink(" ", "create", "company", null, htmlAttributes: new
-                   {
-                       @class = "glyphicon glyphicon-plus",
-                       @style = "padding-top:5px;",
-                       data_toggle = "tooltip",
-                       data_placement = "right",
-                       title = "Enter new company"
-                   })
+                    {
+                            id="tooltipAdd",
+                        @class = "glyphicon glyphicon-plus",
+                        @style = "padding-top:5px;",
+                        data_toggle = "tooltip",
+                        data_placement = "right",
+                        title = "Enter new company"
+                    })
+               
+                    @Html.ActionLink(" ", "create", "company",null , htmlAttributes: new
+                    {
+                        @class = "glyphicon glyphicon-pencil",
+                        id = "tooltipEdit",
+                        @style = "padding-top:5px;display: none",
+                        data_toggle = "tooltip",
+                        data_placement = "right",
+                        title = "Edit company"
+                    })
                 </div>
+
             </div>
         </div>
 
@@ -297,9 +309,11 @@
 
         $(document).ready(function () {
          //   $(".phonevalidate").hide();
+
+
             if (window.location.search && window.location.search.split("=")[1])
                 $("#SalCompId").val(window.location.search.split("=")[1]).change();
-            $("#SalContFirstName").focus();
+                $("#SalContFirstName").focus();
 
             $("#SalContPhone").blur(function () {
                 if (!phoneMobileValidCheck(this)) {
@@ -310,6 +324,8 @@
                 }
             });
 
+        
+
             $("#SalContMobile").blur(function () {
                 if (!phoneMobileValidCheck(this)) {
                     $(".phonevalidate").show();
@@ -318,6 +334,20 @@
                     $(".phonevalidate").hide();
                 }
 
+            });
+
+            $("#SalCompId").on("change", function () {
+                var CompanyEdithref = $("#tooltipEdit").attr("href");
+                var CompanyCreatehref = $("#tooltipAdd").attr("href");
+
+               if ($(this).val()) {
+                    $("#tooltipEdit").show();
+                    $("#tooltipEdit").attr("href", CompanyCreatehref + "/" + $(this).val());
+                }
+                else {
+                   $("#tooltipEdit").hide();
+                   $("#tooltipEdit").attr("href", CompanyCreatehref);
+                }
             });
 
             var phoneMobileValidCheck = function (elem) {
@@ -356,7 +386,7 @@
                         break;
                 }
             });
-
+            $("#SalCompId").trigger("change");
             //$("button[name='submitCustomer']").click(function (event) {
             //    event.preventDefault();
             //    if(document.referrer.toLowerCase().indexOf("project") >0){
